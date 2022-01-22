@@ -1,0 +1,610 @@
+\chapterauthor{thomas mcandrew}{Lehigh University}
+%\chapterauthor{Second Author}{Second Author Affiliation}
+\chapter{Sets, the sample space, and probability}
+\hspace{1mm}
+
+\section{Introduction}\label{intro}
+
+When we decide to study a topic, we often have in mind a \text{population}, a protocol to observe members of our population, a hypothesis that posits some aspects of our observed members.
+We collect data, we compile results.
+At the close of our study we want to know how the results ("what happened") contribute to our hypotheses ("what we thought may happen") and, importantly, the chances that if we reproduced the same study that the results would lead us towards the same conclusions.  
+
+For example, suppose we decide to study the impact of percutaneous intervention (PCI) versus optimal medical therapy (OMT) to treat patients how have had a myocardial infarction, often called a "heart attack".
+Patients are enrolled in a study and randomly assigned PCI or OMT.
+We hypothesize that PCI will result in a prolonged life from when the intervention took place onward.
+After our study we find patients who underwent PCI live on average 100 days longer than those who underwent OMT. 
+However, it feels unsatisfactory to have a single number describing how effective PCI was at prolong life. 
+We may want to know the chances PCI prolongs life 80 days, 30 days, or maybe zero days, compared to OMT. 
+
+We want to understand how likely we are to see specific events.
+The formal method of assigning chances to a set of events is called probability theory.
+
+\section{Probability lingo}
+\hspace{1mm}
+%Sets, Outcomes, Events, and the Sample space
+\subsection{Sets}
+
+We define a \textbf{set} as a collection of items, sometimes called elements. 
+A set is typically given a capital letter (for example $A$) and the elements are included inside curly braces. 
+
+Here, we define three sets
+\begin{align}
+    A &= \{ a,b,c\}\\
+    C &= \{ -1,1,3.14\}\\
+    Z &= \{ \text{orange},1,\text{puppy dog}\}
+\end{align}
+The elements inside a set are unordered and do not necessarily need to be numbers. A set can contain any object.
+The set $A$ could have been defined as $\{a,b,c\}$ or $\{c,b,a\}$.
+We use the symbol $\in$ to express that an element "is a member of" a set.
+For example, $a \in A$ can be read "the element a is a member of the set A" or "the element a is in the set A". 
+We can also communicate when an element is not a member of a set with the symbol $\notin$.
+For example, $c \notin C$ is read "the element c is not a member of (not in) te set C".
+
+Two sets are \textbf{equal} is they contain the same elements.
+In other words, if for an element $x$, $x \in A$ implies that $x \in B$ \textbf{and} if for an element $y$, $y \in B$ implies that $y \in A$ then the set $A$ and set $B$ are equal.
+If a set $A$ and set $B$ are equal we write $A=B$. 
+If two sets do contain the same elements than they are \textbf{unequal} and we write $A \neq B$.
+
+Lets look at an example.
+\begin{align}
+    A &= \{ a,b,c\}\\
+    B &= \{ b,a,c\}\\
+    C &= \{ b,c\}
+\end{align}
+Above, $A=B$ but $A \neq C$ and $B \neq C$.
+
+A set $A$ is a \textbf{subset} of a second set $B$ if all of the elements in $A$ are also elements in $B$.
+We can say that $A$ is a subset of $B$ if every element in $x$ implies that element is in $B$, or $x \in A$ implies $x \in B$.
+We write $A \subset B$ to denote that $A$ is a subset of $B$. 
+To denote that a set $A$ is \textbf{not a subset} of $B$, we write $A \not\subset B$. 
+In the example above, the $C$ is a subset of $A$ $C \subset A$, but $A$ is not a subset of $C$, or $A \not\subset C$.
+
+We can build new sets by operating on two or more existing sets.
+
+Set \textbf{intersection} takes as input two or more sets, $A$,$B$, and returns a set that contains all the elements that are in both $A$ \underline{and} $B$.
+We use the symbol "cap" to denote set intersection $A \cap B$ and often say "A intersect B". 
+
+For the above sets $A$ and $C$, their intersection is 
+\begin{align}
+    A \cap C = \{c,b\}
+\end{align}
+because the element $c$ belongs to both set $A$ and set $C$ and because the element $b$ belongs to $A$ and $C$.
+
+We can intersect more than two sets. 
+
+Let $A =\{ a,b,10,12 \}$, $Z =\{ b,10,-1 \}$, $U =\{ a,b,c,d,10 \}$.
+Then
+\begin{equation}
+    A \cap Z = \{ b,10 \}    
+\end{equation}
+and 
+\begin{equation}
+ A \cap Z \cap U = \{ b,10\}.
+\end{equation}
+
+If $A$ is a subset of $B$, $A \subset B$, then the only elements both sets have in common are those in $A$. 
+The intersection of $A$ and $B$ is then
+\begin{align}
+    \begin{aligned}
+      \text{If } A \subset B \text{ then}\\
+       A \cap B = A.
+    \end{aligned} \label{subsetInter}
+\end{align}
+
+Set \textbf{union} takes as input two or more sets and output a set that contains all the elements that belong to first set \underline{or} the second set \underline{or} the third set, and so on.
+We use the "cup" symbol to denote set union. 
+As an example, consider the sets $A$, $Z$, and $U$ to be the same as they are above. 
+Then $A$ \textbf{union} $Z$ is 
+\begin{equation}
+    A \cup Z = \{a,b,10,12,-1\}
+\end{equation}
+This is because each of the above elements belongs to at least one of the sets $A$ and $Z$. As another example, 
+\begin{equation}
+    A \cup Z \cup U = \{a,b,c,10,12,-1\}
+\end{equation}
+
+Intersection and union are the most common set operations. 
+Before we define the set operation \textbf{complement}, we need to discuss two special sets. 
+
+The \textbf{universal set} is the set of all elements. 
+We denote the universal set with a $\mathcal{G}$.
+The set which contains no elements is called the \textbf{empty set}, and we denote the empty set as $\emptyset$.
+
+If a set $A$ and set $B$ have no elements in common, then $A \cap B = \emptyset$.
+We often say that the set $A$ and $B$ are \textbf{disjoint}.
+For example, 
+\begin{align}
+    \begin{aligned}
+       A = \{ 1,3,5 \} \\
+       Q = \{ 2,4,6 \} \\
+       A \cap Q = \emptyset
+    \end{aligned}
+\end{align}
+Because the intersection between $A$ and $Q$ is empty, these sets are disjoint.
+
+Now for our final set operation---complement.
+The set complement takes as input a single set, $A$, and outputs a set with elements that are members of $\mathcal{G}$ but are not members of $A$.
+We denote set complement in one of two ways: $A^{c}$ or $A'$.
+
+\begin{VT1}
+
+\VH{Set operations example}
+Let's look at an example of how these sets and set operations work. 
+Define the universal set, $\mathcal{G}$, to be the set of all positive integers (i.e. $1,2,3,4,\cdots$). Lets define the sets $A_{1}=\{1\},A_{2}=\{1,2\},A_{3}=\{1,2,3\}, \cdots, A_{n}=\{1,2,3,4\cdots,n\} $. We use a subscript and a number to "index" our sets. 
+An index is an easy way to keep track of sets (and many mathematical objects).
+\begin{align}
+    \begin{aligned}
+        A_{1} \cap A_{2} &= \{ 1 \}\\
+        A_{1} \cap A_{5} &= \{ 1 \}\\
+        A_{3} \cap A_{8} &= \{ 3 \}\\
+    \end{aligned}
+\end{align}
+Note that $A_{3} \cap A_{8}$ is not the value $3$, but the set \{3\}.
+The examples above suggest a pattern for any set $A_{i}$ and $A_{j}$ where $i \leq j$:
+\begin{align}
+    A_{i} \cap A_{j} = \{ i \}
+\end{align}
+
+Lets look at set union in this example
+\begin{align}
+    \begin{aligned}
+        A_{1} \cup A_{2} &= \{ 1,2 \}\\
+        A_{1} \cup A_{5} &= \{ 1,2,3,4,5 \}\\
+        A_{3} \cup A_{8} &= \{ 1,2,3,4,5,6,7,8 \}\\
+    \end{aligned}
+\end{align}
+and we see the following pattern for $i \leq j$
+\begin{align}
+    A_{i} \cup A_{j} = \{1,2,3,4\cdots,j \} = A_{j}
+\end{align}
+
+Because we defined a universal set, we can look at set complement
+\begin{align}
+    \begin{aligned}
+        A_{1}^{c} &= \{2,3,4,5,\cdots \}\\
+        A_{5}^{c} &= \{ 5,6,7,8,\cdots \}\\
+        A_{8}^{c} &= \{8,9,10,11,12,\cdots \}\\
+    \end{aligned}
+\end{align}
+\end{VT1}
+
+\section{Applying set theory to probability}
+\vspace{-0.75cm} \hspace{1mm}  
+\subsection{Foundation}
+The ideas about sets and set operations are the foundations for how we think about probability, about experiments, and hypotheses. 
+We only need to recast the above set ideas to results from an experiment. 
+
+We use $\mathcal{G}$ to define the set of all possible outcomes from an experiment and call this set the \textbf{sample space}. 
+The term "experiment" has a broad meaning. 
+An experiment can mean everything from a randomized controlled trial to an observational study.
+Here an \textbf{experiment} is the process that generates observations.
+
+An \textbf{outcome} is defined as an element of the sample space. 
+An outcome is a single observation from an experiment, and we define an \textbf{event} as a set of outcomes. 
+Most often we use $o_{i}$ to denote an outcome and $E_{i}$ to denote an event.
+
+The \textbf{probability} of an event $E$ is a mapping from the set $E$ to a number between, or equal to, the values 0 and 1. We use $P(E)$ to denote the probability of event $E$.
+We require that the probabilities assigned to individual sets consisting of a single element in $E$ add up to the probability of $E$. 
+Lets suppose there are $n$ outcomes in the event $E$.
+Then
+\begin{align}
+    \begin{aligned}
+       E &= \{ o_{1}, o_{2}, o_{3}, \cdots, o_{n}\} \\ 
+       P(E) &= P(\{o_{1}\}) + P(\{o_{2}\}) \cdots P(\{o_{n}\})
+    \end{aligned}
+\end{align}
+
+We further require $P(\mathcal{G}) = 1$.
+In other words, the probability that something happens is certain.
+Note that we do not need to describe how we assign probabilities to events, we only describe what values we expect those numbers to be.
+
+Lets further detail relationships between probabilities of sets that we would expect. 
+\begin{enumerate}
+    \item If $A \subset B$ then $P(A) \leq P(B)$ \label{subsetrule}. 
+    \item $P(A \cup B) \leq P(A) + P(B)$ (why?)
+    \item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+    \item If $A$ and $B$ are disjoint then $P(A \cup B) = P(A) + P(B) $
+\end{enumerate}
+
+The following three axioms (knowledge we assume true without proof) are called \textbf{Kolmorogov's axioms} (\label{Kaxioms})
+\begin{enumerate}
+    \item For any event $E$, $P(E) \geq 0$
+    \item $P(\mathcal{G}) = 1$
+    \item If $E_{1}$ and $E_{2}$ are disjoint then $P(E_{1} \cup E_{2}) = P(E_{1}) + P(E_{2})$
+\end{enumerate}
+
+\textbf{Example:} When we want to compute the probability that an outcome fall in any one of the events, say $E_{1}, E_{2},E_{3}$, knowing that these events have no outcomes in common, that they are disjoint, makes the computation easy. An intuitive way to think about events that are disjoint is if they cannot all occur at the same time.
+Suppose we wish to study the prevalence of stroke among patients who are older than sixety-five.
+Strokes can be categorized into transient ischemia attacks (TIA), ischemic stroke (IS), and hemorrhagic stroke (HS).
+Further lets assume the following probabilities for each event: $P(\{\text{TIA}\}) = 0.15$, $P(\{\text{IS}\}) = 0.75$, $P(\{\text{HS}\}) = 0.10$, and that these events cannot occur simultaneously. Then the probability of the event $E=\{TIA,HS\}$ can be broken into the union of two disjoint events $E = \{TIA\} \cup \{HS\}$ and we can use what we know about these disjoint events to compute the probability of $E$
+\begin{align}
+    P(E) &= P(\{\text{TIA},\text{HS}\} ) \\ 
+         &=P(\{\text{TIA}\} \cup \{\text{HS}\} ) \\
+         &=P(\{\text{TIA}\}) + P(\{\text{HS}\} ) \;\;\;\text{disjoint} \\
+         &= 0.15 + 0.75 = 0.90
+\end{align}
+
+\subsection{The principle of equally likely outcomes---one way to assign probabilities}
+
+There are many different ways to assign probabilities to events. 
+In this text, we will only consider using the principle of equally likely outcomes to assign probabilities. 
+The \textbf{principle of equally likely outcomes} (PELO) states that the probability we assign to every event which contains a single outcome, $E_{i} = \{o_{i}\}$, in a sample space $\mathcal{G}$ is equal.
+
+We can use this principle to assign probabilities first to every individual outcome and then to arbitrary events. Assume the PELO is true, then 
+\begin{align}
+    o_{1},o_{1},o_{1}, \cdots,o_{n} \in \mathcal{G}\\
+    E_{i} = \{o_{i}\}\\
+    E_{1} \cup E_{2} \cup E_{3} \cup \cdots \cup E_{n} = \mathcal{G} \;\; \text{(why?)}\\ 
+    P(E_{1} \cup E_{2} \cup \cdots \cup E_{n}) = P(\mathcal{G}) = 1 \\ 
+    P(E_{1} \cup E_{2} \cup \cdots \cup E_{n}) = P(E_{1}) + P(E_{2} \cup \cdots \cup E_{n}) \;\; (\text{disjoint})\\
+    P(E_{1}) + P(E_{2}) + \cdots P(E_{n}) = 1\\
+    n \cdot p = 1 \;\; (p \text{ is the constant prob. we are after})\\
+    p = 1/n
+\end{align}
+The PELO tells us that the probability of an event with a single outcome is equal to one divided by the total number of outcomes in the sample space.
+The PELO also tells us that for a sample space with $n$ elements the probability of an event $E = \{o_{1},o_{20},o_{4}\}$ that contains three outcomes is $P(E) = \frac{3}{20}$.
+
+
+\begin{VT1}
+
+\VH{An example when, and when not, the PELO applies.}
+
+PELO only works when we expect each outcome in our sample space to be equally likely.\\ 
+
+\textbf{Example 1} Suppose our experiment is a coin toss and we will observe whether or not the coin lands heads up (H) or tails up (T). If we assume the coin has not been altered in any way, then PELO applies.
+Our sample space is $\mathcal{G} = {H,T}$. 
+Because there are two outcomes in our sample space, $P(\{H\}) = 1/2$ and $P(\{T\}) = 1/2$.
+
+\textbf{Example 2} Suppose for our experiment we observe for one year a single patient who was admitted to the hospital because of an influenza infection and we plan to observe if that patient returns to the hospital because of a second infection. Our sample space contains one outcome $R$ if the patient is re-admitted to the hospital within one year and a second outcome if they are no re-admitted ($N$).
+Our sample space is $\mathcal{G} = {R,N}$. 
+If we applied the PELO to this problem we would have to assume the probability this patient returns, or does not return, are equal. Intuitively,it feels unreasonable to assume these two events have equal probabilities.
+
+We need an additional way to assign probabilities.
+\end{VT1}
+
+\subsection{A frequentist approach to assigning probabilities}
+
+An empirical approach to assign probabilities to an event $A$ with sample space $\mathcal{G}$ is to do the following:
+\begin{enumerate}
+    \item Generate $1, 2, 3, 4, \cdots, N$ outcomes from $\mathcal{G}$
+    \item Define a variable $N(A)$ and set that variable to zero.
+    \item If the 1st outcome is a member of $A$ than add one $N(A)$, otherwise move on
+    \item If the 2nd outcome is a member of $A$ than add one to $N(A)$\\
+    \vdots
+    \item If the Nth outcome is a member of $A$ than add one to $N(A)$
+\end{enumerate}
+The above algorithm defined a variable $N(A)$ that counts the number of outcomes that belong to $A$ out of the $N$ generated outcomes.
+We can assign to $A$ the probability 
+\begin{equation}
+    P(A) = \frac{N(A)}{N}
+\end{equation}
+that is, the number of times we observed an outcome that belonged to A divided by the number of outcomes we observed.
+
+As an example, suppose we want to understand the probability that patients with non-medically treated type II diabetes transition to needing treatment within one year of their diagnosis.
+Our outcomes are $\mathcal{G}$ = \{"need treatment" and "no treatment"\}. 
+To assign a probability to the event $E = \{\text{need treatment}\}$ using the frequentist approach we decide to request anonymized patient records from a set of hospitals, asking that each hospital only send those patients who had an original diagnosis of type II diabetes without medication and who have had a physician visit one year more later.
+After our data request, we received 5,000 patient records and find that 1,585 of these patients were asked to start medication for their type II diabetes within one year.
+A frequentist approach would assign
+\begin{equation}
+    P(E) = 1,585/5,000 = 0.317
+\end{equation}
+and also assign to the event $F=\{\text{no treament}\}$
+\begin{equation}
+    P(F) = 0.683 \; \; \text{(why?)}
+\end{equation}.
+
+\subsection{Products, Conditionals, Baye's Theorem, and Repeated Experiments }
+\hspace{1mm}
+
+\subsubsection{Product Sets}
+
+Suppose a novel vaccine was developed and we are asked to compare two probabilities: the probability a vaccinated patient is infected before 30 days after they receive their vaccine and the probability a patient who has not received a vaccine is infected before 30 days since they have enrolled in the experiment. 
+To estimate these probabilities, we enroll 200 volunteer patients. We will assign 100 patients to be given the treatment and the remaining 100 patients will be observed without treatment.
+
+Because of our experimental design, $P(\{\text{vaccinated}\})=1/2$ and $P(\{\text{not vaccinated}\}) = 1/2$ with a sample space $\mathcal{G_{\text{assignment}}}$, containing two outcomes $\{\text{vaccinated},\text{not vaccinated}\}$.
+But our main interest is in the probability of infection within 30 days of enrolling in the study, and so our main interest is in the a related sample space $\mathcal{G}_{\text{infection}} = \{\text{infection}, \text{no infection}\}$.
+We need a way to combine these sample spaces together so that we can estimate the probability of a patient that is vaccinated \underline{and} that is infected. 
+
+Up until this point we have learned how to assign probabilities to events in one sample space. 
+Lets look at how we may assign events to a combination of, and later a sequence of, sample space\textbf{s}.
+
+\textbf{Products of sets:}   
+First, we'll need to talk about the product of two sets. 
+Let $A = \{a,b,c\}$ and $B = \{1,2,3\}$. 
+Then the Cartesian product $C = A \times B$ is a set where each element in $A$ is paired with each element in $B$. 
+\begin{equation}
+    C = \{(a,1),(a,2),(a,3),(b,1),(b,2),(b,3),(c,1)(c,2)(c,3)  \}
+\end{equation}
+We use the notation $(,)$, called a "tuple", to denote pairs.
+A \textbf{tuple} is an outcome belonging to a sample space built from the Cartesian product of many individual sample spaces. 
+Tuples are ordered. The tuple $(a,1) \neq (1,a)$.
+The above is called a Cartesian product because you could imagine creating a grid where the horizontal axis has gridlines at "a", "b", "c" and the vertical axis has grid lines at "1", "2", and "3". Where the gridlines intersect are the tuples that belong to $C$.
+
+We can apply the Cartesian product to combine samples spaces.
+Define $\mathcal{G}_{\text{experiment}}$ as the Cartesian product between $\mathcal{G}_{\text{assignment}}$ and $\mathcal{G}_{\text{infection}}$, or 
+\begin{equation}
+    \mathcal{G}_{\text{experiment}} = \mathcal{G}_{\text{assignment}} \times \mathcal{G}_{\text{infection}}
+\end{equation}
+This new sample space has the following outcomes:
+\begin{align}
+   \begin{aligned}
+   \mathcal{G}_{\text{experiment}} = \{(\text{vaccinated},\text{infection}),(\text{vaccinated},\text{not infected}) \\
+   ,(\text{not vaccinated},\text{infection}),(\text{not vaccinated},\text{not infected})\}
+   \end{aligned}
+\end{align}
+Our new sample space has $4$ outcomes, two outcomes from the assignment sample space are paired with two outcomes from the infection sample space ($2$ outcomes $\times$ $2$ outcomes equals $4$ outcomes in the new space).
+
+With this new space in hand, we can assign probabilities to the outcomes "vaccinated \underline{and} infected" and the outcome "not vaccinated \underline{and} infected".
+You may hear events like the above called \textbf{compound events}, or \textbf{joint events}.
+
+Let's use the frequentist approach to estimate the probabilities of these four events.
+We enroll all 200 patients over a 6 months period and then follow each patient for 30 days. 
+At 7 days, 14 days, 21 days, and at the end of there 30 day period they meet with a physician to relay information about how they feel that could indicate they had an infection.
+We collect the following data:
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{cccc}
+        \hline
+        Vaccinated & Infected & Frequency & Estimated Prob.\\
+        \hline
+         Yes & Yes &  20 & 20/200 = 0.1 \\
+         Yes & No  &  80 & 80/200 = 0.4 \\
+         No  & Yes &  40 & 40/200 = 0.2 \\
+         No  & No  &  60 & 60/200 = 0.3 \\
+         \hline
+    \end{tabular}
+    \caption{Frequencies collected about our vaccination experiment~\label{tab1.vacc}}
+\end{table}
+
+From our experimental evidence we would assign a probability of $P(\{\text{vacc},\text{infected}\}) = 0.10$ to those who were vaccinated and infected and a probability of $P(\{\text{no vacc},\text{infected}\}) = 0.20$ to those who were not vaccinated and were infected. 
+But this was not what were were asked to compute.
+We were asked to compute the probability that someone is infected after they received (\underline{given that they already had}) a vaccine, and the probability of infection given a patient was not vaccinated.
+Probabilities of one event, given we have observed another event are called \textbf{conditional probabilities}.
+
+\subsubsection{Conditional probabilities}
+
+Assume a sample space $\mathcal{G}$. We define the conditional probability of event $A$ given event $B$ as 
+\begin{equation}
+    P(A|B) = \frac{P(A \cap B)}{P(B)}
+\end{equation}
+
+\textbf{Example:} Lets use the definition above to compute the probability of an event $A$ given $\mathcal{G}$, the sample space (remember that the sample space is a set and so technically an event).
+By the definition of conditional probbility 
+\begin{equation}
+    P(A|\mathcal{G}) = \frac{P(A \cap \mathcal{G})}{P(\mathcal{G})}
+\end{equation}
+We know that $P(\mathcal{G}) = 1$ (Kolmogorov axioms in \ref{Kaxioms}) and so 
+\begin{align}
+    P(A|\mathcal{G}) &= \frac{P(A \cap \mathcal{G})}{P(\mathcal{G})} \\
+    P(A|\mathcal{G}) &= \frac{P(A \cap \mathcal{G})}{1}\\
+                     &= P(A \cap \mathcal{G})
+\end{align}
+The set $A$ must be a subset of $\mathcal{G}$ and so by \eqref{subsetInter}
+\begin{equation}
+ P(A|\mathcal{G}) = P(A \cap \mathcal{G}) = P(A)
+\end{equation}
+The above example shows that we can think of the event that we condition on as a new sample space. 
+Lets return to our example of vaccination and the incidence of infection.
+
+To compute the probability of infection given a patient was vaccinated we need to compute
+\begin{equation}
+    P( \text{inf} | \text{vacc} ) = \frac{P(\text{inf} \cap \text{vacc})}{ P(\text{vacc})}
+\end{equation}
+where the event "inf" contains those outcomes in $\mathcal{G}_{\text{experiment}}$ which have "infected" in the fist position of their tuple $(\text{infected}, \cdot)$ and the event "vacc" contains those outcomes which have "vaccinated" in the second position of their tuple $(\cdot, \text{vaccinated} )$.
+Then $P(\text{inf} \cap \text{vacc})$ are those outcomes with "infected" in the first position and "vaccinated" in the second position. We have a single outcome where this happens: \{(infected, vaccinated)\} and this outcome has a probability of $P(\text{inf} \cap \text{vacc}) = 0.1$.
+
+Computing $P(\text{vacc})$ is only slightly more difficult. 
+We can use what we learned about unions and disjoint events for help.
+\begin{align}
+    \begin{aligned}
+       P(\text{vacc}) &= P( \{ (\text{infected},\text{vacc} ), (\text{not infected},\text{vacc} ) \}  ) \\ 
+                     &=  P( \{ (\text{infected},\text{vacc} )\} \cup  \{(\text{not infected},\text{vacc} ) \}  ) \\
+                     &=  P( \{ (\text{infected},\text{vacc} )\})+  P(\{(\text{not infected},\text{vacc} ) \}  )\\
+                     &= 0.1+0.4 = 0.5
+    \end{aligned}
+\end{align}
+
+We arrive at our final result.
+\begin{equation}
+ P( \text{inf} | \text{vacc} ) = \frac{P(\text{inf} \cap \text{vacc})}{ P(\text{vacc})} = \frac{0.1}{0.5} = 0.2
+\end{equation}
+and we can do the same for 
+\begin{equation}
+ P( \text{inf} | \text{no vacc} ) = \frac{P(\text{inf} \cap \text{no vacc})}{ P(\text{ no vacc})} = \frac{0.2}{0.5} = 0.4
+\end{equation}
+
+We report back to our experimental team that our estimated probability of infection from someone who received a vaccine is 0.2 and the probability of infection from someone who did not received a vaccine is 0.4, double the probability of a vaccinated individual.
+
+Conditional probabilities give us, for free, an alternative way to compute the probability of the intersection of two sets.
+All we need to do is rearrange the definition of conditional probability
+\begin{align}
+       P(A|B) &= \frac{P(A \cap B)}{P(B)} \\ 
+       P(A \cap B) &= P(B)P(A|B) \label{multrule}
+\end{align}
+Equation~\eqref{multrule} is called the \textbf{multiplication rule}.
+Lets explore how the multiplication rule may make computing probabilities easier.
+
+\textbf{Example:} We want to compute the probability that it rains and we remember to leave the house with an umbrella. We can imagine our sample space having the following four outcomes: $\mathcal{G}$ = \{(rain,remember),(rain,forgot), (no rain, remember), (no rain, forgot)\}. We try to remember all the times that the outcome (rain,remember) occurred in our past---but we cannot. Instead, we can certainly estimate the probability we forgot our umbrella given that it rained because it was an unpleasant experience~(for some). We estimate $P(\text{forgot}|\text{rain}) = 0.95$.
+To compute $P(\text{forgot} \cap \text{rain})$ all we need now is the probability it rains. We take a look at the weather station reports over the  past year and use the frequentest approach to estimate the probability it rains:$P(\text{rain}) = 0.25$. So then the probability it rains and we forget our umbrella is 
+\begin{align}
+    \begin{aligned}
+        P(\text{forgot} \cap \text{rain}) &= P(\text{forgot}|\text{rain})P(\text{rain})\\
+        &=0.95 \times 0.25 = 0.2375
+    \end{aligned}
+\end{align}
+
+The multiplication rule makes computations easier because we can think of events occurring in sequence. First it rains and second we forget our umbrella.
+
+Conditional probabilities also allow us to express what it means for two events to be \textbf{independent}.
+An event $A$ is independent from an event $B$ if
+\begin{equation}
+    P(A|B) = P(A)
+\end{equation}
+We know the event $B$ occurred, but this has not changed the \underline{probability} that $A$ has occurred.
+When two events are independent we can compute their intersection more easily.
+\begin{align}
+    \begin{aligned}
+        &\text{Event } A \text{ and } B  \text{ are independent}\\
+        &P(A \cap B) = P(A|B)P(B)  &\text{multiplication rule}\\
+        &P(A \cap B) = P(A)P(B)    &\text{independence}\\
+    \end{aligned}
+\end{align}
+If two events are independent than the probability they occur together is the product of their probabilities.
+Statistical independence can be difficult to see.
+
+\textbf{Example} We are recruited to track the evolution of an infectious agent for a team of public health officials (PHOs).
+To support future strategic planning the PHOs want to know the impact of intervention $X$ on increases or decreases in the incidence of this infectious agent. The PHO team collected for each county in their state whether the intervention was enacted, and whether the incidence of case counts of this infectious agent increased or decreased 60 days after the intervention was in place data.
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ccc}
+        \hline
+        Intervention & Raise in infection & Probability \\
+        \hline
+        yes & yes  &  0.225   \\
+        yes & no   &  0.525 \\
+        no  & yes  &  0.075\\
+        no  & no   &  0.175\\
+        \hline
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
+When we look at this table, our first thought may be that when the intervention is enacted there is a high probability that the infection rate decreases (0.525), evidence that this is an important intervention for preventing the spread of this agent.
+
+But be careful. Let's compute the probability of intervention $P(\{intervention\})$ and the probability of a raise in infection $P(\{raise\})$. To do this we should define our sample space to be clear about what outcomes we can observe from our experiment.
+
+Our sample space is the set of four pairs
+\begin{align}
+    \begin{aligned}
+    \mathcal{G}=\{ (\text{intervention},\text{raise}),(\text{intervention},\text{lower})\\
+    ,(\text{no intervention},\text{raise})
+    ,(\text{no intervention},\text{lower})\}
+    \end{aligned}
+\end{align}
+and we want to compute $P(\text{intervention}) = 0.225 + 0.525 = 0.75$ (why?) and $P(\text{raise}) = 0.225+0.075 = 0.30$ (why?).
+
+
+One way that can test whether intervention is independent of a rise or fall in incidence, is compare the probabilities we estimated from our data (in table \ref{}) to the product of individual events we computed above. 
+Lets look at an example.
+The probability of an intervention and rise in incidence was estimated from our data to be $P(\text{intervention},\text{raise}) = 0.225$. Lets compare this probability to the product $P(\text{intervention}) \cdot P(\text{raise})$. 
+\begin{equation}
+    P(\text{intervention}) \cdot P(\text{raise}) = 0.75 \cdot 0.30 = 0.225
+\end{equation}
+We have a match. 
+Our estimated probability of an intervention and a rise occurring together is equal to the probability that an intervention occurs and a rise in incidence occurs.
+We can do the same procedure above for the remaining three scenario.
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ccc|c}
+     \hline
+        Intervention & Raise & Probability from data & Probability assuming indep. \\
+        \hline
+        yes & yes  &  0.225 & 0.75 (0.30) = 0.225  \\
+        yes & no   &  0.525 & 0.75 (0.70) = 0.525 \\
+        no  & yes  &  0.075 & 0.25 (0.30) = 0.075\\
+        no  & no   &  0.175 & 0.25 (0.70) = 0.175\\
+        \hline
+    \end{tabular}
+    \caption{Probabilities of the cooccurance of an intervention and the rise or fall of an infectious agent, and the probability of each of these four events assuming they are independent. \label{tab.indep}}
+\end{table}
+
+We see that the probabilities we collected form the data match the product of the probabilities of each individual event~(Table~\ref{tab.indep}). 
+Intervention is independent, does not change the probability, of a rise or fall in incidence of the infectious agent we are tracking. 
+We will need to report these results to the PHO team and recommend they try alternative interventions to curb the spread of this agent.
+
+\subsubsection{Repeated experiments}
+Many natural experiments involve repeated observations. 
+It may be of interest to observe the whether and assign a probability to "sunny" or "cloudy" weather conditions. 
+However, many vacationers, who plan to spend 2, 3, or more days at a remote destination may want to know the probability that the next $X$ days are sunny. 
+
+The Cartesian product gives us a natural way to express repeated experiments.
+If we chose to repeat an experiment $N$ times where each experiment produced an outcome in $\mathcal{G}$, we could imagine the set of outcomes as tuples of length $N$ where each entry in the tuple is from our sample space.
+In other words, a single outcome in this repeated experiment would be $(o_{1},o_{2},o_{3},\cdots,o_{N})$ and this outcome is a member of the set $\mathcal{G} \times \mathcal{G} \times \mathcal{G} \times \cdots \times \mathcal{G}$.
+
+Back to our vacation example. 
+If a vacationer wanted to understand the chances they had of enjoying $5$ sunny days in a row, then we know that we could defined a sample space $\mathcal{G} = \{\text{"sunny"},\text{"not sunny"}\}$ and we also know that the vacationer is interested in outcomes in the sample space 
+\begin{equation}
+    (d_{1},d_{2},d_{3},d_{4},d_{5}) \in \mathcal{G} \times \mathcal{G}\times \mathcal{G}\times \mathcal{G}\times \mathcal{G} 
+\end{equation}
+where $d_{i}$ is the outcome on day $i$.
+We can frame the problem, and clearly layout the potential outcomes, for example on outcome is ("sunny", "sunny", "not sunny", "sunny", "not sunny").
+
+
+\subsection{Product, tuples, and relational data bases}
+
+<to write>
+
+\section{Exercises}
+
+\begin{enumerate}
+    \item \begin{align*}
+              A &= {1,2,3,4,5,6};
+              \;\;B = {1,3,6} \\
+              C &= {7}  
+              \;\;D = \emptyset
+           \end{align*}
+    \begin{enumerate}
+        \item Please compute $A \cap B$
+        \item Please compute $A \cup C$
+        \item Please compute $A \cup D$
+        \item Please compute $A \cap D$
+        \item Please compute $(A \cap B) \cup (C \cup D)$
+    \end{enumerate}
+    \item Let the sample space $\mathcal{G} = \{ 1,2,3,4,5,6,7 \}$
+    \begin{enumerate}
+       \item Please compute $A^{c}$
+       \item Please compute $B^{c}$
+       \item Please compute $D^{c}$
+       \item Please compute $\mathcal{G} \cap A$
+       \item Is $A \subset \mathcal{G}$?
+       \item Is $\emptyset \subset \mathcal{G}$?
+    \end{enumerate}
+    \item Let $A = {0,1,2}$ for some sample space $\mathcal{G}$ that we know contains the more elements than 0,1,2. Further assume $P(A) = 0.2$. 
+    \begin{enumerate}
+        \item Are the sets $A$ and $A^{c}$ disjoint? Why or why not.
+        \item Use Kolmogorov's axioms to show that $P(A) = 1 - P(A^{c})$ 
+    \end{enumerate}
+    \item If $A=\{1,2,3\}$ and $B = \{2,3,4\}$ and $C = \{1,3\}$
+    \begin{enumerate}
+        \item Can $P(A) < P(B)$? Why or why not
+        \item Can $P(A) < P(C)$? Why or why not
+    \end{enumerate}
+    \item Use what you know about the intersection, about subsets, and about probability to show that $P(A \cap B) \leq P(A)$. Hint: How are $A \cap B$ and $A$ related?
+    \item Suppose we wish to study the reemergence of cancer among patients in remition. We collect data on 1,000 patients who are in cancer remition and follow them for 5 years. At five years we are interested in the probability of a second cancer. 
+    \begin{enumerate}
+        \item Define a sample space $\mathcal{G}$ we can use to assign probabilities to a second cancer and no second cancer. 
+        \item After five years of followup we find that 238 patients experienced a second cancer. Use the frequentist approach to assign probabilities to a second cancer \underline{and} no second cancer.
+        \item If you collected data on 2,000 patients do you expect the probability of a second cancer to change? How do you expect the probability to be different for 2,000 patients than with 1,000 patients? 
+    \end{enumerate}
+    
+\end{enumerate}
+
+\section{Glossary}
+\begin{Glossary}
+\item[Set]
+\item[Subset]
+\item[Set equality]
+\item[Set intersection]
+\item[Set union]
+\item[Universal set]
+\item[Empty set]
+\item[Sample space]
+\item[Experiment]
+\item[Outcome]
+\item[Event]
+\item[Probability]
+\item[Kolmorogov's Axioms]
+\item[Principle of Equally Likely Outcomes]
+\item[Product Set]
+\item[Compound event]
+\item[Conditional probability]
+\item[Multiplication Rule]
+\item[Independence]
+
+
+\end{Glossary}
+
+
+
