@@ -1,0 +1,68 @@
+\chapterauthor{thomas mcandrew}{Lehigh University}
+%\chapterauthor{Second Author}{Second Author Affiliation}
+\chapter{Random variables}
+\hspace{1mm}
+
+\section{Introduction}\label{intro}
+
+The foundations of probability are built on sets,
+yet data is more naturally stored and more easily computed on if it is represented numerically.  
+
+Random variables match each outcome in our sample space to a value on the number line. 
+
+In addition to computational advantages, random variables help us extract from our data the most important characteristics, and they serve as building blocks which we can use to create powerful models.
+Random variables are also a language we can use to communicate our modeling efforts to other mathematicians, statisticians, and data scientists.  
+
+Suppose we hypothesize that the frequency of social media posts on some popular outlet are related to influenza-like illness~(ILI)---a syndromic diagnosis suggesting a patient may have influenza. A patient is diagnosed with ILI if their temperature is measured to be at or above 38C and symptoms resembling the flu.
+Because influenza is most active in winter and spring, we collect a random sample, each day, of social media posts from September to May and in addition we collect the proportion of patients who are admitted to the hospital and are diagnosed with influenza-like illness at the US national level. 
+
+The above hypothesis, data collection, and future inference has numerous details. 
+However, we will see shortly that we can simplify our hypothesis by using random variables. 
+
+\section{Maps from the sample space to the number line}\label{maps}
+
+Given a sample space $\mathcal{G}$, a \textbf{random variable}, (e.g. $X$), is a function from each element in $\mathcal{G}$---from each outcome---to a value on the real number line.
+The real number line contains all numbers: integer and decimal, from negative to positive infinity.
+
+\textbf{Example:} Suppose our sample space contains two elements $\mathcal{G} = \{ a,b \}$. We may decide to define a random variable $X$ that maps the outcome $a$ to the value $-1$ and the outcome $b$ to the value $1$. In otherwords, $X(a)=-1$ and $X(b)=1$. We could as well define a random variable $Y$ on the same sample space such that $Y(a)=0$ and $Y(b)=1$.
+
+\textbf{Example:} Suppose our sample space contains all integers from 0 to 1000 $\mathcal{G} = \{0,1,2,3\cdots,1000 \}$. We may be most interested in when an integer is even or odd, and so we can define a random variable $Y(y)=0$ when $y$, our outcome, is an odd integer and $Y(y)=1$ when $y$ is even. This is an example of how a random variable can distill down a sample space with many outcomes into a random variable with two.
+
+\textbf{Example:} Suppose we decide to study the relationship between the cumulative total number of cigarettes smoked by a person form the date that they started smoking and the presence of lung cancer.
+We define our sample space to be $\mathcal{G} = \{ (x,y) | x \in \mathbb{Z}, y \in \{0,1\} \}$. We define two random variables, a random variable $X$ that maps the outcome $(x,y)$ to the value in the first position $x$, and a random variable $Y$ that maps the $outcome (x,y)$ to the value in the second position $y$. Though our outcomes are linked, we can use random variables to think about two separate outcomes---cigarettes smoked and lung cancer---and how they interact.
+
+\section{A new sample space}\label{intro}
+
+When we build a random variable $(X)$ that maps outcomes to values on the number line we create a new sample space which we will call the support of $X$ or $supp(X)$. 
+Define a sample space $\mathcal{G}$ without outcomes $o_{i}$.
+Then the \textbf{support of X} is
+\begin{align}
+    supp(X) = \{x | X(o) = x \text{ for some outcome } o \text{ in } \mathcal{G} \}
+\end{align}
+Our new sample space is the set of all the potential values that our random variable $X$ can produce.
+This is a sample space linked to $\mathcal{G}$, but in practice after we develop a random variable we often no longer reference $\mathcal{G}$.
+
+\ex In our above example where $\mathcal{G} = \{a,b\}$, the random variable $X$ has support $supp(X) = \{-1,1\}$ and $supp(Y)=\{0,1\}$.
+Lets look at another example, when above $\mathcal{G}$ is  the set of all integers from 0 to 1000. 
+Even though the sample space is quite large, the random variable that maps the integers to 0 when they are odd and 1 when even has a small support $(supp(Y) = \{0,1\})$.   
+
+\section{How to assign probabilities to a random variable}
+
+Random variable themselves do not require that we include the probability of each of their values. Random variables are a function from outcomes to the real numbers---nothing more. 
+That said, in practice we build random variables expecting that the probabilities we assign to outcomes in our sample space will correspond to probabilities assigned to values of our random variable.
+
+We assign a probability to the value $x$, which belongs in the support of random variable $X$, the sum of the probabilities of all the outcomes that $X$ maps to $x$.
+\begin{equation}
+    P(X=x) = P(o_{1}) + P(o_{2}) + \cdots + P(o_{n})    
+\end{equation}
+where each outcome $o_{1},o_{2},\cdots,o_{n}$ is mapped by $X$ to the value $x$. In other words, $X(o)=x$ for each of $o_{1},o_{2},\cdots,o_{n}$.
+
+\ex
+
+\section{Probability mass function}
+
+\section{Cumulative mass function}
+
+\section{Two or more random variables}
+
+\section{A Model}
