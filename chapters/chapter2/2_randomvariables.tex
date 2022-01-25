@@ -57,11 +57,85 @@ We assign a probability to the value $x$, which belongs in the support of random
 \end{equation}
 where each outcome $o_{1},o_{2},\cdots,o_{n}$ is mapped by $X$ to the value $x$. In other words, $X(o)=x$ for each of $o_{1},o_{2},\cdots,o_{n}$.
 
-\ex
+\ex Define a $\samplespace = \{a,b,c,d,e\}$ and a random variable $X$ that maps the outcomes to the following values
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ccc}
+        Outcome & P(outcome) & X(outcome)  \\
+        \hline
+        a & 0.1  & 0\\
+        b & 0.25 & 1\\
+        c & 0.15 & 1\\
+        d & 0.3  & 2\\
+        e & 0.2  & 0\\
+    \end{tabular}
+\end{table}
+
+We assign the probability that $X=0$ as the sum of the probabilities assigned to outcome $a$ and outcome $e$, or
+\begin{align}
+    P(X=0) &= P(\{a\}) + P(\{e\})\\
+           &= 0.1+0.2 = 0.3
+\end{align}
+We can run the same procedure for all the elements in the support of $X$, 
+\begin{align}
+    P(X=1) &= P(\{b\}) + P(\{c\})\\
+           &= 0.25+0.15 = 0.40\\
+    P(X=2) &= P(\{d\}) = 0.3 = 0.30,
+\end{align}
+and organize our work in a table
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{c|c}
+        X & P(X=x) \\
+        \hline
+        0 & 0.30\\
+        1 & 0.40\\
+        2 & 0.30
+    \end{tabular}
+\end{table}
+
+A \textbf{probability distribution} for a random variable $X$ is a set of tuples where the first position in each tuple is a value in the support of $X$ and the second position in the tuple is the corresponding probability assigned to that value. 
+
+\ex A probability distribution for the random variable $X$ above is $\{(0,0.30),(1,0.40),(2,0.30)\}$.
+
+\ex Imagine we run an experiment that collects data on marathon runners. We decide to collect the number of elapsed minutes until they finish the race. Our sample space is defined as all positive integers $\samplespace = \{1,2,3,\cdots,\}$. We may decide to build a random variable $X$ that maps outcomes less than 60 to the value 1, outcomes from 61 to 120 to the value 2, and outcomes greater than 120 to the value 3. One potential probability distribution for $X$ is $\{(1,0.10),(2,0.50),(3,0.40)\}$. For this probability distribution, $P(X=1) = 0.10$, $P(X=2) = 0.50$, and $P(X=3) = 0.40$.
+
+\begin{figure}[ht!]
+    \includegraphics{chapters/chapter2/rvsLink.pdf}
+    \caption[List]{A sample space $\samplespace$ with elements $\{a,b,c,d,e\}$ and a random variable $X$ that maps each element in $\samplespace$ to one the values: 0, 1, or 2. Probabilities corresponding to outcomes in the sample space and how they map to probabilities for each value of $X$ are shown in blue.}
+\end{figure}
 
 \section{Probability mass function}
 
+There are several supportive tools that we can use to help us better understand random variable we create.
+The first is the probability mass function, or p.m.f.
+The \textbf{probability mass function} is a \underline{function} that maps values in the support of a random variable $X$ to their corresponding probabilities.
+Inputs are values of $X$, outputs are probabilities.
+
+The probability mass function is a convenient way to organize a probability distribution and it allows us to transfer all the information we know about functions to random variables.
+
+\ex Define a random variable $Y$ with support $\{-1,0,1\}$, probability distribution \{(-1,0.2),(0,0.5),(1,0.3)\}, and probability mass function 
+\begin{equation}
+    f(y) = \begin{cases}
+            0.2 & \text{ when } y=-1\\
+            0.5 & \text{ when } y = 0\\
+            0.3 & \text{ when } y=1
+            \end{cases}
+\end{equation}
+The function---our probability mass function---is a type of function called a \textbf{piecewise} function.
+
+We can ask our pm.f. to return the probability for a given value
+\begin{equation}
+    f(1) = 0.3
+\end{equation}
+and we can visualize our probability mass function using, for example, a barplot.
+
+
+
 \section{Cumulative mass function}
+
+The \textbf{cumulative mass function} is a \underline{function} that maps values in the support of a random variable $X$ to their corresponding probabilities.
+
 
 \section{Two or more random variables}
 
