@@ -23,16 +23,16 @@
     % Ensure that by default, figures have no caption (until we provide a
     % proper Figure object with a Caption API and a way to capture that
     % in the conversion process - todo).
-    \usepackage{caption}
-    \DeclareCaptionFormat{nocaption}{}
-    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+    %\usepackage{caption}
+    %\DeclareCaptionFormat{nocaption}{}
+    %\captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
 
     \usepackage{float}
     \floatplacement{figure}{H} % forces figures to be placed at the correct location
     \usepackage{xcolor} % Allow colors to be defined
     \usepackage{enumerate} % Needed for markdown enumerations to work
     %\usepackage{geometry} % Used to adjust the document margins
-    \usepackage{amsmath} % Equations
+    %\usepackage{amsmath} % Equations
     \usepackage{amssymb} % Equations
     \usepackage{textcomp} % defines textquotesingle
     % Hack from http://tex.stackexchange.com/a/47451/13684:
@@ -372,9 +372,10 @@
       }
     % Slightly bigger margins than the latex defaults
     
-   % \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+%    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
    
    \newcommand{\ex}{\textbf{Example: }}
+   \newcommand{\samplespace}{\mathcal{G} }
    
    
 
