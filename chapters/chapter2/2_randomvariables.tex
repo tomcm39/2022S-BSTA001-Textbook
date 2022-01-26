@@ -129,14 +129,87 @@ We can ask our pm.f. to return the probability for a given value
     f(1) = 0.3
 \end{equation}
 and we can visualize our probability mass function using, for example, a barplot.
+\begin{figure}[ht!]
+    \centering
+    \includegraphics{chapters/chapter2/pmfviz.pdf}
+    \caption{A barplot for visualizing the probability mass function of our random variable $Y$. The support of $Y$ is plotted on the horizontal axis and height of each bar corresponds to the probability assigned to that value in the support.\label{fig.pmfviz}}
+\end{figure}
 
+\textbf{Distributed as $f$:} Because we can use the probability mass function to describe the probability distribution of a random variable, we will often write 
+\begin{equation}
+    Y \sim f
+\end{equation}
+The above formula is read "the random variable $Y$ is distributed as $f$", and what we mean when a random variable is distributed as $f$ is that the support of $Y$ is the same as the domain of the function $f$ and that the probability of a value $y$ is equal to $f(y)$, or 
+\begin{align}
+    supp(Y) &= dom(f)\\
+    P(Y = y) &= f(y)
+\end{align}
 
+The probability mass function is a convenient method for assigning probabilities to random variables and visualizing the distribution of a random variable.
 
 \section{Cumulative mass function}
 
-The \textbf{cumulative mass function} is a \underline{function} that maps values in the support of a random variable $X$ to their corresponding probabilities.
+The \textbf{cumulative mass function} is a \underline{function} that maps values in the support of a random variable $X$ to the probability that the random variable is less than or equal to this value, or $P(X \leq x)$.
 
+We use a capital $F$ to denote a cumulative mass function (c.m.f).
+The c.m.f. corresponding to random variable $X$ has a domain equal to the support of $X$ and produces values between 0 and 1 (the values a function can produce is called the function's \textbf{image}). 
+
+\begin{align}
+    supp(X) &= dom(F)\\
+    image(F) &= [0,1]\\
+    P(X \leq x) &= F(x)
+\end{align}
+
+The c.m.f. too can be visualized and we could also use the c.m.f. to describe the probability distribution of a random variable. 
+This is because we can use the c.m.f. to derive the p.m.f.
+
+\ex For a random variable 
+\begin{align}
+    X &\sim f\\
+    supp(X) &= \{0,1,2,3\}\\
+    f(x) &= \begin{cases}
+     0 & 0.1\\
+     1 & 0.3\\
+     2 & 0.2\\
+     3 & 0.4\\
+    \end{cases}
+\end{align}
+The c.m.f is then 
+\begin{align}
+    F(x) =  
+    \begin{cases}
+     0 & 0.1\\
+     1 & 0.3 + 0.1 = 0.4\\
+     2 & 0.2+0.3+0.1 = 0.6\\
+     3 & 0.4+0.2+0.3+0.1 = 1\\
+     \end{cases}
+\end{align}
+
+We can use the c.m.f $(F(x))$ to compute any p.m.f ($f(x)$) too by noticing that for a support $\{x_{0},x_{1},x_{2},x_{3}, \cdots,x_{n-1}\cdots,x_{n}\}$ where the values in this set are ordered form smallest to largest 
+\begin{align}
+    f(x_{i}) &= \left[f(x_{i}) + f(x_{i-1}) + \cdots f(x_{0}) \right] - \left[f(x_{i-1}) + \cdots f(x_{0})\right] \\ 
+    &=F(x_{i}) - F(x_{i-1}).
+\end{align}
+Because the p.d.f. and c.m.f equivalently describe the probability distribution of a random variable we can write $X\sim F$ or $X \sim f$.  
 
 \section{Two or more random variables}
+
+A single random variable is a useful way to describe a sample space and the probabilities assigned to values on the number line corresponding to outcomes.
+
+But more complicated scientific questions often require several random variables and rules for how they interact.
+We will explore how to generate multiple random variables  on the same sample space. 
+Then we will develop an approach to define probabilities for combinations of random variables, a joint probability mass function and joint cumulative mass function.
+
+Suppose we design a sample space $\samplespace$ and build two random variables on this space $X$ and $Y$.
+Because $X$ and $Y$ are random variables we can think of the support of $X$ and support of $Y$ as two new sample spaces. Lets assume that the outcomes in $supp(X) = \{x_{1},x_{2},x_{3},\cdots,x_{N}\}$ and that the outcomes in $supp(Y) = \{y_{1},y_{2},\cdots,y_{M}\}$. 
+Then we can define a new set of outcomes in the space $supp(X) \times supp(Y) = \{x_{i}, y_{j}\}$ for all combinations of $i$ from $1$ to $N$ and $j$ from $1$ to $M$.
+
+This new space above maps outcomes in $\samplespace$ to a tuple $(x_{i},y_{j})$  where the outcomes were mapped by $X$ to the value $x_{i}$ and by $Y$ to the value $y_{j}$. 
+If we assign the probability of $(x_{i},y_{j})$ to be the the sum of the probabilities of all outcomes in $\samplespace$ that $X$ maps to $x_{i}$ and $Y$ maps to $y_{i}$ then we call this a \textbf{joint probability distribution}. 
+
+
+
+
+
 
 \section{A Model}
