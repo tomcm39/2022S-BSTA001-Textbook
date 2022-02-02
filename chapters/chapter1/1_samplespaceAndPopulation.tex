@@ -171,8 +171,8 @@ Because we defined a universal set, we can look at set complement
 \begin{align}
     \begin{aligned}
         A_{1}^{c} &= \{2,3,4,5,\cdots \}\\
-        A_{5}^{c} &= \{ 5,6,7,8,\cdots \}\\
-        A_{8}^{c} &= \{8,9,10,11,12,\cdots \}\\
+        A_{5}^{c} &= \{6,7,8,9\cdots \}\\
+        A_{8}^{c} &= \{9,10,11,12,\cdots \}\\
     \end{aligned}
 \end{align}
 \end{VT1}
@@ -401,6 +401,7 @@ To compute the probability of infection given a patient was vaccinated we need t
     P( \text{inf} | \text{vacc} ) = \frac{P(\text{inf} \cap \text{vacc})}{ P(\text{vacc})}
 \end{equation}
 where the event "inf" contains those outcomes in $\mathcal{G}_{\text{experiment}}$ which have "infected" in the fist position of their tuple $(\text{infected}, \cdot)$ and the event "vacc" contains those outcomes which have "vaccinated" in the second position of their tuple $(\cdot, \text{vaccinated} )$.
+Events which hold one or more positions in a tuple constant are often called \textbf{marginal events} and the associated probability is called a \textbf{marignal probability}.
 Then $P(\text{inf} \cap \text{vacc})$ are those outcomes with "infected" in the first position and "vaccinated" in the second position. We have a single outcome where this happens: \{(infected, vaccinated)\} and this outcome has a probability of $P(\text{inf} \cap \text{vacc}) = 0.1$.
 
 Computing $P(\text{vacc})$ is only slightly more difficult. 
@@ -540,18 +541,46 @@ If a vacationer wanted to understand the chances they had of enjoying $5$ sunny 
 where $d_{i}$ is the outcome on day $i$.
 We can frame the problem, and clearly layout the potential outcomes, for example on outcome is ("sunny", "sunny", "not sunny", "sunny", "not sunny").
 
-
 \subsection{The datapoint, dataset, and dataframe}
 
-<to write>
+The sample space, event, and outcome are all potential results from an experiment. 
+When we conduct an experiment we will generate an outcome from our sample space and call this realized outcome a \textbf{data point}. 
+
+\ex Consider the experiment of flipping a coin and recording whether the coin lands heads or tails side up.
+We can define a sample space $\samplespace = \{H,T\}$ where $H$ is an outcome that represents the coin landing heads up and $T$ represents tails up. Up until this point we have structured our experiment, but we have generated no data. We flip the coin and the coin lands tails side up. Now we have performed an experiment and generated the data point $T$.
+
+Now suppose that we conduct an experiment with the same sample space~$(\samplespace)$ a number $N$ times and with each experiment we record a data point. A tuple of data points~$d$ is called a \textbf{data set}~$\mathcal{D} = (d_{1}, d_{2}, d_{3}, \cdots, d_{N})$ where $d_{i}$ is the data point generated from the $i^\text{th}$ experiment.
+We say that we have \underline{drawn} or that we have \underline{sampled} a data set $\mathcal{D}$. Further, data points~$(d)$ are often called \underline{realized} outcomes because they are no longer in a set of potential possibilities but are now determined items. 
+
+A data set~$\mathcal{D}$ can be unwieldy depending on the number of data points, the complexity of the sample space, or both.
+A \textbf{data frame} is one way to organize a data set.
+A data frame~$\mathcal{F}$ is a table where each data point~$d$ in a dataset~$\mathcal{D}$ is represented as a row in the table and if the data point is a tuple then a separate column is created for each position in the tuple.
+
+\ex Suppose we design an experiment to collect from humans predictions, two weeks ahead from the time of our experiment, of the number of incident cases and incident deaths at the US national level of COVID-19~(\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7523166/}). We decide to collect from each human whether they are an expert in the modeling of infectious disease,  a prediction of incident cases, and a prediction of incident deaths. We draw a data set $\mathcal{D}$ of 50 human judgement predictions. We can organize this data set into a data frame 
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{c|c|c}
+    Expert & Prediction of cases & Prediction of deaths\\
+    \hline
+    Yes     & 145    & 52 \\ 
+    No      & 215    & 34 \\
+    Yes     & 524    & 48 \\
+    Yes     & 265    & 95 \\
+    No      & 354    & 35 \\
+    \end{tabular}
+    \caption{Example data frame $\mathcal{F}$ built from a data set~$\mathcal{D}$ that contains 5 data points where each data point is a tuple of length three.}
+\end{table}
+
+Above, the first data point is $(Yes,145,52)$, the second data point is $(No, 215, 34)$, and so on until the last data point $(No, 354, 35)$. A data frame can also include informative information for others such as labels for each column.
+
 
 \section{Exercises}
 
 \begin{enumerate}
     \item \begin{align*}
-              A &= {1,2,3,4,5,6};
-              \;\;B = {1,3,6} \\
-              C &= {7}  
+              A &= \{1,2,3,4,5,6\};
+              \;\;B = \{1,3,6\} \\
+              C &= \{7\}  
               \;\;D = \emptyset
            \end{align*}
     \begin{enumerate}
@@ -615,6 +644,90 @@ We can frame the problem, and clearly layout the potential outcomes, for example
        \item Are $E_{1}$ and $E_{2}$ disjoint? Why or why not?
        \item Can $P(E_{1}) < P(E_{2})$?
    \end{enumerate}
+   
+   \item Please compute the following
+   \begin{enumerate}
+       \item $A = \{1,2,3\}$ and $B = \{4,5,6\}$. Please compute $A \times B$ (Answer should be a set of tuples)
+       \item $A = \{1,2,3\}$. Please compute $A \times A$ (Answer should be a set of tuples)
+       \item How many elements are in $A \times A$ (looking for a number)
+       \item How many elements are in  $A \times A \times A$? (looking for a number)
+       \item How many elements are in  $A \times A \times A \times \cdots \times A$ where we take the Cartesian product $N$ times? (looking for a number)
+   \end{enumerate}
+   \item Define a sample space $\samplespace = \{ a,b,c,d,1,2,3,4,5 \}$ and let $E_{1} = \{1,3,5\}$, $E_{2} = \{a,b,c\}$, $E_{3} = \{ a,d,5 \}$. We further assign the following probabilities 
+   \begin{table}[ht!]
+       \centering
+       \begin{tabular}{ c c}
+       Outcome &  $P(\{\text{Outcome}\})$\\
+       \hline
+            a & 0.10  \\
+            b & 0.05 \\
+            c & 0.15 \\
+            d & 0.02 \\
+            1 & 0.14 \\
+            2 & 0.25 \\
+            3 & 0.08 \\
+            4 & 0.04 \\
+            5 & 0.17
+       \end{tabular}
+   \end{table}
+   \begin{enumerate}
+       \item Compute $P(E_{1})$ (looking for a number)
+       \item Compute $P(E_{2})$ (looking for a number)
+       \item Compute $P(E_{3})$ (looking for a number)
+       \item Compute $P(E_{1} \cap E_{2})$ (looking for a number)
+       \item Compute $P(E_{1} \cap E_{3})$ (looking for a number)
+       \item Compute $P(E_{2} \cap E_{2})$ (looking for a number)
+       \item Compute $P(E_{1} | E_{2})$ (looking for a number)
+       \item Compute $P(E_{1} | E_{3})$ (looking for a number)
+       \item Compute $P(E_{2} | E_{3})$ (looking for a number)
+       \item Compute $P(E_{3} | E_{2})$ (looking for a number)
+   \end{enumerate}
+   \item Define a sample space $\samplespace = \{ (a,1),(b,1),(c,1),(a,2),(b,2),(c,2) \}$ and let $E_{1} = \{(a,1),(a,2),(c,2)\}$, $E_{2} = \{(c,2),(a,1) \}$, $E_{3} = \{(b,2) \}$. We further assign the following probabilities 
+   \begin{table}[ht!]
+       \centering
+       \begin{tabular}{ c c}
+       Outcome &  $P(\{\text{Outcome}\})$\\
+       \hline
+            (a,1) & 0.05  \\
+            (b,1) & 0.22 \\
+            (c,1) & 0.15 \\
+            (a,2) & 0.02 \\
+            (b,2) & 0.13 \\
+            (c,2) & 0.43 \\
+       \end{tabular}
+   \end{table}
+   \begin{enumerate}
+       \item Compute $P(E_{1})$ (looking for a number)
+       \item Compute $P(E_{2})$ (looking for a number)
+       \item Compute $P(E_{3})$ (looking for a number)
+       \item Compute $P(E_{1} \cap E_{2})$ (looking for a number)
+       \item Compute $P(E_{1} \cap E_{3})$ (looking for a number)
+       \item Compute $P(E_{2} \cap E_{2})$ (looking for a number)
+       \item Compute $P(E_{1} | E_{2})$ (looking for a number)
+       \item Compute $P(E_{1} | E_{3})$ (looking for a number)
+       \item Compute $P(E_{2} | E_{3})$ (looking for a number)
+       \item Compute $P(E_{3} | E_{2})$ (looking for a number)
+   \end{enumerate}
+   
+   \item Given two events $A$ and $B$, show that $P(A|B) \geq P(A \cap B)$ (looking for a short explanation and mathematical argument)
+   
+   \item Suppose we wish to study adverse outcomes among patients who have unprotected left main disease~(\url{https://www.nejm.org/doi/full/10.1056/nejmoa1909406}). In this experiment~(called a clinical trial) we randomize patients to receive percutaneous intervention~(PCI) or a coronary artery bypass graft~(CABG). We wish to study the number of patients who received a PCI \underline{and} experienced a myocardial infarction~(MI) between the time they had their procedure and 5 years, however we only know three pieces of information: (i) the probability a patient was randomized to PCI was 0.5, (ii) the probability a patient was randomized to CABG was 0.5, and (iii) we know that the probability of a MI was 0.2 among patients who received a PCI.
+   \begin{enumerate}
+       \item Define a sample space that will allow us to compute the probability a patient was randomized to PCI and experienced an MI (looking for a description of the sample space and a set)
+       \item Please compute the probability a patient experiences an MI and was randomized to PCI. (looking for a number)
+       \item Please compute the probability a patient does not experience an MI and was randomized to PCI. (looking for a number)
+   \end{enumerate}
+   
+   \item If two events $A$ and $B$ are disjoint, are they also independent? (looking for a description and mathematical argument to backup your description.)
+   
+   \item Researchers studied epidemiological characteristics of a variant of SARS-CoV-2 called B.1.526~(\url{https://www.science.org/doi/10.1126/sciadv.abm0300}). Suppose we too wanted to study the impact of B.1.526 on a population of patients who have been admitted to the hospital for COVID-19 by collecting each patent's age, whether they have were vaccinated against COVID-19, and whether their infection was due to the B.1.526 variant.
+   
+   \begin{enumerate}
+       \item If we define our experiment as generating the above three pieces of information from a single patient, define a sample space~($\samplespace$) for these potential outcomes. (looking for a short description and the sample space)
+       \item Define a sample space if we repeated our above experiment 2 times. In other words, what would be our sample space if we collected information from 2 patients? 
+   \end{enumerate}
+    
+   \item Can a data set ever have more elements than a sample space? Explain. (looking for a paragraph with some examples)
     
 \end{enumerate}
 
