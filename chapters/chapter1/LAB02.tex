@@ -1,0 +1,533 @@
+
+\chapterauthor{thomas mcandrew, david braun}{Lehigh University}
+%\chapterauthor{Second Author}{Second Author Affiliation}
+\chapter{Laboratory 02}
+
+\hspace{1mm}
+\hypertarget{control-flow}{%
+\subsection{Control flow}\label{control-flow}}
+
+Now that we defined some fundemental objects and operations in R, we
+need to explore how R, and many other programmign language execute code.
+R executes code sequentially from top to bottom. The line of R code at
+the top is run first, then the second highest line, then the third
+highest and so on.
+
+When code is executed line by line from top to bottom it is called
+\textbf{sequential control}. Sequentuntial control if the default way R
+executes statements.
+
+However, we can change the order in which R executes lines of code in
+three ways: (i) choice (ii) repetition (iii) functions (we'll talk much
+more about functions next week).
+
+    \hypertarget{choice-or-selection}{%
+\subsubsection{Choice or Selection}\label{choice-or-selection}}
+
+An R \textbf{program} is a set of statements meant to produce one or
+more results. We can choose to execute all the lines in our program, or
+we can choose to execute some lines and not others depedent on
+conditions. When we execute some lines of R code to run and not others
+we are using a specific type of control flow called \textbf{Selection}
+(``we select some lines and not others'').
+
+While we often define statements as sentences that are either TRUE or
+FALSE, in R we define a logical statement that evaluates to TRUE or to
+FALSE an \textbf{expression}.
+
+The main ways to control which lines to execute is with the if/else,
+if/elsif/else, and the switch statement.
+
+\hypertarget{ifelse}{%
+\paragraph{If/else}\label{ifelse}}
+
+The following study at this link = \url{https://doi.org/10.1200/jco.2005.03.0221}
+chose to study the effects of a novel treatment on newly diagnosed
+myleoma. The study investigators random;y assigned 103 patientrs to
+receive a control therapy and 104 patients to receieve the novel
+treatment. The primary outcome of interest was the rate of response
+among patients in control and treament where a response was defined as a
+50\% or greater decrease in detection of the cancer.
+
+We could decide to define a vector \(v\) that will contain three pieces
+of information: a patient id that is an integer used to link a single
+patient to their clincial records, whether the patient was assigned to
+recieve a treatment or control therapy, and the percent response where
+100 means complete response/reduction and 0 means no response/reduction.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{70}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{l+m}{1256}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{TREATMENT\PYZdq{}}\PY{p}{,} \PY{l+m}{87}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    We stored a vector called \texttt{pt} with our three pieces of info. Now
+suppose we want to add an additional piece of info to our patient vector
+that determines if the patient had a succussful or unsuccussful
+response.
+
+We need the if/else sytax. The if/else is an expression placed inside of
+parentheses and two blocks of code. if the expression evaluates to TRUE
+the first block of code will be executed and the second block is
+skipped. If the expression evaluates to FALSE then the second block will
+be executed and first block will be skippedd.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{71}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nf}{if}\PY{p}{(} \PY{n}{pt}\PY{p}{[}\PY{l+m}{3}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m}{50} \PY{p}{)}\PY{p}{\PYZob{}}  \PY{c+c1}{\PYZsh{} Our expression is pt[3] \PYZgt{} 50}
+    \PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{n}{pt}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}
+\PY{p}{\PYZcb{}}\PY{n}{else}\PY{p}{\PYZob{}}
+    \PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{n}{pt}\PY{p}{,}\PY{l+m}{0}\PY{p}{)}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    We expect that the code above will create a new vector
+\texttt{c(1256,"TREATMENT",87,1)}. To be sure, lets check the variable
+\texttt{pt} by printing it.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{72}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{pt}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "1256"      "TREATMENT" "87"        "1"
+    \end{Verbatim}
+
+    \hypertarget{ifelseifelse-and-switch}{%
+\paragraph{if/elseif/else and switch}\label{ifelseifelse-and-switch}}
+
+The \textbf{if/else} handles one condition that either evaluates to TRUE
+or FALSE. However, we may need to execute a specific piece of code that
+depends on more than one condition. The \textbf{if/else if/else} syntax
+can execute a specific block of code dependent on more than one
+condition.
+
+For example, suppose that we want to classify a patient's response as
+either above 75, between 50 and 75, not including 50 and 75, or less
+than or equal to 50. Let us also assume our patient is a following
+vector:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{73}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{l+m}{6587}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{CONTROL\PYZdq{}}\PY{p}{,}\PY{l+m}{24}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    We can use the if /else if/ else syntax.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{74}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nf}{if}\PY{p}{(} \PY{n}{pt}\PY{p}{[}\PY{l+m}{3}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m}{75} \PY{p}{)}\PY{p}{\PYZob{}}  
+    \PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{n}{pt}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}
+\PY{p}{\PYZcb{}}\PY{n}{else} \PY{n+nf}{if }\PY{p}{(} \PY{n}{pt}\PY{p}{[}\PY{l+m}{3}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{l+m}{50} \PY{p}{)} \PY{p}{\PYZob{}}
+    \PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{n}{pt}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}
+\PY{p}{\PYZcb{}}\PY{n}{else} \PY{p}{\PYZob{}}\PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{n}{pt}\PY{p}{,}\PY{l+m}{0}\PY{p}{)} \PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} Our if/else if/else will run this code bc the above two conditions are not met.}
+\end{Verbatim}
+\end{tcolorbox}
+
+    The if/else if/ else syntax begins at the top condition
+(\texttt{pt{[}3{]}\ \textgreater{}\ 75}). If the top condition is FALSE
+then the condition second to the top is evaluated next
+\texttt{(\ pt{[}3{]}\ \textgreater{}\ 50)}. If the second condition is
+FALSE, and there are no additional \texttt{else\ if} conditions, then
+code in the \texttt{else} block is executed.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{75}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{pt}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "6587"    "CONTROL" "24"      "0"
+    \end{Verbatim}
+
+    \hypertarget{compund-expressions}{%
+\paragraph{Compund expressions}\label{compund-expressions}}
+
+The expressions we used above evaluated a single expression as either
+TRUE or FALSE. At times we may need more complicated expressions that
+must evaluate several expressions at once. We will call these compund
+expressions.
+
+For example, we may want to treatment response values different if the
+patient was assigned to treatment versus control. Suppose if a patient
+is assigned control and has a response above 50 they receieve a 1, if a
+patient is assigned control with a response equal to or less than 50
+they recieve a 0. If a patient is assigned treatment and has a response
+above 50 they receieve a 2 and if their response is equal to or less
+than 50 they recieve a 3.
+
+We need to evaluate two expressions based on the patient assignment and
+response. We are allowed to include logical comparisons (LAB01) inside
+expressions.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{76}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{l+m}{1359}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{TREATMENT\PYZdq{}}\PY{p}{,} \PY{l+m}{72}\PY{p}{)}
+
+\PY{n+nf}{if}\PY{p}{(} \PY{p}{(}\PY{n}{pt}\PY{p}{[}\PY{l+m}{3}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m}{50}\PY{p}{)} \PY{o}{\PYZam{}\PYZam{}} \PY{p}{(}\PY{n}{pt}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{==}\PY{l+s}{\PYZdq{}}\PY{l+s}{CONTROL\PYZdq{}}\PY{p}{)} \PY{p}{)}\PY{p}{\PYZob{}} 
+    \PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{n}{pt}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}
+\PY{p}{\PYZcb{}}\PY{n}{else} \PY{n+nf}{if }\PY{p}{(} \PY{p}{(}\PY{n}{pt}\PY{p}{[}\PY{l+m}{3}\PY{p}{]} \PY{o}{\PYZlt{}=} \PY{l+m}{50}\PY{p}{)} \PY{o}{\PYZam{}\PYZam{}} \PY{p}{(}\PY{n}{pt}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{==}\PY{l+s}{\PYZdq{}}\PY{l+s}{CONTROL\PYZdq{}}\PY{p}{)} \PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{n}{pt}\PY{p}{,}\PY{l+m}{0}\PY{p}{)}
+\PY{p}{\PYZcb{}}\PY{n}{else} \PY{n+nf}{if }\PY{p}{(} \PY{p}{(}\PY{n}{pt}\PY{p}{[}\PY{l+m}{3}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m}{50}\PY{p}{)} \PY{o}{\PYZam{}\PYZam{}} \PY{p}{(}\PY{n}{pt}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{==}\PY{l+s}{\PYZdq{}}\PY{l+s}{TREATMENT\PYZdq{}}\PY{p}{)} \PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{n}{pt}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}
+\PY{p}{\PYZcb{}}\PY{n}{else} \PY{n+nf}{if }\PY{p}{(} \PY{p}{(}\PY{n}{pt}\PY{p}{[}\PY{l+m}{3}\PY{p}{]} \PY{o}{\PYZlt{}=} \PY{l+m}{50}\PY{p}{)} \PY{o}{\PYZam{}\PYZam{}} \PY{p}{(}\PY{n}{pt}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{==}\PY{l+s}{\PYZdq{}}\PY{l+s}{TREATMENT\PYZdq{}}\PY{p}{)} \PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{pt} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{n}{pt}\PY{p}{,}\PY{l+m}{3}\PY{p}{)}
+\PY{p}{\PYZcb{}}
+
+\PY{c+c1}{\PYZsh{} check our work}
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{pt}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "1359"      "TREATMENT" "72"        "2"
+    \end{Verbatim}
+
+    The above code used the logical comparison \texttt{AND\ (\&\&)} to test
+whether the patient was treatment/control and if there repsonse was
+above or below 50.
+
+    \hypertarget{repitition}{%
+\subsubsection{Repitition}\label{repitition}}
+
+Often we will need to repeat a certain number of lines of code. We may
+need to apply the same operation to many different patients or
+observations or apply some set of code repeatedly until a condition it
+met. Loops allows us to \textbf{repeat} lines of code before continuing
+to execute lines of code below our loop.
+
+\hypertarget{while-loop}{%
+\paragraph{While loop}\label{while-loop}}
+
+The while loop repeats lines of code---called a \textbf{block}---until a
+specific condition is met.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{77}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x} \PY{o}{=} \PY{l+m}{2}
+\PY{n+nf}{while}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZlt{}}\PY{l+m}{1000}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{o}{\PYZca{}}\PY{p}{(}\PY{l+m}{2}\PY{p}{)}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 65536
+    \end{Verbatim}
+
+    In the code above, we used the syntax
+\texttt{while\ (CONDITION)\ \{CODE\}} to execute a while loop. The code
+above assigned the variable \texttt{x} the value 2. The next line of
+code was the while loop. Because the condition evaluated to FALSE (x was
+not less than 1000) the code inside the parentheses---the code
+block---was executed once. After executing the code block the condition
+\texttt{x\textless{}1000} was tested again. Becasue the condition
+evaluated to FALSE, the code block was executed again, and again, and
+again, until the condition evaluated to TRUE. After the code block
+evaluated to TRUE, we continued to execute lines below the while loop in
+sequence.
+
+The above code is equivalent to the following expanded code
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{78}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x}\PY{o}{=}\PY{l+m}{2}
+\PY{n+nf}{if }\PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}}\PY{l+m}{1000}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{if }\PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}}\PY{l+m}{1000}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{if }\PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}}\PY{l+m}{1000}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{if }\PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}}\PY{l+m}{1000}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{if }\PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}}\PY{l+m}{1000}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{if }\PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}}\PY{l+m}{1000}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{if }\PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}}\PY{l+m}{1000}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{if }\PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}}\PY{l+m}{1000}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 65536
+    \end{Verbatim}
+
+    and so the while loop is a natural way to repeat a series of R code
+until meeting some condition.
+
+    \hypertarget{for-loop}{%
+\paragraph{For loop}\label{for-loop}}
+
+Suppose we want to execute a code a block a \emph{fixed} number of
+times. We could use a while loop to square the variable \texttt{x} four
+times using the below code:
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{79}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{number\PYZus{}of\PYZus{}times}\PY{o}{=}\PY{l+m}{1}
+\PY{n}{x} \PY{o}{=} \PY{l+m}{2}
+
+\PY{n+nf}{while }\PY{p}{(}\PY{n}{number\PYZus{}of\PYZus{}times} \PY{o}{\PYZlt{}}\PY{l+m}{5}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+    \PY{n}{number\PYZus{}of\PYZus{}times} \PY{o}{=} \PY{n}{number\PYZus{}of\PYZus{}times}\PY{l+m}{+1}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 65536
+    \end{Verbatim}
+
+    Because repeating code a fixed number of times is needed so often to
+solve a problem, a second type of loop was created---the \textbf{for
+loop}. The \textbf{for loop} repeats a code block a fixed number of
+times by iterating through a sequence.
+
+\hypertarget{sequences}{%
+\paragraph{Sequences}\label{sequences}}
+
+A sequence is a mapping, or function, from the numbers 1,2,3,4,\ldots{}
+to some set of items \(a,b,c,d,\cdots\). We often denote the items
+\(a,b,c,d,...\) with a single variable name and a subscript that is
+called an index: \(a_{1},a_{2},a_{3},a_{4},\cdots\). In the above
+sequence the number \(1\) maps to \(a_{1}\), the number \(2\) maps to
+\(a_{2}\) and so on.
+
+We can create sequences of integers in R with the function \texttt{seq}.
+We can provide \texttt{seq} two integers, a ``from'' and ``to'' and this
+function will produce all integers between ``from'' and ``to'',
+including both the ``from'' value and the ``to'' value. We will produce
+all integers from -2 to 8. Watch
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{80}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nf}{seq}\PY{p}{(}\PY{l+m}{\PYZhy{}2}\PY{p}{,}\PY{l+m}{8}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate*}
+\item -2
+\item -1
+\item 0
+\item 1
+\item 2
+\item 3
+\item 4
+\item 5
+\item 6
+\item 7
+\item 8
+\end{enumerate*}
+
+
+    
+    This sort of request is so common in R that there is an easier way to
+write ``from,to'' sequences. We place the ``from'' value to the left and
+the ``to'' value to the right of a colon.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{81}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{l+m}{\PYZhy{}2}\PY{o}{:}\PY{l+m}{8}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate*}
+\item -2
+\item -1
+\item 0
+\item 1
+\item 2
+\item 3
+\item 4
+\item 5
+\item 6
+\item 7
+\item 8
+\end{enumerate*}
+
+
+    
+    R understand that the colon asks to produce all integers starting with
+the value on the left and ending with the value on the right.
+
+\hypertarget{back-to-the-for-loop}{%
+\paragraph{Back to the for loop}\label{back-to-the-for-loop}}
+
+Lets look how we can use sequences and the idea of the for loop to
+rewrite our code.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{82}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x}\PY{o}{=}\PY{l+m}{2}
+\PY{n+nf}{for}\PY{p}{(}\PY{n}{number\PYZus{}of\PYZus{}times} \PY{n}{in} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{4}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{p}{\PYZcb{}}
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 65536
+    \end{Verbatim}
+
+    We can think of the for loop above in expanded form.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{83}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x}\PY{o}{=}\PY{l+m}{2}
+
+\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m}{2}
+
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 65536
+    \end{Verbatim}
+
+    \hypertarget{assignment}{%
+\subsubsection{Assignment}\label{assignment}}
+
+Lets use our new control flow skills to compute probabilities and
+conditional probabilities.
+
+    Run the below code to create one vector that describes whether patients
+were assigned to treatment or control and a second vector describing
+whether the patient had a succussful or unsuccesful status.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{84}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{draw\PYZus{}random\PYZus{}number} \PY{o}{=} \PY{n+nf}{function}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n+nf}{return}\PY{p}{(}\PY{n+nf}{runif}\PY{p}{(}\PY{l+m}{1}\PY{p}{)}\PY{p}{)}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{practice-loop-and-conditional-structure}{%
+\subparagraph{Practice loop and conditional
+structure}\label{practice-loop-and-conditional-structure}}
+
+After running the above code block, we can create a random number by
+running the following code \texttt{draw\_random\_number()} 
+\begin{enumerate}
+    \item Run the code \texttt{draw\_random\_number()}
+    \item Create and if/else statement that prints ``Less than 1/2'' when \texttt{draw\_random\_number()} is smaller than the value 0.5 and else prints ``greater than or equal to 1/2'' when \texttt{draw\_random\_number()} is 0.5 or larger.
+    \item  Create a variable \texttt{category} and assign this variable the value -1.
+    \item Create an if/else if/else statement that assigns the variable category the value 1 when \texttt{draw\_random\_number()} is smaller than 0.25, the value 2 when \texttt{draw\_random\_number()} is greater than or equal to 0.25 and smaller than 0.50, the value 3 when \texttt{draw\_random\_number()} is greater than or equal to 0.50 and smaller than 0.75 and the value 4 otherwise.
+    \item  Create a vector random\_values that is empty (i.e.~\texttt{random\_values\ =\ c()}).
+    \item  Assign the variable \texttt{value} equal to \texttt{draw\_random\_number()}.
+    \item Create a while loop with the condition that \texttt{value} returns a value less than 0.5 - Inside the while loop, in the code block, assign the variable \texttt{value} to a new random number \texttt{draw\_random\_number()} - Inside the while
+loop, in the code block, append \texttt{value} to your vector
+\texttt{random\_values} 
+    \item Create a for loop that iterates the code block you create for the while loop 10 times.
+    \item  What can you say about the vector \texttt{random\_values} that would be produced from 7. versus 8.?
+\end{enumerate}
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{85}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{patient\PYZus{}status}    \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{0}\PY{p}{)}
+\PY{n}{patient\PYZus{}treatment} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{t\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{c\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{lets-create-a-for-loop-that-will-iterate-through-the-positions-of-our-two-vectors-patient_status-and-patient_treatment-performing-different-operations-as-we-move-to-each-item-in-the-vector}{%
+\subparagraph{\texorpdfstring{Lets create a for loop that will iterate
+through the positions of our two vectors \texttt{patient\_status} and
+\texttt{patient\_treatment}, performing different operations as we move
+to each item in the
+vector}{Lets create a for loop that will iterate through the positions of our two vectors patient\_status and patient\_treatment, performing different operations as we move to each item in the vector}}\label{lets-create-a-for-loop-that-will-iterate-through-the-positions-of-our-two-vectors-patient_status-and-patient_treatment-performing-different-operations-as-we-move-to-each-item-in-the-vector}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Use the \texttt{length} function to compute the number of patients in
+  the study and store that length in the variable \texttt{N}
+\item
+  Create a variable called \texttt{num\_of\_treat\_assigns} and assign
+  that variable the value 0
+\item
+  Create a variable called \texttt{num\_of\_contr\_assigns} and assign
+  that variable the value 0
+\item
+  Create a variable called \texttt{num\_of\_status\_success} and assign
+  that variable the value 0
+\item
+  Create a for loop that will run a code block starting at 1 and ending
+  at \texttt{N}
+\item
+  Inside the code block of the for loop, use the variable
+  \texttt{num\_of\_status\_success} to count the number of patients with
+  a succussful status
+\item
+  Use \texttt{N} and \texttt{num\_of\_status\_success} to compute the
+  probability of a success
+\item
+  Lets make our for loop more complicated. Inside our code block, create
+  an if/else such that when patient treatment is a ``t'' we increment
+  the variable \texttt{num\_of\_treat\_assigns} by 1, else we increment
+  the variable \texttt{num\_of\_contr\_assigns} by 1.
+\item
+  Lets add to our if/else statement. Create two variables
+  \texttt{num\_of\_trt\_status\_success} and
+  \texttt{num\_of\_ctr\_status\_success} and assign them both the value
+  0. Inside our loop, when a patient treatment is ``t'' we will
+  implement step 8 and in addition we will increment the variable
+  \texttt{num\_of\_trt\_status\_success} by 1. If the patient treatment
+  is ``c'' then we will increment \texttt{num\_of\_ctr\_status\_success}
+  by 1.
+\item
+  Using \texttt{num\_of\_trt\_status\_success} and
+  \texttt{num\_of\_treat\_assigns} compute the conditional probability
+  of success given the patient was assigned treatment.
+\item
+  Using \texttt{num\_of\_ctr\_status\_success} and
+  \texttt{num\_of\_contr\_assigns} compute the conditional probability
+  of success given the patient was assigned control.
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
