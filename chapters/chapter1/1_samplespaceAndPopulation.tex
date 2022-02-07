@@ -482,7 +482,7 @@ To support future strategic planning the PHOs want to know the impact of interve
 \end{table}
 When we look at this table, our first thought may be that when the intervention is enacted there is a high probability that the infection rate decreases (0.525), evidence that this is an important intervention for preventing the spread of this agent.
 
-But be careful. Let's compute the probability of intervention $P(\{intervention\})$ and the probability of a raise in infection $P(\{raise\})$. To do this we should define our sample space to be clear about what outcomes we can observe from our experiment.
+But be careful. Let's compute the probability of intervention $P(\text{intervention})$ where we define the event intervention as $\{ (\text{intervention},\text{rise}), (\text{intervention}, \text{no rise})\}$ and the probability of a raise in infection $P(\text{raise})$ where the event raise is defined as $\{(\text{intervention},\text{rise}),(\text{no intervention}, \text{rise})\}$. To do this we should define our sample space to be clear about what outcomes we can observe from our experiment.
 
 Our sample space is the set of four pairs
 \begin{align}
@@ -523,6 +523,90 @@ We can do the same procedure above for the remaining three scenario.
 We see that the probabilities we collected form the data match the product of the probabilities of each individual event~(Table~\ref{tab.indep}). 
 Intervention is independent, does not change the probability, of a rise or fall in incidence of the infectious agent we are tracking. 
 We will need to report these results to the PHO team and recommend they try alternative interventions to curb the spread of this agent.
+
+\subsubsection{The multiplication rule as a tool to compute sequential events}
+
+The multiplication rule equips us with a way to break down an event that involves many simultaneous phenomena into a sequence of, potentially easier to compute, probabilities.  
+
+\ex Suppose we wish to study the impact diabetes and smoking may have on the probability of a stroke before the age of 50. We decide to observe a population of humans in the US who are all 18 years old and host annual check-ins to record whether each person has acquired diabates, is considered obese, and has experienced a stroke.
+
+Our sample space is $\samplespace = \{ (x,y,z) |\;x \in \{\text{diab}, \;\text{no diab}\} \text{ and } y \in \{\text{obese},\; \text{no obese}\} \text{ and } z \in \{\text{stroke},\; \text{no stroke}\} \}$. For example, one outcome in our sample is $o = (\text{diab},\text{no obese},\text{no stroke})$ or the outcome that a patient has acquired diabates, is not considered obese, and has not experienced a stroke.
+
+We may find it difficult to collect data that purposely recorded these three variables together, however it may be easier to find data that has paired diabetes with obesity and diabetes with stroke. 
+The multiplication rule can give us some intuition about the outcomes we wish to study.
+
+Define three events:
+\begin{enumerate}
+  \item $D = \{ (x,y,z) | x=diab\}$
+  \item $O = \{ (x,y,z) | y=obese\}$
+  \item $S = \{ (x,y,z) | z=stroke\}$
+\end{enumerate}
+
+We may find information to assign a probability to $O$. Lets suppose we found $P(O) = 0.60$. 
+Investigating further we find a dataset that compares those who have obesity and diabetes. This data may alow us to assign the following probabilities $P(D|O) = 0.5$ and $P(D|O^{c}) = 0.31$.
+Finally, we find a dataset that measured the prevalence of stroke among patients with/without  diabetes and obesity, giving us the following probability assignments: $P(S|D \cap O) = 0.2$, $P(S|D \cap O^{c}) = 0.1$, $P(S|D^{c} \cap O) = 0.15$, and $P(S|D^{c} \cap O^{c}) = 0.01$.
+
+If we feel that the above information applies to our study, we can compute the probability of simultaneous events by breaking them into a sequence of conditional probabilities. 
+Suppose we wish to compute $P(D \cap O \cap S)$. 
+This can be separated using the multiplication rule:
+\begin{align}
+    P(D \cap O \cap S) &= P(S | O \cap D ) P(O \cap D)\\
+    &=P(S| O \cap D) P(D | O) P(O) . 
+\end{align}
+We can now compute the probability of our simultaneous event with the information we collected across several studies. 
+\begin{align}
+    P(D \cap O \cap S)  &= P(S| O \cap D) P(D | O) P(O)\\
+   &= 0.2 \times 0.5 \times 0.60  = 0.06
+\end{align}
+
+If we want, we can visualize all the conditional relationships related to $D$, $O$, and $S$ with a \textbf{tree diagram}.
+A tree diagram starts with a dot that represents the "root". 
+We pick an event, say $O$, and create two branches: one for when $O$ occurs and one for when $O^{c}$ occurs. 
+
+\begin{figure}
+    \centering
+    \fbox{\includegraphics{chapters/chapter1/tree_diagram__branch1.pdf}}
+    \caption{ }
+\end{figure}
+
+We pick the next event, say $D$, and create two branches from $O$ and two branches from $O^{c}$ for a total of four branches. 
+Conditional on  $O$, two branches represent the occurrence of $D$ and occurrence of $D^{c}$.
+Conditional on $O^{c}$, two branches represent the occurrence of $D$ and occurrence of $D^{c}$. 
+
+\begin{figure}[ht!]
+    \centering
+    \fbox{\includegraphics{chapters/chapter1/tree_diagram__branch2.pdf}}
+    \caption{ }
+\end{figure}
+
+We can, in this example, do the same procedure for $S$ that we did for $D$, but this time we need to look at the occurrence of $S$ and $S^{c}$ for the four newest branches we created. 
+
+\begin{figure}[ht!]
+    \centering
+    \fbox{\includegraphics{chapters/chapter1/tree_diagram__branch3.pdf}}
+    \caption{ }
+\end{figure}
+
+
+\subsubsection{Partitions and the law of total probability}
+
+The multiplication rule is one way to use conditional probabilities to make computing probabilities of the intersection of many events more manageable.
+We can also use conditional probabilities to simplify computing single events easier.
+
+A \textbf{partition} of the event $A$ is a collection of sets $\mathcal{P} = \{B_{1}, B_{2}, \cdots, B_{n}\}$ such that $A = \left(A \cap B_{1}\right) \cup  \left(A \cap B_{2}\right)  \cup  \left(A \cap B_{3}\right) \cdots  \cup  \left(A \cap B_{n}\right)$.
+
+
+\begin{figure}[ht!]
+    \centering
+    \fbox{\includegraphics{chapters/chapter1/partition.pdf}}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+
+\subsubsection{Baye's Theorem}
+
+
 
 \subsubsection{Repeated experiments}
 Many natural experiments involve repeated observations. 
@@ -676,7 +760,7 @@ Above, the first data point is $(Yes,145,52)$, the second data point is $(No, 21
        \item Compute $P(E_{3})$ (looking for a number)
        \item Compute $P(E_{1} \cap E_{2})$ (looking for a number)
        \item Compute $P(E_{1} \cap E_{3})$ (looking for a number)
-       \item Compute $P(E_{2} \cap E_{2})$ (looking for a number)
+       \item Compute $P(E_{2} \cap E_{3})$ (looking for a number)
        \item Compute $P(E_{1} | E_{2})$ (looking for a number)
        \item Compute $P(E_{1} | E_{3})$ (looking for a number)
        \item Compute $P(E_{2} | E_{3})$ (looking for a number)
@@ -702,7 +786,7 @@ Above, the first data point is $(Yes,145,52)$, the second data point is $(No, 21
        \item Compute $P(E_{3})$ (looking for a number)
        \item Compute $P(E_{1} \cap E_{2})$ (looking for a number)
        \item Compute $P(E_{1} \cap E_{3})$ (looking for a number)
-       \item Compute $P(E_{2} \cap E_{2})$ (looking for a number)
+       \item Compute $P(E_{2} \cap E_{3})$ (looking for a number)
        \item Compute $P(E_{1} | E_{2})$ (looking for a number)
        \item Compute $P(E_{1} | E_{3})$ (looking for a number)
        \item Compute $P(E_{2} | E_{3})$ (looking for a number)
@@ -720,7 +804,7 @@ Above, the first data point is $(Yes,145,52)$, the second data point is $(No, 21
    
    \item If two events $A$ and $B$ are disjoint, are they also independent? (looking for a description and mathematical argument to backup your description.)
    
-   \item Researchers studied epidemiological characteristics of a variant of SARS-CoV-2 called B.1.526~(\url{https://www.science.org/doi/10.1126/sciadv.abm0300}). Suppose we too wanted to study the impact of B.1.526 on a population of patients who have been admitted to the hospital for COVID-19 by collecting each patent's age, whether they have were vaccinated against COVID-19, and whether their infection was due to the B.1.526 variant.
+   \item Researchers studied epidemiological characteristics of a variant of SARS-CoV-2 called B.1.526~(\url{https://www.science.org/doi/10.1126/sciadv.abm0300}). Suppose we too wanted to study the impact of B.1.526 on a population of patients who have been admitted to the hospital for COVID-19 by collecting each patient's age, whether they have were vaccinated against COVID-19, and whether their infection was due to the B.1.526 variant.
    
    \begin{enumerate}
        \item If we define our experiment as generating the above three pieces of information from a single patient, define a sample space~($\samplespace$) for these potential outcomes. (looking for a short description and the sample space)
