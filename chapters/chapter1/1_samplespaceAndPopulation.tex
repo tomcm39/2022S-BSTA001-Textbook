@@ -587,23 +587,71 @@ We can, in this example, do the same procedure for $S$ that we did for $D$, but 
 \end{figure}
 
 
+\clearpage
 \subsubsection{Partitions and the law of total probability}
 
 The multiplication rule is one way to use conditional probabilities to make computing probabilities of the intersection of many events more manageable.
 We can also use conditional probabilities to simplify computing single events easier.
 
-A \textbf{partition} of the event $A$ is a collection of sets $\mathcal{P} = \{B_{1}, B_{2}, \cdots, B_{n}\}$ such that $A = \left(A \cap B_{1}\right) \cup  \left(A \cap B_{2}\right)  \cup  \left(A \cap B_{3}\right) \cdots  \cup  \left(A \cap B_{n}\right)$.
-
+A \textbf{partition} of the event $A$ is a collection of sets $\mathcal{P} = \{B_{1}, B_{2}, \cdots, B_{n}\}$ such that $A = \left(A \cap B_{1}\right) \cup  \left(A \cap B_{2}\right)  \cup  \left(A \cap B_{3}\right) \cdots  \cup  \left(A \cap B_{n}\right)$ and for each $i,k$ pair of sets $B_{i} \cap B_{k} = \emptyset$.
 
 \begin{figure}[ht!]
     \centering
     \fbox{\includegraphics{chapters/chapter1/partition.pdf}}
-    \caption{Caption}
-    \label{fig:my_label}
+    \caption{A partition $\mathcal{P} = \{B_{1},B_{2},B_{2}\}$ of the set $A$\label{fig.partition}}
 \end{figure}
 
 
+Because $B_{i}$ and $B_{k}$ are disjoint for any choice of $i$ and $k$, then $A \cap B_{i}$ and $A \cap B_{k}$ are also disjoint sets.
+We can use the disjoint property of our partition to break down the probability of $A$ into the sum of probabilities of $A$ intersect $B_{k}$ for $k$ from $1$ to $n$.
+\begin{align}
+    P(A) &= P(\left(A \cap B_{1}\right) \cup  \left(A \cap B_{2}\right)  \cup  \left(A \cap B_{3}\right) \cdots  \cup  \left(A \cap B_{n}\right) \\
+    &= P\left(A \cap B_{1}\right) +  P\left(A \cap B_{2}\right) +     + \cdots  +  P\left(A \cap B_{n}\right)  & \text{(Disjoint)}
+\end{align}
+
+We can further manipulate the above using the multiplication rule to find
+\begin{align}
+    P(A) &= P\left(A \cap B_{1}\right) +  P\left(A \cap B_{2}\right) +     + \cdots  +  P\left(A \cap B_{n}\right)  \\ 
+         &= P(B_{1}) P(A|B_{1}) + P(B_{2}) P(A|B_{2}) + \cdots + P(B_{n}) P(A|B_{n}) 
+\end{align}
+This is called \textbf{the law of total probability}.
+Intuitively the law of total probability says that the probability of an event $A$ can be computed by first considering the probabilities of a collection of related events, and then considering the probability that $A$ occurs given each related event. 
+
+\ex Let $\mathcal{G} = \{(a,1), (a,2), (a,3), (b,4)\}$ and further suppose we assign the following probabilities to each outcome. 
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{ll}
+        Outcome & Probability \\
+        \hline
+        $(a,1)$ & 0.10\\
+        $(a,2)$ & 0.25\\
+        $(a,3)$ & 0.14\\
+        $(b,4)$ & 0.51
+    \end{tabular}
+\end{table}
+
+Define the events $A = \{ (a,1), (b,4), (a,2) \}$. The finest (as opposed to course) partition is a a collection of sets where each outcome in $A$ is in one, and only one, of the sets $B_{1},B_{2},...$. For example a partition of $A$ could be $\mathcal{P} = \{ B_{1}, B_{2}, B_{3} \}$ where $B_{1} = \{(a,1)\}$, $B_{2} = \{(b,4)\}$, and $B_{3} = \{(a,2)\}$. 
+A courser partition is $\mathcal{P} = \{ B_{1}, B_{2} \}$ where $B_{1} = \{(a,1)\}$ and $B_{2} = \{(a,2),(b,4)\}$.
+
+
+
 \subsubsection{Baye's Theorem}
+
+We have investigated how the conditional probability is related to simultaneous events, gives us a natural definition of Independence, and can allow us to compute the probability of an event if we have a partition of that event. 
+
+The final relationship we will explore is between two conditional probabilities. 
+
+\textbf{Baye's Theorem} relates two conditional probabilities to one another 
+\begin{align}
+    P(A | B) =  \frac{P(B | A) P(A)}{P(B)}
+\end{align}
+
+We can show that Baye's theorem is true from the definition of conditional probability. 
+
+\begin{align}
+    &P(A | B) = \frac{P(A \cap B)}{P(B)}  & \text{definition} \\ 
+    &P(A | B) = \frac{P(B |A) P(A)}{P(B)} & \text{multiplication rule} 
+\end{align}
 
 
 
@@ -811,6 +859,38 @@ Above, the first data point is $(Yes,145,52)$, the second data point is $(No, 21
    \end{enumerate}
     
    \item Can a data set ever have more elements than a sample space? Explain. (looking for a paragraph with some examples)
+   
+   \item Suppose we collect the following data about the co-occurence of patients admitted to the hospital for influenza-like illness~(ILI) and whether the patient does or does not work in a clinical setting. 
+   After data collection we estimate the following probabilities: The probability that a patient works in a clinical setting is 0.12. The probability that a patient who works in a clinical setting is admitted to the hospital for ILI is 0.2, and the probability a patient who does not work in a clinical setting was admitted to the hospital for ILI is 0.3. 
+   \begin{enumerate}
+       \item Define a sample space to study outcomes related to the co-occurance of ILI/No ILI and patients who do/do not work in a clinical setting. (Looking for a set and a very brief description of an outcome or two.) 
+       \item Compute the probability a patient is admitted to the hospitals for ILI and they work in a clinical setting. (Looking for an equation and number)
+       \item Compute the probability a patient is not admitted to the hospital for ILI and they work in a clinical setting. (Looking for an equation and number)
+       \item Compute the probability a patient is admitted to the hospital for ILI and they do not work in a clinical setting. (Looking for an equation and number)
+       \item Compute the probability a patient is not admitted to the hospital for ILI and they do not work in a clinical setting. (Looking for an equation and number)
+   \end{enumerate}
+   
+   \item Show that for two events $A$ and $B$ the $P(A|B)P(B)  \leq P(B)$. Why is this the case intuitively? (Looking for two brief descriptions)
+   \clearpage
+   \item \begin{figure}[ht!]
+       \centering
+       \fbox{\includegraphics{chapters/chapter1/tree_diagram__HW.pdf}}
+   \end{figure} Please use the above tree diagram to answer the following questions. 
+   \begin{enumerate}
+       \item Fill in the $P(O^{c})$ which corresponds to (A) in the figure
+       \item Fill in the $P(D | O^{c})$ which corresponds to (B) in the figure
+       \item Fill in the $P(D^{c} | O)$ which corresponds to (C) in the figure
+       \item Please compute $P(D)$
+       \item Please compute $P(D^{c})$
+   \end{enumerate}
+   
+   \item Influenza is a contagious virus that enters the respiratory system from a human's nose, throat, or lungs. Common symptoms are cough, chills, and a fever.
+   Suppose we collect data from a local hospital about those who were infected and not infected by the influenza virus and the above three symptoms. Let $\samplespace = \{ (x,y)  | x \text{ is } \text{"Flu"} \text{ or } \text{"not Flu"} \text{ and } y \in \{ \text{cough },\text{chills },\text{ fever} \}   \}$. 
+   Suppose further that we define events $F$ = \{ (x,y)  | x \text{ is } \text{"Flu"} \}, $C$ = \{ (x,y)  | y \text{ is } \text{"Cough"} \}, $H$ = \{ (x,y)  | y \text{ is } \text{"Chills"} \} , $E$ = \{ (x,y)  | y \text{ is } \text{"Fever"} \}, and that $P( C|F ) = 0.5$ and $P( C|F^{c} ) = 0.15$, $P( H|F ) = 0.25$ and $P( H|F^{c} ) = 0.01$, $P( E|F ) = 0.98$ and $P( H|F^{c} ) = 0.35$, $P(F) = 0.02$  
+    \begin{enumerate}
+       \item A patient presents with the chills. What is the probability they have influenza? 
+       \item What symptom from the above, if present, would indicate with a high probability a patient has influenza?
+    \end{enumerate}
     
 \end{enumerate}
 
