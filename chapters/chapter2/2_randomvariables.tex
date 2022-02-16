@@ -322,6 +322,15 @@ and so define statistical independence between two random variables, $A$ and $B$
     P(A = a | B=b) = P(A = a) \text{ for all } a \in supp(A),b \in supp(B)    
 \end{align}
 
+We can also translate the law of total probability from events to random variables.
+For a partition $[Y=y_{1}] \cup [Y=y_{2}] \cup [Y=y_{3}] \cup \cdots \cup [Y=y_{n}]$ of the event that the random variable $X=x$,
+\begin{align}
+    \begin{aligned}
+    P(X=x) = P(X=x|Y=y_{1})p(y_{1}) + P(X=x|Y=y_{2})p(y_{2})\\ + P(X=x|Y=y_{3})p(y_{3}) \cdots + P(X=x|Y=y_{n})p(y_{n})
+    \end{aligned}
+\end{align}
+
+By thinking of the values of a random variable as outcomes in a new sample space, we can apply our past intuition and the past mechanics of events, sets to a collection of random variables.
 
 \section{Functions of a random variable}
 
