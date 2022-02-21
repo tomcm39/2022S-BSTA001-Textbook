@@ -334,11 +334,175 @@ By thinking of the values of a random variable as outcomes in a new sample space
 
 \section{Functions of a random variable}
 
+There are times that we may wish to summarize the behavior of a random variable.
+One common way to describe how probability is distributed among values in the support of a random variable is by computing some function of that random variable. 
+
+
+\subsection{Multiplying and adding a constant to a random variable}
+
+Suppose we have defined a random variable $X$ and wish to study a new random variable $Y = g(X)$ that is a function of $X$.
+The values and the probabilities assigned to $X$, along with the function $g$ will determine the values in the support of $Y$ and assigned probabilities to these values.
+
+\subsubsection{Translation}
+
+Define a random variable $X$ with p.m.f. $f_{X}$ and a new random variable $Y = X+c$ where $c$ is a constant. Then the support for $Y$, $supp(Y) = \{ x+c | x \in supp(X) \}$ and the p.m.f. of $Y$, $f_{Y}(y)$ is 
+\begin{align}
+    f_{Y}(y) &= P(Y=y) \\ 
+     &= P(X+c = y)\\ 
+     &= P(X=y-c)\\
+     &= f_{X}(y-c)
+\end{align}
+
+In otherwords, the  probability distribution on $Y$ is $\mathbb{P} = \{ (y,p) \;|\; y=x+c \text{ and } P(X=x) = p \}$.
+This type of transformation of the random variable $X$ to $Y$ is called a \textbf{translation}.
+
+
+\ex Suppose we define a random variable $Z$ such that $supp(Z) = \{0,1,2,3,4,5\}$ and 
+\begin{align}
+    f_{Z}(z) = \begin{cases}
+                0.10 & \text{ if } z=0\\
+                0.05 & \text{ if } z=1\\
+                0.20 & \text{ if } z=2\\
+                0.12 & \text{ if } z=3\\
+                0.07 & \text{ if } z=4\\
+                0.58 & \text{ if } z=5
+               \end{cases}
+\end{align}
+
+We can define a new random variable $Y = Z-4$.
+This random variable will have $supp(Y) =\{-4,-3,-2,-1,0,1\}$ and 
+
+\begin{align}
+    f_{Y}(y) = \begin{cases}
+                0.10 & \text{ if } y=-4\\
+                0.05 & \text{ if } y=-3\\
+                0.20 & \text{ if } y=-2\\
+                0.12 & \text{ if } y=-1\\
+                0.07 & \text{ if } y=0\\
+                0.58 & \text{ if } y=1
+               \end{cases}
+\end{align}
+
+
+\subsubsection{Scaling}
+
+Define a random variable $X$ with p.m.f. $f_{X}$ and a new random variable $Y = c \cdot X$ where $c$ is a constant. Then the support for $Y$, $supp(Y) = \{ c \cdot x | x \in supp(X) \}$ and the p.m.f. of $Y$, $f_{Y}(y)$ is 
+\begin{align}
+    f_{Y}(y) &= P(Y=y) \\ 
+     &= P(cX = y)\\ 
+     &= P(X=y/c)\\
+     &= f_{X}(y/c)
+\end{align}
+
+When we multiply or divide a random variable by a constant to produce a new random variable this is called \textbf{scaling}.
+
+\ex Suppose we define a random variable $Z$ such that $supp(Z) = \{0,1,2,3,4,5\}$ and 
+\begin{align}
+    f_{Z}(z) = \begin{cases}
+                0.10 & \text{ if } z=0\\
+                0.05 & \text{ if } z=1\\
+                0.20 & \text{ if } z=2\\
+                0.12 & \text{ if } z=3\\
+                0.07 & \text{ if } z=4\\
+                0.58 & \text{ if } z=5
+               \end{cases}
+\end{align}
+
+We can define a new random variable $Y = 4 \cdot Z$.
+This random variable will have $supp(Y) =\{0,4,8,12,16,20\}$ and 
+
+\begin{align}
+    f_{Y}(y) = \begin{cases}
+                0.10 & \text{ if } y= 0\\
+                0.05 & \text{ if } y= 4\\
+                0.20 & \text{ if } y= 8\\
+                0.12 & \text{ if } y= 12\\
+                0.07 & \text{ if } y= 16\\
+                0.58 & \text{ if } y= 20
+               \end{cases}
+\end{align}
+
+\subsection{General transformation of a discrete random variable}
+
+We explored translation and scaling as specific ways to use one random variable to generate another.
+However, there are many functions we can apply to a random variable $X$ to create a new random variable $Y$, and we need a more general method to compute the probability mass function for $Y$.
+
+Build a random variable $X$ and define $Y$ to be a new random variable such that $Y = g(X)$.
+Then the support for $Y$ is $supp(Y) = \{y | y = g(x) \text{ and } x \in supp(X) \}$, and 
+\begin{align}
+    f_{Y}(y) = f_{X}(x_{1}) + f_{X}(x_{2}) + \cdots f_{X}(x_{n})  
+\end{align}
+where $x_{1},x_{2}, \cdots x_{n} \in g^{-1}(y)$.
+If $Y$ is a function of $X$ then the probability that the random variable $Y$ will assign to the value $y$ is the sum of the probabilities the random variable $X$ assigns to the set of values $x_{1},x_{2},\cdots,x_{n}$ that are mapped to $y$ by the function $g$.
+
+\ex Let $X$ be the random variable with p.m.f
+\begin{align}
+    f_{X}(x) = \begin{cases}
+                0.01 & \text{ if } x=-2 \\  
+                0.05 & \text{ if } x =-1\\
+                0.50 & \text{ if } x=0\\
+                0.34 & \text{ if } x=1\\
+                0.10 & \text{ if } x=2
+               \end{cases}
+\end{align}
+and also build a new random variable $Y = X^{2}$. 
+Here the function $g$ is $g(x) = x^{2}$.
+The support of $Y$ is 
+\begin{align}
+    supp(Y) & = \{ -2^{2},-1^{2},0^{2},1^{2},2^{2} \}\\
+            & = \{ 4,1,0,1,4 \}\\
+            & = \{ 0,1,4 \}
+\end{align}
+
+To compute $P(Y=0)$ we need to sum up the probabilities of all values in $supp(X)$ that $g$ maps to $0$. In our case the only value mapped to $0$ is the value $0$, and so $P(Y=0) = P(X=0) = 0.50$. 
+To compute $P(Y=1)$ we need to sum the probabilities of all values that $g$ maps to the value $1$. In this case two values in $X$ map to $1$, the values $-1$ and $1$, and so $P(Y=1) = P(X=-1) + P(X=1) = 0.05+0.34=0.39$.
+Finally,  $P(Y=4) = P(X=-2) + P(X=2) = 0.11$ (why?).
+The pm.f for $Y$ is 
+\begin{align}
+    f_{Y}(y) = \begin{cases}
+                  0.50 & \text{ if } y=0\\
+                  0.39 & \text{ if } y=1\\
+                  0.11 & \text{ if } y=4\\
+               \end{cases}
+\end{align}
+
 \subsection{Expectation}
+
+Suppose we build a random variable $X$ with a corresponding probability mass function $f_{X}$.  
+
+The \textbf{expected value} of a random variable $X$ is computed as 
+\begin{align}
+    \mathbb{E}\left(X \right) &=
+    P(X=x_{1})x_{1} +P(X=x_{2})x_{2} + \cdots + P(X=x_{n})x_{n}\\ 
+    &= f(x_{1})x_{1} + f(x_{2})x_{2} + \cdots + f(x_{n})x_{n} 
+\end{align}
+where $x_{1},x_{2},\cdots,x_{n}$ are all values in the $supp(X)$.
+
+An intuitive definition of the expected value is that $\mathbb{E}(X)$ is a weighted average of all values in the support of $X$ where the weight for $x_{i}$ is the probability of $x_{i}$.
+The expected value of $X$ will be close to values in $supp(X)$ with high probability.
+
+\ex Build a random variable $Y$ with support $supp(Y) = \{-1,0,1\}$ and $f_{Y} = \{(-1,0.2),(0,0.5),(1,0.3)\}$. The expected value of $Y$ is $\mathbb{E}(Y) = 0.2 (-1) + 0.5 (0) + 0.3 (1) = 0.1$.
+
+\subsubsection{Properties of the expectation}
+
+The expectation is a linear function, that is $\mathbb{E}(aY + b) = a\mathbb{E}(Y) + b $. 
+We can show this by defining a random variable $Z = aY+b$ and asking 
+\begin{align}
+    \mathbb{E}(Z) &= z_{1} f_{Z}(z_{1}) + z_{2} f_{Z}(z_{2}) + \cdots z_{n} f_{Z}(z_{n})\\
+                  &=  (ay_{1}+b) f_{Z}(z_{1}) + (ay_{2}+b) f_{Z}(z_{2})+ \cdots (ay_{n}+b) f_{Z}(z_{n})\\
+                  & \begin{aligned}
+                  &= a \left[ y_{1}f_{Z}(z_{1}) + y_{2}f_{Z}(z_{2}) + \cdots y_{n}f_{Z}(z_{n}) \right] \\
+                  &+ b\left[f_{Z}(z_{1}) + f_{Z}(z_{2}) + \cdots + f_{Z}(z_{n}) \right]
+                  \end{aligned} \\
+                  &= a \left[ y_{1}f_{Z}(z_{1}) + y_{2}f_{Z}(z_{2}) + \cdots y_{n}f_{Z}(z_{n}) \right] + b \hspace{2mm} \text{(why?)} \\
+                  &= a \left( y_{1}f_{Y}(y_{1}) + y_{2}f_{Y}(y_{2}) + \cdots y_{n}f_{Y}(y_{n}) \right) + b \label{exp.last} \\
+                  &= a \mathbb{E}(Y) + b 
+\end{align}
+
+The step \eqref{exp.last} deserves some attention. Values $z_{i}$ are equal to $ay_{i} + b$, they are mapped from the values $y_{i}$ and so the probability that $Z$ equals $z_{i}$ is equivalent to the probability that $Y$ equals $y_{i}$.  
 
 \subsection{Second moment and variance}
 
-\subsection{Higher order moments}
 
 \subsection{Covariance}
 
