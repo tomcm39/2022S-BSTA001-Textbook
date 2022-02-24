@@ -438,32 +438,102 @@
    \item Researchers studied epidemiological characteristics of a variant of SARS-CoV-2 called B.1.526~(\url{https://www.science.org/doi/10.1126/sciadv.abm0300}). Suppose we too wanted to study the impact of B.1.526 on a population of patients who have been admitted to the hospital for COVID-19 by collecting each patient's age, whether they have were vaccinated against COVID-19, and whether their infection was due to the B.1.526 variant.
    
    \begin{enumerate}
-       \item If we define our experiment as generating the above three pieces of information from a single patient, define a sample space~($\samplespace$) for these potential outcomes. (looking for a short description and the sample space)
+       \item If we define our experiment as generating the above three pieces of information from a single patient, define a sample space~($\mathcal{G}$) for these potential outcomes. (looking for a short description and the sample space)
        \begin{enumerate}
-           \item {\color{red}     }
+           \item {\color{red}  $\mathcal{G} = \{ (x,y,z)\; | \; x \text{ is the patients age},\\ y \text{ is whether the patient was vacc'd}, z \text{ whether the patient was infected } \}$    }
        \end{enumerate}
        \item Define a sample space if we repeated our above experiment 2 times. In other words, what would be our sample space if we collected information from 2 patients? 
        \begin{enumerate}
-           \item {\color{red}     }
+           \item {\color{red} Our sample space would be 
+           \begin{align*}
+               &\mathcal{G} \times \mathcal{G} =  \\ 
+               &\{ (  (x,y,z), (a,b,c) )\; | \; x \text{ is the patients age},\\ 
+               &y \text{ is whether the patient was vacc'd}, z \text{ whether the patient was infected},\\
+               a \text{ is the patients age},
+               &b \text{ is whether the patient was vacc'd}, c \text{ whether the patient was infected } \}
+           \end{align*}
+           
        \end{enumerate}
    \end{enumerate}
     
    \item Can a data set ever have more elements than a sample space? Explain. (looking for a paragraph with some examples)
    \begin{enumerate}
-           \item {\color{red}     }
+           \item {\color{red}  Yes. Take  for example the sample space $\mathcal{G} = \{0,1\}$. We can generate 5 data points from this sample space: $
+           \mathcal{D} = (0,1,0,1,1)$   }
        \end{enumerate}
    
    \item Suppose we collect the following data about the co-occurence of patients admitted to the hospital for influenza-like illness~(ILI) and whether the patient does or does not work in a clinical setting. 
    After data collection we estimate the following probabilities: The probability that a patient works in a clinical setting is 0.12. The probability that a patient who works in a clinical setting is admitted to the hospital for ILI is 0.2, and the probability a patient who does not work in a clinical setting was admitted to the hospital for ILI is 0.3. 
    \begin{enumerate}
        \item Define a sample space to study outcomes related to the co-occurance of ILI/No ILI and patients who do/do not work in a clinical setting. (Looking for a set and a very brief description of an outcome or two.) 
+       
+       \begin{enumerate}
+           \item {\color{red} \begin{align*}
+                      \mathcal{G} = \{  (ILI,clin),(No ILI,clin) ,(ILI, no clin), (No ILI, no clin)   \}
+                 \end{align*}
+                 }
+       \end{enumerate}
+       
        \item Compute the probability a patient is admitted to the hospitals for ILI and they work in a clinical setting. (Looking for an equation and number)
+       
+       \begin{enumerate}
+           \item {\color{red} 
+               \begin{align*}
+                    P(ILI \cap clin) &= P(ILI | clin)P(clin)\\
+                                     &= 0.2 (0.12) = 0.024
+               \end{align*}}
+        \end{enumerate}
+           
+           
        \item Compute the probability a patient is not admitted to the hospital for ILI and they work in a clinical setting. (Looking for an equation and number)
+       
+       \begin{enumerate}
+           \item {\color{red} 
+               \begin{align*}
+                    P( no ILI \cap clin) &= P(No ILI | clin)P(clin)\\
+                                     &= 0.8 (0.12) = 0.096
+               \end{align*}}
+        \end{enumerate}
+           
        \item Compute the probability a patient is admitted to the hospital for ILI and they do not work in a clinical setting. (Looking for an equation and number)
+       
+       \begin{enumerate}
+           \item {\color{red} 
+               \begin{align*}
+                    P( ILI \cap no clin) &= P(No ILI | clin)P(clin)\\
+                                     &= 0.3 (0.88) = 0.264
+               \end{align*}}
+        \end{enumerate}
+
+       
        \item Compute the probability a patient is not admitted to the hospital for ILI and they do not work in a clinical setting. (Looking for an equation and number)
+       
+        \begin{enumerate}
+           \item {\color{red} 
+               \begin{align*}
+                    P( no ILI \cap no clin) &= P(No ILI | clin)P(clin)\\
+                                     &= 0.7 (0.88) = 0.616
+               \end{align*}}
+        \end{enumerate}
+
+       
+       
    \end{enumerate}
    
    \item Show that for two events $A$ and $B$ the $P(A|B)P(B)  \leq P(B)$. Why is this the case intuitively? (Looking for two brief descriptions)
+   
+    \begin{enumerate}
+        \item {\color{red}
+            \begin{align*}
+                \text{Because } A \cap B \subset B\\
+                P( A \cap B ) \leq P(B) \\
+                \text{But this means}\\
+                P( A \cap B ) = P(A|B)P(B) \leq P(B) \text{ (multiplication rule)} \\
+            \end{align*}
+        }
+    \end{enumerate}
+   
+   
    \clearpage
    \item \begin{figure}[ht!]
        \centering
@@ -471,18 +541,98 @@
    \end{figure} Please use the above tree diagram to answer the following questions. 
    \begin{enumerate}
        \item Fill in the $P(O^{c})$ which corresponds to (A) in the figure
+       
+       \begin{enumerate}
+        \item {\color{red}
+            \begin{align*}
+                P(O^{c}) = 1-0.16 = 0.84
+            \end{align*}
+        \end{enumerate}
+       
        \item Fill in the $P(D | O^{c})$ which corresponds to (B) in the figure
+       
+       \begin{enumerate}
+        \item {\color{red}
+            \begin{align*}
+                 1 - 0.68 = 0.32
+             \end{align*}
+        \end{enumerate}
+       
        \item Fill in the $P(D^{c} | O)$ which corresponds to (C) in the figure
+       
+       \begin{enumerate}
+        \item {\color{red}
+            \begin{align*}
+                 0.50
+             \end{align*}
+        \end{enumerate}
+       
        \item Please compute $P(D)$
+       
+       \begin{enumerate}
+        \item {\color{red}
+            \begin{align*}
+                P(D) &= P(D|O)P(O) +  P(D | O^{c})P(O^{c})\\
+                     &= 0.5 (0.16) + 0.32 (0.84) \\ 
+                     &= 0.35
+             \end{align*}
+        \end{enumerate}
+       
        \item Please compute $P(D^{c})$
+       
+       \begin{enumerate}
+        \item {\color{red}
+            \begin{align*}
+                P(D^{c}) = 1 - P(D) = 0.65
+             \end{align*}
+        \end{enumerate}
+       
    \end{enumerate}
    
    \item Influenza is a contagious virus that enters the respiratory system from a human's nose, throat, or lungs. Common symptoms are cough, chills, and a fever.
    Suppose we collect data from a local hospital about those who were infected and not infected by the influenza virus and the above three symptoms. Let $\samplespace = \{ (x,y)  | x \text{ is } \text{"Flu"} \text{ or } \text{"not Flu"} \text{ and } y \in \{ \text{cough },\text{chills },\text{ fever} \}   \}$. 
-   Suppose further that we define events $F$ = \{ (x,y)  | x \text{ is } \text{"Flu"} \}, $C$ = \{ (x,y)  | y \text{ is } \text{"Cough"} \}, $H$ = \{ (x,y)  | y \text{ is } \text{"Chills"} \} , $E$ = \{ (x,y)  | y \text{ is } \text{"Fever"} \}, and that $P( C|F ) = 0.5$ and $P( C|F^{c} ) = 0.15$, $P( H|F ) = 0.25$ and $P( H|F^{c} ) = 0.01$, $P( E|F ) = 0.98$ and $P( E|F^{c} ) = 0.35$, $P(F) = 0.02$  
+   Suppose further that we define events $F$ = \{ (x,y)  | x \text{ is } \text{"Flu"} \}, $C$ = $\{ (x,y)  | y \text{ is } \text{"Cough"} \}$, $H$ = $\{ (x,y)  | y \text{ is } \text{"Chills"} \}$ , $E$ = $\{ (x,y)  | y \text{ is } \text{"Fever"} \}$, and that $P( C|F ) = 0.5$ and $P( C|F^{c} ) = 0.15$, $P( H|F ) = 0.25$ and $P( H|F^{c} ) = 0.01$, $P( E|F ) = 0.98$ and $P( E|F^{c} ) = 0.35$, $P(F) = 0.02$  
     \begin{enumerate}
        \item A patient presents with the chills. What is the probability they have influenza? 
+       
+       \begin{enumerate}
+        \item {\color{red}
+            \begin{align*}
+                P(F | H) &= \frac{P(H | F)P(F)}{P(H)}\\
+                P(F | H) &= \frac{0.25 * 0.02  }{ 0.25*0.02 + 0.01*0.98} \\
+                &= \frac{0.005}{ 0.0148 }\\
+                &= 0.337
+             \end{align*}
+        \end{enumerate}
+       
        \item What symptom from the above, if present, would indicate with a high probability a patient has influenza?
+       
+       \begin{enumerate}
+        \item {\color{red}
+            \begin{align*}
+                P(F | H) &= \frac{P(H | F)P(F)}{P(H)}\\
+                P(F | H) &= \frac{0.25 * 0.02  }{ 0.25*0.02 + 0.01*0.98} \\
+                &= \frac{0.005}{ 0.0148 }\\
+                &= 0.337 \\
+                \\
+                P(F | E) &= \frac{P(E | F)P(F)}{P(E)}\\
+                P(F | E) &= \frac{0.25 * 0.02  }{ 0.98*0.02+0.35*0.98 } \\ 
+                &= \frac{0.005}{0.3626  } \\ 
+                &= 0.0137\\
+                \\
+                P(F | C) &= \frac{0.25 * 0.02  }{ 0.5*0.02+0.5*0.98}
+                &= \frac{0.005}{ 0.5 }\\
+                &= 0.01
+             \end{align*}
+             
+             Chills is most likely (if my math is correct)
+        \end{enumerate}
+       
+       
+       
+       
+       
+       
     \end{enumerate}
  
             
