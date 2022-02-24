@@ -1,0 +1,72 @@
+\chapterauthor{thomas mcandrew}{Lehigh University}
+%\chapterauthor{Second Author}{Second Author Affiliation}
+\chapter{Probability distributions: templates}
+\hspace{1mm}
+
+\section{Introduction}\label{intro}
+
+
+\section{The Bernoulli distribution}
+
+The Bernoulli distribution assigns probabilities to a random variable who support contains the values 0 and 1. The Bernoulli distribution has a single parameter, often denoted $\theta$, that controls how probabilities are assigned to these two values 0 and 1.
+
+To communicate that a random variable $Z$ has a Bernoulli distribution with parameter $\theta$, we write 
+\begin{equation}
+    Z \sim \text{Bernoulli}(\theta)    
+\end{equation}
+
+The support of $Z$ is $supp(Z) = \{0,1\}$, and the probability mass function for the random variable $Z$ is 
+\begin{equation}
+    f_{Z}(z) = \begin{cases}
+                   \theta & \text{ if } z=1\\
+                   1- \theta & \text{ if } z=0\\
+               \end{cases}
+\end{equation}
+
+We can use the probability mass function to compute the expectation
+\begin{align}
+    \mathbb{E}(Z) &= f_{Z}(1) \cdot 1 + f_{Z}(0) \cdot 0\\
+                  &= f_{Z}(1) \cdot 1 = f_{Z}(1)\\
+                  &= \theta,
+\end{align}
+and we can use the probability mass function to compute the variance
+\begin{align}
+    V(Z) &= (1 - \theta)^{2} f_{Z}(1)+ (0-\theta)^{2} f_{Z}(0) \\
+         &= (1 - \theta)^{2} \theta + \theta^{2} (1-\theta)\\
+         &= \theta(1-\theta) \left[ (1-\theta) + \theta  \right]\\
+         &= \theta(1-\theta)
+\end{align}
+
+\ex 
+
+
+
+\section{Exercises}
+
+\begin{enumerate}
+    \item Let $X \sim \text{Bernoulli}(0.2)$
+    \begin{enumerate}
+        \item P(X=0) = ?
+        \item P(X=1) = ?
+        \item Please compute $\mathbb{E}(X)$
+        \item Please compute $V(X)$
+        \item Define the $supp(X)$
+    \end{enumerate}
+    
+    \item Let $Y \sim \text{Bernoulli}(\theta)$, and 
+    show that $P(Y=1) = \mathbb{E}(Y)$
+
+    \item Let $Y \sim \text{Bernoulli}(\theta)$, and 
+    show that $V(Y) \leq \mathbb{E}(Y)$
+    
+    \item Let $Y \sim \text{Bernoulli}(\theta)$, and let $Z$ be the following function of $Y$:
+    \begin{align}
+        Z(y) = \begin{cases}
+                1 & \text{ if } y = 0\\
+                0 & \text{ if } y = 1
+            \end{cases}
+    \end{align}
+    What probability distribution does $Z$ follow?
+\end{enumerate}
+
+
