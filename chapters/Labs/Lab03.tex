@@ -1,0 +1,365 @@
+
+\chapterauthor{thomas mcandrew, david braun}{Lehigh University}
+%\chapterauthor{Second Author}{Second Author Affiliation}
+\chapter{Laboratory 03}
+
+    
+\hypertarget{functions}{%
+\subsection{Functions}\label{functions}}
+
+Functions in R are used to organize our work, clarify code for others,
+and allows us to apply the same finite steps to many different objects.
+
+\textbf{Example:} Suppose we want to use the frequentist approach to
+assign probabilities to a sample space \(\mathcal{G} = \{-1,0,1\}\)
+based on a dataset \(\mathcal{D}\). Our dataset may look like
+\(\mathcal{D} = (-1,0,0,1,-1,1,1,1,-1)\). To assign a probability to the
+event \(\{-1\}\) we can write R code to count the number of times the
+outcome \(-1\) appears in our data and divide by the number of data
+points in our data set. For the event \(\{0\}\) we can write R code to
+perform the \emph{same steps} for 0 as we performed for the event
+\(\{-1\}\). Because we are repeating the same steps for the event
+\(\{-1\}\) and for event \(\{0\}\), a function may simplify our code.
+
+\textbf{Example:} We are asked to support a clinical team that collected
+data on patients who are current smokers and outcomes thought to be
+linked to smoking. The code needs (i) to be processed, (ii) analyzed,
+and (iii) reported. Though we can write our code in sequence to perform
+all three steps, we may be able to better organize our work into three
+functions: one that processes the data, a function that analyses the
+data, and a third to report.
+
+    \hypertarget{anatomy-of-a-function}{%
+\subsubsection{Anatomy of a function}\label{anatomy-of-a-function}}
+
+A function in R has the following X parts:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Assignment:} We create a function by assigning a variable name
+  to the function
+\item
+  \emph{Function} : Next we need to use the reserved word ``function''
+  so that R knows we are creating a function.
+\item
+  \emph{Arguments}: After the workd function we will include open and
+  closed parentheses. Inside these parentheses we can include one or
+  more arguments for the function. An argument is an input to our
+  function.
+\item
+  \emph{Code block}: We write a sequence of steps to execute R code
+  inside two curly brackets \{\}. \textbf{Important: Any variables that
+  were created inside this code block are deleted after the function is
+  finished.}
+\item
+  \emph{Return}: Inside the code block we can also include a return
+  statement. This statement includes variables that were generated
+  inside the code block that we wish to keep when the function is
+  finished executing.
+\end{itemize}
+
+    \hypertarget{declaring-a-function}{%
+\subsubsection{Declaring a function}\label{declaring-a-function}}
+
+When store a function in memory, we call this \textbf{declaring a
+function}.
+
+Lets declare a function called \texttt{sum\_two\_numbers}. This function
+will have two arguments: one called \texttt{x} and one called
+\texttt{y}. Arguments are names that we use to identify specific inputs
+to our function---they are placeholders for variables outside of our
+function that we may want to use as inputs. In the code block we will
+write a line of code that stores the sum of \texttt{x} and \texttt{y} as
+the variable \texttt{z}. The second line in the code block will
+\texttt{return(z)}. Because we did not return \texttt{x} or \texttt{y}
+they will be deleted from memory after the function is finished
+executing.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{sum\PYZus{}two\PYZus{}numbers} \PY{o}{=} \PY{n+nf}{function}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n}{z} \PY{o}{=} \PY{n}{x}\PY{o}{+}\PY{n}{y}      \PY{c+c1}{\PYZsh{} line of code in the code block. This uses our x,y arguments (place holders)}
+    \PY{n+nf}{return}\PY{p}{(}\PY{n}{z}\PY{p}{)}    \PY{c+c1}{\PYZsh{} Return the variable z }
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{calling-a-function}{%
+\subsubsection{Calling a function}\label{calling-a-function}}
+
+When we declare a function it is stored in memory. If we want to apply
+our function to a set of arguments (inputs) then we \textbf{call} our
+function.
+
+Lets call our function \texttt{sum\_to\_numbers} with the arguments 2
+and 4.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{result} \PY{o}{=} \PY{n+nf}{sum\PYZus{}two\PYZus{}numbers}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{4}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    We \textbf{called} our function by typing the name of the function and
+supplying the function with two arguments: 2 and 4. When we called the
+function, the following took place. 1. The variable \texttt{x} was
+assigned the value 2. 2. the variable \texttt{y} was assigned the value
+4. 3. The first line of the code block was executed. 4. The second line
+of the code block was executed, returning the variable \texttt{z}. 5.
+The returned variable (\texttt{z}) was stored in the variable
+\texttt{result}.
+
+Watch
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{result}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 6
+    \end{Verbatim}
+
+    \hypertarget{named-vs-unnamed-arguments}{%
+\subsubsection{Named vs unnamed
+arguments}\label{named-vs-unnamed-arguments}}
+
+When we input our argument 2 and 4 into the function
+\texttt{sum\_to\_numbers} we did not specify which value should be
+assigned to the argument \texttt{x} and which should be assigned to
+\texttt{y}. When we do not specify the argument names we are proving a
+function \textbf{unnamed arguments}.
+
+We could have called the function \texttt{sum\_to\_numbers} by
+specifying which arguments correspond to which values. When we supply a
+name and the value to the argument we are providing \textbf{named
+arguments}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{13}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nf}{sum\PYZus{}to\PYZus{}numbers}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m}{2}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+m}{4}\PY{p}{)} \PY{c+c1}{\PYZsh{} named arguments}
+\end{Verbatim}
+\end{tcolorbox}
+
+    6
+
+    
+    \hypertarget{default-arguments}{%
+\subsubsection{Default arguments}\label{default-arguments}}
+
+When we declare a function we specify which arguments are needed for the
+function to execute all the lines in the coded block. We expect all
+these arguments to have values, but there may be a time when we do not
+necessarily need someone who uses our function to specify all the
+arguments. Instead, we can provide \textbf{default} argument values.
+
+Lets create a function called \texttt{sumMult} that takes as input a
+vector that we will assign the name \texttt{v} and a logical value
+called \texttt{sum\_or\_mult}. If the value of \texttt{sum\_or\_mult} is
+TRUE then we will add all the items in the vector. If the value of
+\texttt{sum\_or\_mult} is FALSE then we will multiply all the values.
+
+By default, we will add all the items. This means that is the user does
+not supply a value for the argument \texttt{sum\_or\_mult} then we
+automatically assign to \texttt{sum\_or\_mult} the value TRUE. To give
+the function \texttt{sumMult} a default value for the argument
+\texttt{sumMult} we will include after \texttt{sum\_or\_mult} an equals
+sign and our desired default value.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{sumMult} \PY{o}{=} \PY{n+nf}{function}\PY{p}{(}\PY{n}{v}\PY{p}{,}\PY{n}{sum\PYZus{}or\PYZus{}mult}\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}\PY{p}{\PYZob{}} \PY{c+c1}{\PYZsh{} This assigns the sum\PYZus{}or\PYZus{}mult a default value of TRUE}
+    
+    \PY{c+c1}{\PYZsh{}\PYZsh{} if sum\PYZus{}or\PYZus{}mult is TRUE, we sum. if sum\PYZus{}or\PYZus{}mult is FALSE, we multiply}
+    \PY{n+nf}{if }\PY{p}{(}\PY{n}{sum\PYZus{}or\PYZus{}mult}\PY{o}{==}\PY{k+kc}{TRUE}\PY{p}{)}\PY{p}{\PYZob{}}
+        \PY{n}{summation}\PY{o}{=}\PY{l+m}{0}
+        \PY{n+nf}{for }\PY{p}{(}\PY{n}{item} \PY{n}{in} \PY{l+m}{1}\PY{o}{:}\PY{n+nf}{length}\PY{p}{(}\PY{n}{v}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+            \PY{n}{summation} \PY{o}{=} \PY{n}{summation} \PY{o}{+} \PY{n}{item}
+        \PY{p}{\PYZcb{}}
+        \PY{n+nf}{return}\PY{p}{(}\PY{n}{summation}\PY{p}{)}
+    \PY{p}{\PYZcb{}}
+    \PY{n}{else}\PY{p}{\PYZob{}}
+        \PY{n}{product} \PY{o}{=} \PY{l+m}{1}
+        \PY{n+nf}{for }\PY{p}{(}\PY{n}{item} \PY{n}{in} \PY{l+m}{1}\PY{o}{:}\PY{n+nf}{length}\PY{p}{(}\PY{n}{v}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+            \PY{n}{product} \PY{o}{=} \PY{n}{product} \PY{o}{*} \PY{n}{item}
+        \PY{p}{\PYZcb{}}
+        \PY{n+nf}{return}\PY{p}{(}\PY{n}{product}\PY{p}{)}
+    \PY{p}{\PYZcb{}}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Lets create a vector called \texttt{fun\_vector} and assign to it
+\texttt{c(4,2,-2,9,10,11,-0.3)} and lets call the function
+\texttt{sumMult}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{fun\PYZus{}vector} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{\PYZhy{}2}\PY{p}{,}\PY{l+m}{9}\PY{p}{,}\PY{l+m}{10}\PY{p}{,}\PY{l+m}{11}\PY{p}{,}\PY{l+m}{\PYZhy{}0.3}\PY{p}{)}
+
+\PY{n}{result1} \PY{o}{=} \PY{n+nf}{sumMult}\PY{p}{(}\PY{n}{fun\PYZus{}vector}\PY{p}{)}                  \PY{c+c1}{\PYZsh{} Default for sum\PYZus{}or\PYZus{}mult is TRUE}
+
+\PY{n}{result2} \PY{o}{=} \PY{n+nf}{sumMult}\PY{p}{(}\PY{n}{fun\PYZus{}vector}\PY{p}{,}\PY{n}{sum\PYZus{}or\PYZus{}mult}\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)} \PY{c+c1}{\PYZsh{} We are always allowed to assign this argument a value }
+
+\PY{n}{result3} \PY{o}{=} \PY{n+nf}{sumMult}\PY{p}{(}\PY{n}{fun\PYZus{}vector}\PY{p}{,}\PY{n}{sum\PYZus{}or\PYZus{}mult}\PY{o}{=}\PY{k+kc}{FALSE}\PY{p}{)} \PY{c+c1}{\PYZsh{} and we can assign this argument a different value then the default}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{21}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{result1}\PY{p}{)}
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{result2}\PY{p}{)}
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{result3}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 28
+[1] 28
+[1] 5040
+    \end{Verbatim}
+
+    \hypertarget{binding-and-scope}{%
+\subsubsection{Binding and Scope}\label{binding-and-scope}}
+
+To show that the variables summation and product are deleted after we
+call the function, lets try to print the variable \texttt{summation}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nf}{print}\PY{p}{(}\PY{n}{summation}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
+Error in print(summation): object 'summation' not found
+Traceback:
+
+1. print(summation)
+    \end{Verbatim}
+
+    R replies that it looked but cannot find the object summation. The
+function \texttt{sumMult} created a variable called \texttt{summation}
+operated with it inside the code block of our function and then deleted
+this variable.
+
+When a variable name is assigned an object in R, the name and the object
+are associated with one another in the computer. The process of
+associating an object to a name in the computer is called
+\textbf{binding}.
+
+When we call a function, the values we provide are bound to each
+argument name, the function is executed, and those variables are
+deleted. Which variables we can access during the executing of an R
+program is called \textbf{lexical scope}. Varables created inside a
+function can only be accessed and used by lines of code inside the code
+block. These variables are ``in scope'' of the function.
+
+    \hypertarget{assignment}{%
+\subsubsection{Assignment}\label{assignment}}
+
+Lets explore how functions can help us organize our work, clarify code
+for others, and repeat similar operations on objects of the same type.
+
+\hypertarget{unnamed-and-named-arguments}{%
+\paragraph{Unnamed and named
+arguments}\label{unnamed-and-named-arguments}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Declare a function \texttt{subtract} that takes two arguments:
+  \texttt{x} and \texttt{y}. Inside the code block assign the variable
+  \texttt{z} to be \texttt{x} minus \texttt{y} and return the variable
+  \texttt{z}.
+\item
+  Call the function \texttt{subtract} on the values 2 and 6.
+\item
+  Call the function \texttt{subtract} on the values 2 and 6 but bind 2
+  to the argument \texttt{y} and 6 to the argument \texttt{x}.
+\item
+  Why did the results for 2. and for 3. change?
+\end{enumerate}
+
+\hypertarget{successive-subtraction}{%
+\paragraph{Successive subtraction}\label{successive-subtraction}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Declare a function \texttt{vec\_subtract} that takes a vector argument
+  that we will bind to \texttt{v}. Inside the code block compute the
+  first item minus the second item minus the third item and so on. Store
+  this subtarction in the variable \texttt{s} and return the variable
+  \texttt{s}.
+\item
+  Call the function on the vector {[}1,2,3,4,5{]}
+\end{enumerate}
+
+\hypertarget{frequentist-approach-to-probability-assignment}{%
+\paragraph{Frequentist approach to probability
+assignment}\label{frequentist-approach-to-probability-assignment}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Run the code below called \texttt{random\_vector}. This is a function
+  that creates a vector of length 1000 filled with numbers between 0 and
+  1. The second line calls the function with no arguments and creates a
+  variable called \texttt{rand\_vec}.
+\item
+  Declare a function \texttt{freq\_assign} that takes two arguments:
+  \texttt{v} and \texttt{outcome}.
+\item
+  Inside the code block perform the following operations
+\item
+  Use the \texttt{length} function (pre-built by R) to compute the
+  length of \texttt{v} and store this value in the variable \texttt{N}.
+\item
+  Create a variable called \texttt{outcome\_of\_interest} and assign to
+  it an empty vector \texttt{c()}.
+\item
+  Create a for loop that iterates the variable \texttt{i} from the value
+  1 to the value \texttt{N}.
+\item
+  Inside the for loop use an if/else to identify if each item in
+  \texttt{v} is less than or equal to \texttt{outcome}. If the item is
+  less than or equal to \texttt{outcome} then append the value 1 to
+  \texttt{outcome\_of\_interest} else append the value 0. We should
+  expect a vector \texttt{outcome\_of\_interest} that is the same length
+  as \texttt{v} which contains 1s for every value less than outcome and
+  0s otherwise.
+\item
+  Use the sum function in R (pre-built) to compute the sum of
+  \texttt{outcome\_of\_interest} and assign this value the name
+  \texttt{count}
+\item
+  return \texttt{count/N}
+\item
+  Call the function on \texttt{rand\_vec} and record the result. Use
+  \(0.5\) as the input value for \texttt{outcome}.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{random\PYZus{}vector} \PY{o}{=} \PY{n+nf}{function}\PY{p}{(}\PY{n}{N}\PY{o}{=}\PY{l+m}{1000}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n+nf}{return}\PY{p}{(}\PY{n+nf}{runif}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{)}
+\PY{p}{\PYZcb{}}
+\PY{n}{rand\PYZus{}vec} \PY{o}{=} \PY{n+nf}{random\PYZus{}vector}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
