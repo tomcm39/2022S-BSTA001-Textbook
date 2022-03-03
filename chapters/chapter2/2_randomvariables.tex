@@ -541,6 +541,33 @@ Now we can compute the variance
     &= 1.97
 \end{align}
 
+
+\subsection{ How the expected value earned its name }
+
+
+\subsubsection{Markov inequality}
+
+\begin{equation}
+    P(X > a) < \frac{ \mathbb{E}(X) }{a}
+\end{equation}
+
+Suppose we define a random variable $X$ with a support that takes only non-negative numbers.
+\begin{align}
+    \mathbb{E}(X) &= \sum_{ x_{i} \in supp(X)} x_{i} f_{X}(x_{i}) \\ 
+    \mathbb{E}(X) &= \sum_{ x_{i} \leq a  } x_{i} f_{X}(x_{i}) + \sum_{ x_{i} > a  } x_{i} f_{X}(x_{i}) \\
+    \mathbb{E}(X) &>  \sum_{ x_{i} > a  } x_{i} f_{X}(x_{i}) \\
+    \mathbb{E}(X) &>  \sum_{ x_{i} > a  } a f_{X}(x_{i}) \\
+    \mathbb{E}(X) &>  a \sum_{ x_{i} > a  } f_{X}(x_{i}) \\
+    \mathbb{E}(X) &>  a P(X > a) \\
+    \frac{\mathbb{E}(X)}{a} &>  P(X > a) \\
+\end{align}
+
+
+
+\subsubsection{Chebychev's inequality}
+
+
+
 \subsection{Covariance}
 
 \subsection{Correlation}
