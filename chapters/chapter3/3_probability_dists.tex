@@ -5,6 +5,12 @@
 
 \section{Introduction}\label{intro}
 
+There exist several probability distributions that have been studied in depth.
+Templates like this allow us to model data generated from an experiment quickly.
+Random variable templates are so useful that several computer languages have optimized how to compute probabilities, expected values, and higher moments.
+
+We will study parametric distributions for random variables.
+A set of \textbf{parameters}---constants--- determine how our random variable assigns probabilities to outcomes.
 
 \section{The Bernoulli distribution}
 
@@ -12,8 +18,12 @@ The Bernoulli distribution assigns probabilities to a random variable who suppor
 
 To communicate that a random variable $Z$ has a Bernoulli distribution with parameter $\theta$, we write 
 \begin{equation}
-    Z \sim \text{Bernoulli}(\theta)    
+    Z \sim \text{Bernoulli}(\theta)
 \end{equation}
+
+The parameter $\theta$ can take any value between 0 and 1 inclusive, or $\theta \in [0,1]$.
+The allowable values a set of parameters can take is called the $\textbf{parameter space}$. 
+
 
 The support of $Z$ is $supp(Z) = \{0,1\}$, and the probability mass function for the random variable $Z$ is 
 \begin{equation}
@@ -37,8 +47,31 @@ and we can use the probability mass function to compute the variance
          &= \theta(1-\theta)
 \end{align}
 
-\ex 
+\ex Define $Z \sim \text{Bernoulli(0.45)}$. Then $supp(Z) = \{0,1\}$, $P(Z=0) = 0.55$, the $P(Z=1) = 0.45$, $\mathbb{E}(Z) = 0.45$ and $V(Z) = 0.45(0.55) = 0.25$. 
 
+\ex A clinical trial enrolls patients and follows them for one year. 
+The clinical team wants to understand the proportion of patients that experience or do not experience an adverse event. We could model whether each patient either experiences or does not experience an adverse event using a Bernoulli distribution. Define $Z_{i}$ as a Bernoulli distributed random variable for the $i^\text{th}$ patient in the study. When $Z_{i}$ = 1 the  $i^{\text{th}}$ patient experienced an adverse event and 0 otherwise.
+
+
+\section{The Geometric distribution }
+
+If a random variable $X$ has a \textbf{Geometric} distribution then the support is the values $supp(X) = \{1,2,3,4,5,\cdots\}$ and the probability mass function is 
+\begin{equation}
+    f_{X}(x) = p(1-p)^{x-1}
+\end{equation}
+A random variable that has a geometric distribution has a single parameter $p$ that can take any value between 0 and 1 inclusive, or $p \in [0,1]$.
+
+The expected value and variance are
+\begin{align}
+    \mathbb{E}(X) &= \frac{1}{p} \\ 
+    V(X)          &= \frac{1}{p} \left( \frac{1-p}{p} \right) 
+\end{align}
+
+A random variable that follows the Geometric distribution often corresponds to an experiment where there is a $p$ probability that an event occurs~(often called a success), a $(1-p)$ probability an event does not occur~(often called a failure). 
+We assume that each experiment is independent from the previous experiments.
+The Geometric distribution assigns a probability to the the number of times the experiment is repeated until the event occurs~(i.e. the number of repeated experiments until success).
+
+\ex 
 
 
 \section{Exercises}
@@ -66,7 +99,10 @@ and we can use the probability mass function to compute the variance
                 0 & \text{ if } y = 1
             \end{cases}
     \end{align}
-    What probability distribution does $Z$ follow?
+    What probability distribution does $Z$ follow and why?
+    
+    \item Design an experiment (short description) and define a random variable $Y$ that may follow a geometric distribution. In the context of your experiment, how would you communicate $\mathbb{E}(Y)$ to another without statistical expertise?
+    
 \end{enumerate}
 
 
