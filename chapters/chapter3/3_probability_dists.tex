@@ -12,7 +12,10 @@ Random variable templates are so useful that several computer languages have opt
 We will study parametric distributions for random variables.
 A set of \textbf{parameters}---constants--- determine how our random variable assigns probabilities to outcomes.
 
-\section{The Bernoulli distribution}
+\section{Discrete distributions}
+\hspace{1mm}
+
+\subsection{The Bernoulli distribution}
 
 The Bernoulli distribution assigns probabilities to a random variable who support contains the values 0 and 1. The Bernoulli distribution has a single parameter, often denoted $\theta$, that controls how probabilities are assigned to these two values 0 and 1.
 
@@ -53,7 +56,7 @@ and we can use the probability mass function to compute the variance
 The clinical team wants to understand the proportion of patients that experience or do not experience an adverse event. We could model whether each patient either experiences or does not experience an adverse event using a Bernoulli distribution. Define $Z_{i}$ as a Bernoulli distributed random variable for the $i^\text{th}$ patient in the study. When $Z_{i}$ = 1 the  $i^{\text{th}}$ patient experienced an adverse event and 0 otherwise.
 
 
-\section{The Geometric distribution }
+\subsection{The Geometric distribution }
 
 If a random variable $X$ has a \textbf{Geometric} distribution then the support is the values $supp(X) = \{1,2,3,4,5,\cdots\}$ and the probability mass function is 
 \begin{equation}
@@ -71,7 +74,220 @@ A random variable that follows the Geometric distribution often corresponds to a
 We assume that each experiment is independent from the previous experiments.
 The Geometric distribution assigns a probability to the the number of times the experiment is repeated until the event occurs~(i.e. the number of repeated experiments until success).
 
-\ex 
+\ex Suppose we want to study the number of times a diagnostic test needs to be implemented until that test detects the presence of viral infection. Further assume we have found in a laboratory setting that the probability this test detects a viral infection is 0.70. We could model the number of attempts until detection as a random variable $A$, and the rv $A$ would follow a geometric distribution with parameter value equal to 0.70 or $A \sim \text{Geom}(0.70)$. 
+
+\subsection{The Poisson distribution }
+
+If a random variable $X$ has a Poisson distribution then the support of $X$ is all non-negative integers or $supp(X) = \{0,1,2,3,4,...\}$, and the probability mass function is 
+
+\begin{align}
+    f_{X}(x) = \frac{e^{-\lambda} \lambda^{x}}{x!}
+\end{align}
+where $x!$ is read "x factorial" and is defined as 
+\begin{equation}
+    x!=x (x-1) (x-2) (x-3) \cdots (2) (1)
+\end{equation}
+For example, $5! = (5)(4)(3)(2)(1) = 60$.
+The parameter space for the single parameter $\lambda$ is all positive real numbers or $\lambda \in (0,\infty)$. 
+
+The expected value and variance are
+\begin{align}
+    \mathbb{E}(X) &= \lambda \\ 
+             V(X) &= \lambda 
+\end{align}
+
+A random variable that follows a Poisson distribution often corresponds to an experiment where the quantity of interest is a rate. A Poisson random variable assigns probabilities to the number of occurrences of an event in a given time period. 
+
+\ex The owner of a cafe wants records the number of espressos they produce each day and wants to characterize the probability they produce 0, 1, 2, etc. espressos. For one month the owner records the number of espressos produced per day and find on average that they produce 25 per day. We can model the number of espressos per day as a random variable $X \sim Pois(25)$.
+
+\subsection{The Binomial distribution }
+
+A random variable $X$ distributed Binomial$(N,\theta)$ has as support $supp(X) = \{0,1,2,3,4,5,\cdots,N\}$, and the probability mass function is 
+
+\begin{align}
+    f_{X}(x) = \binom{N}{x} \theta^{x}(1-\theta)^{N-x}
+\end{align}
+where $\binom{N}{x}$ is called a binomial coefficient and is defined as $\binom{N}{x} = \frac{N!}{x!(N-x)!}$.
+The binomial coefficient is often read "N choose x" and counts the number of ways one can choose $x$ items from a set of $N$ items where the order that the $x$ items is chosen does not matter. For example, $\binom{10}{4}$ counts the number of ways to choose 4 items from a set of 10 items where the order we selected each of the four items does not matter.
+
+The expected value and variance of $X$ are 
+\begin{align}
+    \mathbb{E}(X) &= N\theta \\ 
+             V(X) &= N\theta(1-\theta)
+\end{align}
+
+Given N observations, the binomial distribution assigns probabilities to the number of observations that experience an outcome of interest where we assume that the probability any single observation experiences the event is $\theta$. 
+
+\ex Imagine we randomize 200 patients in a clinical trial where 100 are enrolled to receive a novel treatment and 100 are enrolled to receive a control treatment. In the treatment group, 10 patients experience an adverse event from the treatment and in the control group 15 patients experience an adverse event. In previous work we found that the probability any one patient experiences an adverse event in the treatment group is 0.02 and in the control group is 0.04. We can define a random variable $T \sim \text{Bin}(100,0.02)$ that assigns a probability to the number of patients who experience an adverse event and define a random variable $C \sim \text{Bin}(100,0.04)$ that assigns probabilities to the number of patients who experience an event in the control group.     
+
+\subsection{The Discrete Uniform distribution }
+
+A random variable $X$ has a uniform discrete distribution $U(\alpha, \beta)$ is this random variable has a support equal to $supp(X) = \{\alpha, \alpha+1,\alpha+2,\cdots,\beta\}$ and a probability mass function equal to 
+
+\begin{align}
+    f_{X}(x) &= \frac{1}{ N  } \\ 
+           N &= \beta - \alpha + 1
+\end{align}
+where $N$ count the number of outcomes between $\alpha$ and $\beta$ inclusive. 
+
+The expect6ed value and variance of $X$ are
+\begin{align}
+    \mathbb{E}(X) &= \frac{\alpha + \beta}{2} \\ 
+             V(X) &= \frac{N^2-1}{12}
+\end{align}
+
+The parameters $\alpha$ and $\beta$ for a uniform discrete distribution can take any integer value so long as the constraint $\alpha < \beta$ is satisfied. 
+
+\ex A game of dice is played between two friends. The die that roll has six sides. We can model the probability the first player rolls any of the one through six values as $F \sim U(1,6)$ and the probability the second player rolls values between one and six as $S \sim U(1,6)$. 
+
+\section{Continuous distributions}
+
+Up until this point we have characterized discrete sample spaces and random variables that are defined on discrete sample spaces, called discrete random variables. 
+
+A \textbf{continuous sample space}, $\samplespace$, is a subset of the real line $(\mathbb{R})$. There are an infinite, uncountable number of outcomes possible in a continuous sample space and this introduces some oddities when we try to assign probabilities on a sample space like this.
+
+A \textbf{continuous random variable} is a function from a continuous sample space to the real line.
+
+\subsection{Discrete to continuous: Points to intervals}
+
+Consider a discrete sample space with outcomes $\samplespace = \{0, 1/4, 2/4, 3/4, 1 \}$, and define a random variable $X$ that has a uniform discrete distribution with parameters 0 and 1 or $X \sim U(0,4)$.Because there are 5 outcomes the probability of each outcome is $1/5$.  
+
+Let's increase the size of our discrete sample space to contain 100 values between 0 and 1 by setting $\samplespace = \{0, 1/99, 2/99, 3/99, \cdots, 98/99, 1 \}$. If we define a uniformly distributed random variable on this space then the probability of each outcome is 1/100. 
+
+As we increase the number of points in our sample space, the probability assigned to each individual point will shrink towards zero. \underline{In a continuous space the probability of any individual value is zero.}
+
+Because the $P(X=x) = 0$ for a continuous random variable defined on a continuous $\samplespace$, we need a new way to define probabilities for a continuous random variables.
+
+\subsection{Densities}
+
+For a continuous random variable $X$ with support $supp(X) = A$, where $A$ is an interval of the real line, we will assign non-negative probabilities to any interval that is a subset of $A$ according to a probability density function $f_{X}$. 
+
+A probability density function $f_{X}$ will help us compute the probability over an interval in $A$. A probability density must have values that are non-negative (i.e. on or above the horizontal line x=0 in an xy-plane) and the area under this probability density function for the set $A$ must equal one.
+
+The probability that a random variable with pdf $f_{X}$ assigns to the interval $(a,b) \subset A$ is the area under $f_{X}$ from a to b.
+
+<picture>
+
+
+\subsection{Uniform continuous distribution}
+
+For a discrete random variable, $X$, the discrete uniform distribution from $\alpha$ to $\beta$ assigns the same probability to every outcome $\alpha,alpha+1,\cdots,\beta$.
+
+For a continuous random variable $Y$, the continuous uniform distribution from $a$ to $b$ or $Y \sim U(a,b)$ will assign the same probability to any interval of the same length between the values $a$ and $b$.   
+
+The probability density function on the set $A = (a,b)$ is 
+\begin{align}
+    f_{Y}(y) = \frac{1}{b-a} \; 
+\end{align}
+
+
+To compute the probability of an interval, lets say $(c,d)$ where $c > a$ and $d < b$, we need to compute the area under $f_{Y}(y)$ from $c$ to $d$.  
+
+<picture>
+
+The area under $f_{Y}(y)$ is equivalent to the area of a rectangle with width $d-c$ and height $\frac{1}{b-a}$. 
+This area equals $\frac{d-c}{b-a}$ and so 
+
+\begin{align}
+    P( c < Y < d ) = \frac{d-c}{b-a}
+\end{align}
+
+We can also define the cumulative density function~(cdf), $F_{Y}(y)$, as 
+
+\begin{align}
+    F_{Y}(y) = P(Y < y) = P(a < Y < y ) = \frac{y-a}{b-a}
+\end{align}
+The cdf is an important function for continuous random variables because this function inputs a value $y$ and returns the probability over all values less than $y$---an interval.
+
+<picture>
+
+The expected value and variance are 
+\begin{align}
+    \mathbb{E}(Y) &= \frac{a+b}{2}\\
+             V(Y) &= \frac{(b-a)^{2}}{12}
+\end{align}
+
+\subsection{Just-in-time integration}
+
+We recognized that the area under the probability density function of a continuous uniform random variable $f_{Y}(y)$ is the same as the area of a rectangle. 
+
+But there are several continuous random variables with non-linear densities that are not easy to compute. We need a special tool and special notation to handle computing areas under these densities.
+
+Suppose we define a continuous random variable $Z$ that has two parameters, $\mu$ and $\sigma$, with the following probability density function 
+\begin{align}
+    f_{Z}(z) = \frac{1}{\sqrt{2 \pi \sigma^{2} } } e^{ -\frac{(z-\mu)^{2}}{2\sigma^{2}}  }
+\end{align}
+defined over all negative and positive numbers or $\mathbb{R}$.
+
+<pciture>
+
+The area under this density is not at all straight forward to compute. 
+However, we may be able to use the area of several rectangles---areas that we can compute---to approximate the area under this more complicated curve. 
+Approximating the area under a curve with a set of simpler curves is called \textbf{Riemann integration}. 
+
+Lets suppose we are interested in 
+\begin{align}
+    P( -1 < Z < 1 )
+\end{align}
+which is the area under $f_{Z}(z)$ from the value -1 to the value 1.
+
+<picture>
+
+One way to approximate this area is to split up the interval $I = (-1,1)$ into (lets say) 20 pieces $P = \{ (-1,-9/10),[-9/10, -8/10), \cdots, [1/10,2/10), [2/10, 3/10], \cdots [9/10,1) \}$. 
+For each smaller interval $P_{i}$ we can choose a single point $z_{i}$, where $z_{-10}$ is a point between -1 and -9/10, the point $z_{-9}$ is a point between -9/10 and -8/10 and so on.
+We can create rectangles with width $1/10$ and height $f(z_{i})$ and sum these rectangles to approximate the area under $f_{Z}$. 
+
+<picutre>
+
+The area of these rectangles is 
+\begin{align}
+    P(-1 < z < 1) \approx \sum_{i=-10}^{10} \frac{1}{10} f(z_{i})
+\end{align}
+
+As we split this interval into more and more intervals the rectangles will better and better approximate the area under $f_{Z}$. 
+
+<picture>
+
+If these exists a number $S$ such that the more splits we create the approximate area gets closer to $S$, then $S$ is called the integral of $f_{Z}$ from $-1$ to $1$ and is the exact area under $f_{Z}$. 
+
+We write 
+\begin{align}
+    \int_{z=-1}^{z=1} f_{Z}(z) dz
+\end{align}
+to represent the area under the probability density $f_{Z}$ between the values -1 and 1.
+
+\ex For a continuous random variable $X \sim U(a,b)$ the integral from $a$ to a value $x$ is the area of a rectangle. 
+$\int_{x=a}^{x=x} f_{X}(x) dx = \frac{x-a}{b-a}$.
+
+\ex The cumulative density function evaluate at a value $y$ for a random variable $Y$ is the area under the probability density function from the smallest possible value in the support of $Y$ to $y$. This can be represented with an integral $F_{Y}(y) = \int_{y=-\infty}^{y=y} f_{Y}(y) dy$. 
+
+\subsection{Normal Distribution}
+
+A continuous random variable $X$ has a Normal distribution with parameters $\mu$ and $\sigma$ if the support of $X$ is all real numbers and the probability density function is 
+\begin{align}
+    f_{X}(x) = \frac{1}{\sqrt{2 \pi \sigma^{2}}} e^{ - (x - \mu)^{2} / 2\sigma^{2}  }
+\end{align}
+
+The normal distribution has several important properties that apply \textbf{only to the normal distribution}. 
+
+\subsubsection{The expected value and variance are equal to distinct parameters}
+
+The expected value and variance of $X$ are 
+\begin{align}
+    \mathbb{E}(X) &= \mu\\
+             V(X) &= \sigma^{2} 
+\end{align}
+
+For most continuous distributions the expected value and variance are a combination of all the paramters values. The normal distribution is unique in that the expected value only contains a single parameter $\mu$ and the variance only contains a unique parameter $\sigma$.
+
+\subsubsection{Shifting and scaling by a constant is easy}
+
+If a random variable $Y = c + X$ where $X \sim \mathcal{N}(\mu,\sigma^{2})$ then the distribution of $Y$ is $Y \sim N(\mu + c, \sigma^{2})$.
+%
+If a random variable $Y = cX$ where $X \sim \mathcal{N}(\mu,\sigma^{2})$ then the distribution of $Y$ is $Y \sim N(\mu, c^{2}\sigma^{2})$.
+
+These shifting and scaling properties are unique to the normal distribution.
+
 
 
 \section{Exercises}
@@ -103,6 +319,38 @@ The Geometric distribution assigns a probability to the the number of times the 
     
     \item Design an experiment (short description) and define a random variable $Y$ that may follow a geometric distribution. In the context of your experiment, how would you communicate $\mathbb{E}(Y)$ to another without statistical expertise?
     
+    \item Define a random variable $R$ with a binomial distribution $(R \sim \text{Bin}(10,0.2))$.
+    \begin{enumerate}
+        \item Compute $\mathbb{E}(R)$
+        \item Compute $V(R)$
+        \item Describe to someone who may not have statistical expertise what $P(R=3)$ means? Be sure to include assumptions about the Binomial distribution and how the parameters $N,\theta$ relate to this probability.
+        \item For what value of $\theta$ is $V(R)$ the highest? Why does this make sense intuitively?
+    \end{enumerate}
+    \item Suppose $Y \sim \text{Pois}(2)$
+    \begin{enumerate}
+        \item Compute $P(Y=2)$
+        \item Compute $P(Y \leq 2)$
+        \item Compute $P(Y > 2)$
+    \end{enumerate}
+    
+    \item $X \sim \mathcal{N}(\mu, \sigma^{2}) $
+    \begin{enumerate}
+        \item Let $Y = X - \mu$. What is the distribution of $Y$?
+        \item Let $Z = Y/\sigma$. What is the distribution of $Z$?
+        \item Compute $P(Z = 0)$
+    \end{enumerate}
+    
+    \item Suppose we define a new random variable $W$ with support $supp(W) = [0,1]$ and probability density function 
+       \begin{align}
+          f_{W}(w) = 2w
+       \end{align}
+      \begin{enumerate}
+          \item Compute $P(W < 1/2) = \int_{0}^{1/2} f_{W}(w)\; dw$
+          \item Compute $P(W < 1) = \int_{0}^{1} f_{W}(w)\; dw$
+      \end{enumerate}
+      
+    \item Let $X$ be a continuous random variable. Is $P(X \leq x) = P(X < x)$? Why or why not? 
+
 \end{enumerate}
 
 

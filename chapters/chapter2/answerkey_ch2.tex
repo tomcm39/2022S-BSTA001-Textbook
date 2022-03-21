@@ -1,0 +1,321 @@
+\documentclass[krantz1,ChapterTOCs]{krantz}
+\usepackage{fixltx2e,fix-cm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\begin{document}
+
+\section{Exercises-Answer key}
+
+\begin{enumerate}
+    \item Suppose $\samplespace = \{ a,b,c \}$ and $P(\{a\})=0.2$, $P(\{b\})=0.3$, $P(\{c\})=0.5$. Define a random variable $X$ such that $X(a)=1$, $X(b)=1$, and $X(c)=0$.
+    Define a second random variable $Y$ such that $Y(a)=0$, $Y(b) = 1$, $Y(c)=2$.
+    \begin{enumerate}
+        \item Compute $P(X=1)$
+        \begin{enumerate}
+            \item {\color{red} P(X=1) = 0.2+0.3=0.5   }
+        \end{enumerate}
+        
+        \item Compute $P(X=0)$
+        \begin{enumerate}
+            \item {\color{red} P(X=0) = 0.5   }
+        \end{enumerate}
+        
+        \item What is $supp(X)$ ? 
+        \begin{enumerate}
+            \item {\color{red} supp(X) = \{0,1\}   }
+        \end{enumerate}
+        
+        \item What new sample space does $X$ generate?
+        \begin{enumerate}
+            \item {\color{red} \mathcal{G} = supp(X) = \{0,1\}   }
+        \end{enumerate}
+
+        \item Compute $P(Y=1)$
+        \begin{enumerate}
+            \item {\color{red} P(Y=1) = 0.3   }
+        \end{enumerate}
+
+        \item Compute $P(Y=0)$
+        \begin{enumerate}
+            \item {\color{red} P(Y=0) = 0.2   }
+        \end{enumerate}
+        
+        \item What is $supp(Y)$ ? 
+        \begin{enumerate}
+            \item {\color{red} supp(Y) = \{0,1,2\}   }
+        \end{enumerate}
+
+        \item What new sample space does $Y$ generate?
+        \begin{enumerate}
+            \item {\color{red} \mathcal{G} = supp(Y) = \{0,1,2\}   }
+        \end{enumerate}
+
+    \end{enumerate}
+    \item Let $\samplespace = \{1,2,3,4,5,6,7,8,9,10,11\}$, the set of all positive integers. Further define a random variable $K$ with the following probability mass function 
+    \begin{align*}
+        f(k) = \left( \frac{1}{2} \right) ^{k} & \text{when } k \leq 10\\
+        f(11) = 0.009
+    \end{align*} 
+    \begin{enumerate}
+        \item Is the pmf $f$ a valid probability distribution? Why or why not?
+        
+        \begin{enumerate}
+            \item {\color{red} Yes, the pmf is a valid probability distribution because the probability of one of the outcomes from 1 to 11 is equal to 1 and because no assignments by the pmf are negative.   }
+        \end{enumerate}
+
+        \item What value of $K$ is assigned the highest probability? 
+        \begin{enumerate}
+            \item {\color{red}  K=1. P(K=1) = 1/2  }
+        \end{enumerate}
+        
+        \item Please define the cumulative mass function for the random variable $K$
+        
+        \begin{enumerate}
+            \item {\color{red} 
+                \begin{align}
+                    F(k) = \begin{cases}
+                            1/2 & if k = 1 \\
+                            1/2 + (1/2)^2 = 3/4    & if k = 2 \\
+                            1/2 + (1/2)^2 + (1/2)^{3} = 7/8    & if k = 3 \\
+                            0.9375    & \text{ if } k = 4 \\
+                            0.9688    & \text{ if } k = 5 \\
+                            0.984    & \text{ if } k = 6 \\
+                            0.992    & \text{ if } k = 7 \\
+                            0.996    & \text{ if } k = 8 \\
+                            0.998    & \text{ if } k = 9 \\
+                             0.999   & \text{ if } k = 10 \\
+                            1        & \text{ if } k = 11 \\
+                           \end{cases}
+                \end{align} 
+            
+            }
+        \end{enumerate}
+
+        
+    \end{enumerate}
+    
+    \item Define a random variable with $supp(Y) = \{-3,-2,-1,0,1,2,3\}$ and cumulative mass function 
+    \begin{align*}
+        F(y) = \begin{cases}
+                  0.10  & \text{ when } y = -3\\
+                  0.24  & \text{ when } y = -2\\
+                  0.36  & \text{ when } y = -1\\
+                  0.50  & \text{ when } y =  0\\
+                  0.67  & \text{ when } y =  1\\
+                  0.78  & \text{ when } y =  2\\
+                  1.00  & \text{ when } y =  3\\
+               \end{cases}
+    \end{align*} 
+    \begin{enumerate}
+        \item What is $P(Y \leq -1)$
+        \begin{enumerate}
+            \item {\color{red} 0.10+0.24+0.36 = 0.7   }
+        \end{enumerate}
+        
+        \item What is $P(Y=-1)$
+        \begin{enumerate}
+            \item {\color{red} 0.36-0.24=0.12   }
+        \end{enumerate}
+        \item What is $P(Y= 1)$
+        \begin{enumerate}
+            \item {\color{red} 0.67-0.50=0.17   }
+        \end{enumerate}
+        \item Please define the p.m.f for the random variable $Y$.
+        \begin{enumerate}
+            \item {\color{red} 
+            \begin{align*}
+                 f_{Y}(y) = \begin{cases}
+                            0.10  & \text{ if } y=-3\\
+                            0.14  & \text{ if } y=-2\\
+                            0.12  & \text{ if } y=-1\\
+                            0.14  & \text{ if } y=0\\
+                            0.17  & \text{ if } y=1\\
+                            0.12  & \text{ if } y=2\\
+                            0.22  & \text{ if } y=3\\
+                            \end{cases}
+            \end{align*}
+            }
+        \end{enumerate}
+        \item Graph the c.m.f
+        \begin{enumerate}
+            \item {\color{red} Graph of the above   }
+        \end{enumerate}
+        \item Graph the p.m.f
+        \begin{enumerate}
+            \item {\color{red} Graph of the above   }
+        \end{enumerate}
+    \end{enumerate}
+
+    \item  Define the following joint distribution of random variable $Q$ and $R$ that are mapped from the sample space $\mathcal{G}$
+    \begin{table}[ht!]
+    \centering
+    \begin{tabular}{c c | c}
+        Q & R & prob \\
+        \hline
+        2 & 1 & 0.01\\
+        2 & 2 & 0.075\\
+        2 & 3 & 0.13\\
+        1 & 1 & 0.1\\
+        1 & 2 & 0.05\\
+        1 & 3 & 0.17\\
+        0 & 1 & 0.05\\
+        0 & 2 & 0.30\\
+        0 & 3 & 0.115
+    \end{tabular}
+    \end{table}
+
+    \begin{enumerate}
+        \item What is the implied support of $Q$?
+        \begin{enumerate}
+            \item {\color{red} $supp(Q) = \{0,1,2\}$   }
+        \end{enumerate}
+        
+        \item What is the implied support of $R$?
+        \begin{enumerate}
+            \item {\color{red} $supp(R) = \{1,2,3\}$   }
+        \end{enumerate}
+        
+        \item Compute P(Q=1,R=2)
+        \begin{enumerate}
+            \item {\color{red} $P(1,2) = 0.05$   }
+        \end{enumerate}
+        
+        \item Compute the marginal probabilities for $Q$
+        \begin{enumerate}
+            \item {\color{red} 
+            \begin{align*}
+                P(Q=0) &= 0.465\\
+                P(Q=1) &= 0.320\\
+                P(Q=2) &= 0.215\\
+            \end{align*}
+            }
+        \end{enumerate}
+        
+        \item Compute the marginal probabilities for $R$
+        \begin{enumerate}
+            \item {\color{red} 
+            \begin{align*}
+                P(R=1) &= 0.16\\
+                P(R=2) &= 0.425\\
+                P(R=3) &= 0.415\\
+            \end{align*}
+            }
+        \end{enumerate}
+        
+        \item Compute $P(R=1 | Q=0)$
+        \begin{enumerate}
+            \item {\color{red} 
+            \begin{align*}
+                P(R=1,Q=0) / P(Q=0) = 0.05/0.465 = 0.107
+            \end{align*}
+            }
+        \end{enumerate}
+
+        \item The random variable $Q$ is called \textbf{statistically independent} from $R$ if for every value $q \in supp(Q)$ and for every value $r \in R$ the following is true $P(Q=q |R=r) = P(Q)$. Is $Q$ statistically independent from $R$? Why or why not?
+        \begin{enumerate}
+            \item { \color{red} 
+            \begin{align*}
+                R \text{ is not statistically independent from Q}\\       P(R|Q) \neq P(R)
+            \end{align*}
+            }
+        \end{enumerate}
+        
+    \end{enumerate}
+    \item For two events $A$ and $B$ that are statistically independent, we found that $P(A \cap B) = P(A)P(B)$. Please derive an equivalent expression for two random variables by applying the definition of conditional probability and statistical independence to random variables.
+
+    \begin{enumerate}
+            \item {\color{red} 
+            \begin{align*}
+                P(R|Q) = P(Q,R)/P(Q)\\
+                P(Q)P(R|Q) = P(Q)P(R)\\
+            \end{align*}
+            }
+    \end{enumerate}
+
+
+    \item Define the following joint distribution of random variable $Q$ and $R$ that are mapped from the sample space $\mathcal{G}$
+    \begin{table}[ht!]
+    \centering
+    \begin{tabular}{c c | c}
+        Q & R & prob \\
+        \hline
+        2 & 1 & 0.01\\
+        2 & 2 & 0.075\\
+        2 & 3 & 0.13\\
+        1 & 1 & 0.1\\
+        1 & 2 & 0.05\\
+        1 & 3 & 0.17\\
+        0 & 1 & 0.05\\
+        0 & 2 & 0.30\\
+        0 & 3 & 0.115
+    \end{tabular}
+    \end{table}
+     \begin{enumerate}
+         \item Please compute $\mathbb{E}(Q)$
+         
+         \begin{enumerate}
+             \item {\color{red}  P(Q) = \{(0,0.465),(1,0.32),(2,0.215)\}}
+             \item {\color{red}  E(Q) = 0*0.465+1*0.32+2*0.215 = 0.75}
+         \end{enumerate}
+         
+         \item Please compute $\mathbb{E}(R)$
+         \begin{enumerate}
+             \item {\color{red}  P(R) = \{(1,0.16),(2,0.425),(3,0.415)\}}
+             \item {\color{red}  E(R) = 1*0.16+2*0.425+3*0.415 = 2.255}
+         \end{enumerate}
+
+         \item Please compute $V(Q)$
+         \begin{enumerate}
+             \item {\color{red}  V(Q) = 0.465*(0-0.75)^2 + 0.32*(1-0.75)^2 + 0.215*(2-0.75)^2 = 0.618    }
+         \end{enumerate}
+         
+         \item Please compute $V(R)$
+         \begin{enumerate}
+             \item {\color{red}  V(R) = 0.160*(1-2.255)^2 + 0.425*(2-2.255)^2 + 0.415*(3-2.255)^2 = 0.509  }
+         \end{enumerate}
+         
+     \end{enumerate}
+
+    \item Suppose $X$ is a random variable with support $supp(X) = \{-2,-1,0,1,2,3\}$ and $Y = |X|$. Further assume the c.m.f of $X$ is 
+    \begin{align}
+        F_{X}(x) \begin{cases}
+                     0.05 & \text{ if } x=-2\\
+                     0.15 & \text{ if } x=-1\\
+                     0.35 & \text{ if } x=0\\
+                     0.65 & \text{ if } x=1\\
+                     0.95 & \text{ if } x=2\\
+                     1.00 & \text{ if } x=3
+                  \end{cases}
+    \end{align}
+    \begin{enumerate}
+            \item Define the support of $Y$
+        \item Build the p.m.f of $Y$
+        \item Build the c.m.f of $Y$
+    \end{enumerate}
+    
+    \item Compute $\sum_{i=-5}^{i=5} i^{2}/2$
+    
+    \item Simplify the $V(X)$ into the equation $E(X^{2}) - \left[E(X)\right]^{2}$. Hint: Write down the definition of variance using the expectation, then expand the squared terms and simplify.
+    
+    \item Define the random variable $A$ with pmf
+    \begin{align}
+        f_{B}(b) = \begin{cases}
+                      0.52 &\text{ if } b=0\\
+                      0.12 &\text{ if } b=1\\
+                      0.34 &\text{ if } b=2
+                   \end{cases}
+    \end{align} 
+    \begin{enumerate}
+        \item Compute $\mathbb{E}(B)$
+        \item Compute $V(B)$
+        \item Use Chebychev's inequality to make a statement about $P(B \geq b)$ 
+    \end{enumerate}
+    
+\end{document}

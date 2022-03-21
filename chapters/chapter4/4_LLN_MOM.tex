@@ -1,0 +1,40 @@
+\chapterauthor{thomas mcandrew}{Lehigh University}
+%\chapterauthor{Second Author}{Second Author Affiliation}
+\chapter{Law of large numbers, Method of Moments, and the Central limit theorem}
+\hspace{1mm}
+
+\section{Introduction}\label{intro}
+
+The law of large numbers~(LLN) and the central limit theorem underpin a large portion of statistical theory. 
+We will see that the LLN will link proportions to probabilities, expected values to the sample mean, and allow us to estimate parameters of a random variable given a dataset.
+
+The method of moments will be the primary tool we use to derive parameter estimates for parameters for a given distribution of a random variable. This method follows directly from the LLN.
+
+Finally, we will explore the Central limit theorem which is the foundation of much of  generating hypothesis tests and building confidence intervals. 
+
+\section{Law of large numbers}\label{intro}
+
+The intuition behind the law of large numbers can be characterized by the following experiment: you are asked to flip a fair coin and record the whether the coin is heads up or tails up. After 10 flips you are asked to compute the proportion of heads up flips, after 50 flips you are asked to compute this proportion, after 100, 1,000, 10,000 flips you are asked to compute the proportion of heads up flips. We expect that if this coin is fair that the proportion of flips with heads face up will get closer and closer to 0.50. 
+
+The law of large numbers attempts to describe this intuition.
+
+Define a sequence of random variables $X_{1}, X_{2}, \cdots, X_{n}$ such that any pair of random variables, $X_{i}$ and $X_{j}$ are independent (that is $P(X_{i} = x | X_{j} = y) =P(X_{i} = x)$. Finally, transform this sequence into a single random variable $\overline{X}$ that is equal to $\overline{X} = \dfrac{X_{1} + X_{2} + X_{3} + \cdots X_{N}}{N}$. 
+
+Then the law of large numbers~(LLN) states that given any small number $\epsilon$ and $\delta$ that are greater than 0 there exists an $N$ such that for $n > N$
+\begin{align}
+    P( | \overline{X}_{n} - \mu | > \epsilon ) < \delta
+\end{align}
+where $\mu = \mathbb{E}(\overline{X})$.
+
+The LLN has many applications. 
+
+\ex Let a sequence of Bernoulli distributed random variables be (i) pairwise independent and (ii) be distributed the same $X_{1}, X_{2}, \cdots, X_{N} \sim \text{Bern}(\theta)$. Because Bernoulli random variables take either the values 0 or 1, the LLN states that the probability that the difference between the  transformation $\overline{X}$ and $\mathbb{E}(\overline{X}) = \mu = \theta$ shrinks as the sequence of random variable grows. That is, if some process has a $\theta$ probability to occur than if we observe the proportion $\overline{X}$ we expect that proportion to get closer to $\theta$ as we observe more realizations from this sequence of random variables.  
+
+
+
+\section{Method of Moments}\label{intro}
+
+
+\section{Central limit theorem}\label{intro}
+
+
