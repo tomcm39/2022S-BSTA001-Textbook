@@ -17,7 +17,7 @@ Finally, we will explore the Central limit theorem which is the foundation of mu
 To model a dataset, $\mathcal{D}$, we will need to make assumptions about how our data set was generated.
 
 A common assumption for a dataset with $n$ data points $\mathcal{D} = (x_{1}, x_{2}, \cdots, x_{n} )$ is that each data point was generated from a random variable $x_{1} \sim X_{1}, x_{2} \sim X_{2}, \cdots, x_{n} \sim X_{n}$. 
-The dataset $\mathcal{D}$ is typically called a \textbf{sample}.
+The collection of random variables $X_{1},X_{2},\cdots, X_{n})$ is called a \textbf{sample} and the dataset $\mathcal{D}$ above is typically called one \textbf{realized sample} or a \textbf{realization} of the sample.
 
 If we additionally assume that all the random variables are \textbf{identically distributed}, or that they have the same distribution $X_{1},X_{2}, \cdots, X_{n} \sim f$, and we assume that for any $i$ and $j$ that $X_{i}$ and $X_{j}$ are independent then we call our sample a \textbf{random sample}.
 
@@ -49,7 +49,7 @@ We start at the definition of the expected value to derive this property
                     &= \mathbb{E}(X) + \mathbb{E}(Y)
 \end{align}
 
-\ex Suppose $X \sim \text{Geom}(1/4)$ and $Y \sim \text{Bernoulli}(1/2)$ then $\mathbb{E}(X+Y) = \frac{1}{1/4} + \frac{1}{2} = 4 \frac{1}{2}$. 
+\ex Suppose $X \sim \text{Geom}(1/4)$ and $Y \sim \text{Bernoulli}(1/2)$ then $\mathbb{E}(X+Y) = \mathbb{E}(X) + \mathbb{E}(Y) = \frac{1}{1/4} + \frac{1}{2} = 4 \frac{1}{2}$. 
 
 The variance is an expected value and so it follows that 
 \begin{align}
@@ -207,8 +207,98 @@ or that $S$ approaches the true variance of $X$.
 
 \section{Statistics, Estimators, and the Method of Moments}\label{intro}
 
-Given a random sample from $X_{1}, X_{2}, X_{3}, \cdots, X_{n}$, a  \textbf{statistic} is a 
+Given a random sample $(X_{1}, X_{2}, X_{3}, \cdots, X_{n})$ or collection of random variables that are i.i.d, a  \textbf{statistic} is a function of our sample $T(X_{1},X_{2},X_{3},\cdots,X_{n})$.
+Because a statistic is a function of a collection of random variables, our statistic too can be characterized by a probability distribution over potential values of the statistic.
 
+For a random sample $(X_{1},X_{2},X_{3},\cdots,X_{n})$ all with the same probability density function $f_{X}(\theta)$ where $\theta$ is a parameter, an $estimator$, $T(X_{1},X_{2},\cdots,X_{n})$ of $\theta$ is (i) a statistic that (ii) is meant get closer to $\theta$ as $n \to \infty$.
+
+An \textbf{estimate} is an estimator applied to a realized sample, and an estimate for a parameter is often denoted as the parameter with a "hat". For example, an estimate of the parameter $\beta$ would bve denoted $\hat{\beta}$.
+
+One way to develop an estimator for a parameter, or for several parameters, is to use the \textbf{Method of Moments}.
+For a random sample $(X_{1},X_{2},\cdots,X_{n})$ where each random variable follows the same probability density function with $k$ parameters $X_{i} \sim f_{X}(x | \theta_{1},\theta_{2},\theta_{k})$, the Method of moments generates estimators for all $k$ parameters by solving this set of equations 
+\begin{align}
+    \mathbb{E}(X)     &= g_{1}(\theta_{1},\theta_{2},\cdots,\theta_{k}) \\ 
+    \mathbb{E}(X^{2}) &= g_{2}(\theta_{1},\theta_{2},\cdots,\theta_{k}) \\ 
+    \vdots \\
+    \mathbb{E}(X^{k}) &= g_{k}(\theta_{1},\theta_{2},\cdots,\theta_{k}), 
+\end{align}
+replacing each exact, expected value by sample means. 
+The expected value $\mathbb{E}(X)$ is replaced by $\overline{X} = \sum_{i=1}^{N} X_{i}/N$, the expected value $\mathbb{E}(X^{2})$ is replaced by its sample mean $\overline{X^{2}} = \sum_{i=1}^{N} X_{i}^{2} / N$, etc. 
+
+Lets look at an example. 
+
+
+\begin{VT1}
+\VH{MoM estimator for the Bernoulli}
+
+Suppose we are studying the probability of survival among patients who are treated with dialysis and experienced a myocardial infarction~(see \url{10.1056/NEJM199809173391203} for a manuscript on this topic). We collect data on 50 patients and model whether they survive or not as a random sample $(X_{1},X_{2},X_{3},\cdots,X_{50})$ where $X_{i} \sim \text{Bern}(\theta)$ and the value 1 represents survival and zero otherwise. We follow patients for a year and record a dataset $\mathcal{D} =(1,0,0,1,1,1,0,0,0,0,1,0,\cdots)$ that contains 36 ones and 14 zeros. 
+
+Because the Bernoulli distribution has a single parameter we only need a single equation that related the expected value and our parameter $\theta$. Because the Bernoulli distribution has a single parameter we only need a single equation that related the expected value and our parameter $\theta$.
+
+The expected value is $\matbb{E}(X) = \theta$ and so we can derive a MoM estimator by replacing the exact $\mathbb{E}(X)$ with the sample mean $\overline{X}$. Our estimator for $\theta$ is $\hat{\theta} = \overline{X} = \sum_{i=1}^{N} x_{i} / N = 36/50 = 72\%$.
+
+\end{VT1}
+
+\begin{VT1}
+\VH{MoM estimator for the Uniform Continuous}
+
+Suppose $(Y_{1},Y_{2},\cdots,Y_{10})$ is a random sample such that $Y_{i} \sim U(\alpha,\beta)$. We collect a dataset (realized sample) $\mathcal{D} = (0.22,0.45,0.12,0.32,0.56,0.73,0.91,0.51,0.11,0.67)$. 
+To develop an estimate for $\alpha$ and an estimate for $\beta$ using the method of moments, we will need to look at the following two equations:
+\begin{align}
+    \mathbb{E}(X)     &= \frac{\alpha+\beta}{2}\\ 
+    \mathbb{E}(X^{2}) &= g(\alpha,\beta) 
+\end{align}
+
+On first glance, the second equation sounds difficult to solve.
+However, we found an expression for the variance that depends on $\mathbb{E}(X^{2})$ and on $\mathbb{E}(X)$ in chapter 2, exercise 9.
+
+\begin{align}
+    V(X) &= \mathbb{E}(X^2) - \left[\mathbb{E}(X)\right]^{2} \\
+    \mathbb{E}(X^2) &= V(X) +  \left[\mathbb{E}(X)\right]^{2}  
+\end{align}
+
+We know that $V(X) = \frac{(b-a)^{2}}{12}$ and so 
+
+\begin{align}
+    \mathbb{E}(X^2) &= V(X) +  \left[\mathbb{E}(X)\right]^{2}  \\
+                    &= \frac{(\beta-a)^{2}}{12} + \left[ \frac{(\alpha+\beta)}{2} \right]^{2} \\ 
+                    &= \frac{\beta^{2} + \alpha^{2} - 2\alpha\beta}{12} + \frac{\alpha^{2}+\beta^{2}+2\alpha\beta}{4} \\ 
+                    &= \frac{\beta^{2} + \alpha^{2} + \alpha\beta}{3}  
+\end{align}
+
+Now our MoM equations are 
+\begin{align}
+    \mathbb{E}(X)     &= \frac{\alpha+\beta}{2}\\ 
+    \mathbb{E}(X^{2}) &=  \frac{\beta^{2} + \alpha^{2} + \alpha\beta}{3}
+\end{align}
+and we will replace $\mathbb{E}(X)$ with the sample mean $\overline{X}$ and replace $\mathbb{E}(X^{2})$ with $\overline{X^{2}}$, and then solve for $\alpha$ and $\beta$.  
+\begin{align}
+    \overline{X}     &= \frac{\alpha+\beta}{2}\\ 
+    \overline{X^{2}} &=  \frac{\beta^{2} + \alpha^{2} + \alpha\beta}{3}
+\end{align}
+
+From the first equation we find $\alpha = 2\overline{X} - \beta$. 
+We can plug the above into the second equation to find 
+
+\begin{align}
+    \overline{X^{2}} &=  \frac{\beta^{2} + (2\overline{X} - \beta)^{2} + (2\overline{X} - \beta)\beta}{3}\\
+    3\overline{X^{2}} &= \beta^{2} + 4 \overline{X}^{2} + \beta^{2} - 4\overline{X} \beta + 2\overline{X} \beta - \beta^{2}\\
+    3\overline{X^{2}} &= \beta^{2} + 4 \overline{X}^{2} - 2\overline{X} \beta \\  
+    0&= \beta^{2} - (2\overline{X}) \beta + (4 \overline{X}^{2} - 3\overline{X^{2}})\\
+    \hat{\beta} &= 2\overline{X} \pm \frac{\sqrt{ (2\overline{X})^{2} - 4(1)(4 \overline{X}^{2} - 3\overline{X^{2}}) } }{2} \\ 
+    \hat{\beta} &= 2\overline{X} \pm \frac{\sqrt{ 4\overline{X}^{2} - (16 \overline{X}^{2} - 12\overline{X^{2}}) } }{2} \\
+    \hat{\beta} &= 2\overline{X} \pm \frac{\sqrt{ - 12 \overline{X}^{2} + 12\overline{X^{2}} } }{2} \\
+    \hat{\beta} &= 2\overline{X} \pm \frac{ 2\sqrt{3} \sqrt{    \overline{X^{2}} -\overline{X}^{2} } }{2} \\
+    \hat{\beta} &= 2\overline{X} \pm \sqrt{3} \sqrt{    \overline{X^{2}} -\overline{X}^{2} } \\
+\end{align}
+
+and so for our problem above $\hat{\beta} = 1.37$ and so $\alpha = -0.45$.
+
+
+
+
+
+\end{VT1}
 
 
 
@@ -218,14 +308,14 @@ Given a random sample from $X_{1}, X_{2}, X_{3}, \cdots, X_{n}$, a  \textbf{stat
 \section{Exercises}
 
 \begin{enumerate}
-    \item Suppose we collect the following sample $d = (10,2,6,7,17,3,1,1,6,5,4,1)$ and further we assume that each data point $d_{i}$ was generated by sampling from a sequence of i.i.d random variables  $d_{1} \sim X_{1}, d_{2} \sim X_{2}, \cdots, d_{12} \sim X_{12}$ where $X_{i} \sim \text{Geom}(p)$.  
+    \item Suppose we collect the following dataset $\mathval{D} = (10,2,6,7,17,3,1,1,6,5,4,1)$ and further we assume that each data point $d_{i}$ was generated by sampling from a sequence of i.i.d random variables  $d_{1} \sim X_{1}, d_{2} \sim X_{2}, \cdots, d_{12} \sim X_{12}$ where $X_{i} \sim \text{Geom}(p)$.  
     \begin{enumerate}
         \item State the LLN for the above problem
-        \item Compute the sample mean of $d$
+        \item Compute the sample mean of $\mathval{D}$
         \item What can we say about the sample mean, using the LLN, if we collect 13,14,$\cdots$ data points?  
     \end{enumerate}
     
-    \item  Suppose we collect the following sample $d = (10,2,6,7,17,3,1,1,6,5,4,1)$ and further we assume that each data point $d_{i}$ was generated by sampling from a sequence of i.i.d random variables  $d_{1} \sim X_{1}, d_{2} \sim X_{2}, \cdots, d_{12} \sim X_{12}$ where $X_{i} \sim \text{Pois}(\lambda)$.
+    \item  Suppose we collect the following sample $\mathcal{D} = (10,2,6,7,17,3,1,1,6,5,4,1)$ and further we assume that each data point $d_{i}$ was generated by sampling from a sequence of i.i.d random variables  $d_{1} \sim X_{1}, d_{2} \sim X_{2}, \cdots, d_{12} \sim X_{12}$ where $X_{i} \sim \text{Pois}(\lambda)$.
     \begin{enumerate}
         \item State the LLN for the above problem
         \item Compute the sample variance
@@ -235,11 +325,37 @@ Given a random sample from $X_{1}, X_{2}, X_{3}, \cdots, X_{n}$, a  \textbf{stat
     \item Define independent and identically distributed random variables $B_{1},B_{2},B_{3},B_{4},B_{5} \sim \text{Geom}(p)$. Suppose we sample these rvs and collect $d = (12,9,1,5,3)$.
     \begin{enumerate}
         \item Use the method of moments to develop an estimator for $p$.
-        \item Estimate $p$ from the above sample $d$. 
+        \item Estimate $p$ from the above sample $\mathcal{D}$. 
         \item What is the estimated expected value? 
         \item What is the estimated variance? 
         \item What is the estimated $P(B_{1} = 1)$
     \end{enumerate}
-    \item
-    \item
+    \item Assume $(Y_{1}, Y_{2},Y_{3}, \cdots, Y_{n})$ are a random sample where $Y_{i} \sim \mathcal{N}(\mu,\sigma^{2})$. Further assume we collected the data set $\mathcal{D} = (1.30, -2.11, 1.44, 0.35, -0.40, 0.61,-1.06, -0.86, -0.60, 0.19)$.
+    \begin{enumerate}
+        \item Use the method of moments to develop an estimator for $\mu$ and for $\sigma^{2}$.
+        \item Estimate $\mu$ and $\sigma^{2}$ from the above sample $\mathcal{D}$. 
+        \item What is the estimated expected value? 
+        \item What is the estimated variance? 
+        \item What is the estimated $P(Y_{1} = 2)$
+    \end{enumerate}
+    \item Lets assume we decide to study the incubation period for the influenza virus. The incubation period is defined as the number of days between when the virus infects a host and when that host becomes symptomatic. We collect from 5 individuals the date they came in contact with someone who was infected with influenza and the date they themselves were symptomatic.
+    
+    \begin{align}
+        \mathcal{D} 
+        = \begin{bmatrix}
+            \text{Date of contact} & \text{Date of Symptoms}\\
+            02/20  & 02/21\\
+            04/12  & 04/17\\
+            03/22  & 03/25\\
+            10/24  & 10/26\\
+            07/15  & 07/18\\
+          \end{bmatrix}
+    \end{align}
+    
+    \begin{enumerate}
+        \item Provide a statistical setup for this data. Define a sample, assumptions about the sample, and a distribution for each random variable that is a part of the sample
+        \item Estimate the parameters in your statistical setup using the Method of Moments
+        \item Describe your results
+    \end{enumerate}
+    
 \end{enumerate}
