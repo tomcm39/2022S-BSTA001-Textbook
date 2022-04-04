@@ -1,0 +1,195 @@
+\documentclass[krantz1,ChapterTOCs]{krantz}
+\usepackage{fixltx2e,fix-cm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\begin{document}
+
+\section{Exercises-Answer key}
+
+\begin{enumerate}
+    \item Let $X \sim \text{Bernoulli}(0.2)$
+    \begin{enumerate}
+        \item P(X=0) = ?
+        \begin{enumerate}
+            \item {\color{red} $1-\theta = 0.8$  }
+        \end{enumerate}
+        \item P(X=1) = ?
+        \begin{enumerate}
+            \item {\color{red} $\theta = 0.2$  }
+        \end{enumerate}
+
+        \item Please compute $\mathbb{E}(X)$
+        \begin{enumerate}
+            \item {\color{red} $\mathbb{E}(X) = \theta = 0.2$  }
+        \end{enumerate}
+
+        \item Please compute $V(X)$
+        \begin{enumerate}
+            \item {\color{red} $V(X) = \theta (1-\theta) 0.2 \cdot 0.8 = 0.16$  }
+        \end{enumerate}
+
+        \item Define the $supp(X)$
+        \begin{enumerate}
+            \item {\color{red} $supp(X) = \{0,1\}$  }
+        \end{enumerate}
+
+    \end{enumerate}
+    
+    \item Let $Y \sim \text{Bernoulli}(\theta)$, and 
+    show that $P(Y=1) = \mathbb{E}(Y)$
+    \begin{enumerate}
+        \item {\color{red} 
+            \begin{align}
+                P(Y=1) &= \theta\\
+                \mathbb{E}(Y) = \theta\\
+                P(Y=1) = \mathbb{E}(Y)
+            \end{align}
+          }
+    \end{enumerate}
+
+
+    \item Let $Y \sim \text{Bernoulli}(\theta)$, and 
+    show that $V(Y) \leq \mathbb{E}(Y)$
+    \begin{enumerate}
+        \item {\color{red} 
+            $V(Y) = \theta (1-\theta)$ and because $\theta \in [0,1]$ then $1-\theta \in [0,1]$ and so $\mathbb{E}(Y) = \theta > \theta (1-\theta)$
+        }
+    \end{enumerate}
+    \item Let $Y \sim \text{Bernoulli}(\theta)$, and let $Z$ be the following function of $Y$:
+    \begin{align}
+        Z(y) = \begin{cases}
+                1 & \text{ if } y = 0\\
+                0 & \text{ if } y = 1
+            \end{cases}
+    \end{align}
+    What probability distribution does $Z$ follow and why?
+    \begin{enumerate}
+        \item {\color{red} 
+            \begin{align}
+                supp(Z) = \{0,1\} \\ 
+                P(Z = 1) = 1 - \theta \\ 
+                P(Z =0) = \theta \\
+                Z \sim \text{Bern}(1-\theta)
+            \end{align}
+        }
+    \end{enumerate}
+    
+    
+    \item Design an experiment (short description) and define a random variable $Y$ that may follow a geometric distribution. In the context of your experiment, how would you communicate $\mathbb{E}(Y)$ to another without statistical expertise?
+    
+    \item Define a random variable $R$ with a binomial distribution $(R \sim \text{Bin}(10,0.2))$.
+    \begin{enumerate}
+        \item Compute $\mathbb{E}(R)$
+        \begin{enumerate}
+            \item {\color{red} $10 \times 0.2 = 2$  }
+        \end{enumerate} 
+                
+        \item Compute $V(R)$
+        \begin{enumerate}
+            \item {\color{red}  $10 \times 0.2 \times 0.8 = 1.6$  }
+        \end{enumerate} 
+
+        \item Describe to someone who may not have statistical expertise what $P(R=3)$ means? Be sure to include assumptions about the Binomial distribution and how the parameters $N,\theta$ relate to this probability.
+        \begin{enumerate}
+            \item {\color{red}  The probability that $R=3$ represents the probability of three successes among 10 trials where the probability of each trial equal 0.2.  }
+        \end{enumerate} 
+
+        \item For what value of $\theta$ is $V(R)$ the highest? Why does this make sense intuitively?
+        \begin{enumerate}
+            \item {\color{red} (Throwing Out This problem)  }
+        \end{enumerate} 
+
+    \end{enumerate}
+    \item Suppose $Y \sim \text{Pois}(2)$
+    \begin{enumerate}
+        \item Compute $P(Y=2)$
+        \begin{enumerate}
+            \item {\color{red} $ \frac{e^{-2} 2^{2}}{2!} = 2e^{-2}$  }
+        \end{enumerate} 
+
+        \item Compute $P(Y \leq 2)$
+        \begin{enumerate}
+            \item {\color{red}
+            \begin{align}
+                P(Y=0) + P(Y=1) + P(Y=2) \\ 
+                \frac{e^{-2} 2^{0}}{0!} + \frac{e^{-2} 2^{1}}{1!} + \frac{e^{-2} 2^{2}}{2!} \\
+                e^{-2} + 2e^{-2} + 2e^{-2} = 5e^{-2}
+            \end{align}
+            }
+        \end{enumerate} 
+
+        \item Compute $P(Y > 2)$
+        \begin{enumerate}
+            \item {\color{red} 1- 5e^{-2}}
+        \end{enumerate} 
+
+    \end{enumerate}
+    
+    \item $X \sim \mathcal{N}(\mu, \sigma^{2}) $
+    \begin{enumerate}
+        \item Let $Y = X - \mu$. What is the distribution of $Y$?
+        \begin{enumerate}
+            \item {\color{red}  
+            \begin{align}
+                Y & \sim \mathcal{N}( \mu - \mu, \sigma^{2}) \\ 
+                Y & \sim \mathcal{N}( 0, \sigma^{2}) \\ 
+            \end{align}
+            }
+        \end{enumerate} 
+
+        \item Let $Z = Y/\sigma$. What is the distribution of $Z$?
+        \begin{enumerate}
+            \item {\color{red}
+            \begin{align}
+                Z & \sim \mathcal{N}(0, \frac{1}{\sigma^{2}}\sigma^{2}) \\ 
+                Z & \sim \mathcal{N}( 0, 1)
+            \end{align}
+                 
+            }
+        \end{enumerate} 
+
+        \item Compute $P(Z = 0)$
+        \begin{enumerate}
+            \item {\color{red} 0  }
+        \end{enumerate} 
+
+    \end{enumerate}
+    
+    \item Suppose we define a new random variable $W$ with support $supp(W) = [0,1]$ and probability density function 
+       \begin{align}
+          f_{W}(w) = 2w
+       \end{align}
+      \begin{enumerate}
+          \item Compute $P(W < 1/2) = \int_{0}^{1/2} f_{W}(w)\; dw$
+        \begin{enumerate}
+            \item {\color{red} Triangle with base 1/2 and height 1 so $\frac{1}{2} \time (\frac{1}{2} \times 1) = 1/4$  }
+        \end{enumerate} 
+
+          \item Compute $P(W < 1) = \int_{0}^{1} f_{W}(w)\; dw$
+        \begin{enumerate}
+            \item {\color{red}  1 }
+        \end{enumerate} 
+
+      \end{enumerate}
+      
+    \item Let $X$ be a continuous random variable. Is $P(X \leq x) = P(X < x)$? Why or why not? 
+        \begin{enumerate}
+            \item {\color{red}  Yes. 
+            \begin{align}
+                P(X \leq x) = P( [X < x] \cup [X=x] ) \\ 
+                P(X<x) + P(X=x) \\ 
+                P(X<x) + 0 \\ 
+                P(X<x)
+            \end{align}
+         }
+        \end{enumerate} 
+
+
+\end{document}

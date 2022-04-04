@@ -295,14 +295,110 @@ We can plug the above into the second equation to find
 and so for our problem above $\hat{\beta} = 1.37$ and so $\alpha = -0.45$.
 
 
+\end{VT1}
 
+
+\begin{VT1}
+\VH{MoM estimator for the Poisson}
+
+Suppose $(R_{1},R_{2},\cdots,R_{5))$ is a random sample such that $R_{i} \sim \text{Pois}(\lambda)$, and we are given the following dataset $\mathcal{D} = (3,7,10,12,45)$.
+
+We can develop an estimator for $\lambda$ by using the LLN and MoM:
+\begin{align}
+    \frac{1}{n}\left(R_{1} + R_{2} + \cdots + R_{n}) \to \mathbb{E}(R)
+\end{align}
+as $n \to \infty$.
+
+The MoM of moments estimator is 
+\begin{align}
+   \frac{1}{n}\left(r_{1} + r_{2} + \cdots + r_{n}) &\approx  \mathbb{E}(R) \\ 
+   \frac{1}{n}\left(r_{1} + r_{2} + \cdots + r_{n}) &= \lambda \\ 
+   \hat{\lambda} &= \frac{1}{n}\sum_{i=1}^{n} r_{i}
+\end{align}
+as $n \to \infty$.
+
+In our example, our estimate for the true $\lambda$ would be 
+\begin{align}
+    \hat{\lambda} = \frac{1}{5} \left(3+7+10+12+45) = 15.4
+\end{align}
+
+We can compute an estimated expected value, variance, estimated probabilities, etc by replacing the our true parameter value $\lambda$ with our estimate $\hat{\lambda}$.
+For example, an estimate for the expected value  is 
+\begin{align}
+    \hat{\mathbb{E}(R)} = \hat{\lambda} = 15.4,
+\end{align}
+an estimated probability mass function 
+\begin{align}
+    f_{R}(r; \hat{\lambda}) = e^{-\hat{\lambda}} \frac{\hat{\lambda}^{r}}{r!}
+\end{align}
 
 
 \end{VT1}
 
 
-
 \section{Central limit theorem}\label{intro}
+
+Given a random sample $(X_{1},X_{2},\cdots,X_{n})$, we used the LLN and  method of moments to produce point estimates---a single number---for a parameter that assigned probabilities to value of $X_{i}$.
+However the LLN only guarantees that our estimator will grow closer to the true parameter value as $n \to \infty$. 
+The LLN does not describe how close we are to the true parameter value for any specific $n$.
+
+The Central limit theorem~(CLT) describes the statistical distribution of the sample mean $\bar{X}$, allowing us to describe how close we are to the true parameter value of interest. 
+
+For a random sample $(X_{1},X_{2},\cdots,X_{n})$ the \textbf{Central Limit Theorem} states
+\begin{align}
+    \overline{X}_{n} \sim \mathcal{N}\left(\mu,\frac{\sigma^{2}}{n}\right)
+\end{align}
+
+or that 
+\begin{align}
+    \sum_{i=1}^{n} X_{n} \sim \mathcal{N}\left(n \mu, n \sigma^{2}\right)
+\end{align}
+
+
+where $\overline{X}_{n} =  \frac{1}{n}\left(X_{1}+X_{2}+\cdots+X_{n}\right)$, $\mu = \mathbb{E}(X)$ and $\sigma^{2} = V(X)$.
+
+\begin{VT1}
+\VH{CLT for the Bernoulli}
+
+Suppose we wish to study a random sample of $n$ Bernoulli distributed random variables $(Y_{1},Y_{2},\cdots,Y_{n}) \sim \text{Bern}(\theta)$.
+
+We know that $\mathbb{E}(Y) = \theta$ and $V(Y) = \theta(1-\theta)$, and so 
+\begin{align}
+    \overline{Y}_{n} \sim \mathcal{N}\left(\theta, \frac{\theta (1-\theta)}{n} \right)
+\end{align}
+
+We saw in the previous section on the LLN and MoM that an estimate for $\theta$ is the sample mean so then 
+\begin{align}
+    \hat{\theta} \sim \mathcal{N}\left(\theta, \frac{\theta (1-\theta)}{n} \right)
+\end{align}
+However, we still cannot compute probabilities that $\hat{\theta}$ is in some interval because the Normal distribution on the right hand side involves the true, unknowable, $\theta$.
+
+\begin{align}
+    \hat{\theta}(Y) - \theta \sim \mathcal{N}\left(0, \frac{\theta (1-\theta)}{n} \right)
+\end{align}
+here we introduce the notation $\hat{\theta}(Y)$ to reinforce that this is a random variable and not a single value.
+
+To approximate the difference $\hat{\theta}(Y) - \theta$ we can replace $\theta$ with our MoM estimate $\overline{y}$.
+\begin{align}
+    \hat{\theta}(Y) - \theta \sim \mathcal{N}\left(0, \frac{\overline{Y}_{n} (1-\overline{Y}_{n})}{n} \right)
+\end{align}
+
+We can use the above to approximate the probability that the difference between our estimated $\hat{\theta}$ and the true $\theta$ is inside some interval. 
+Suppose we collect the data $\mathcal{D} = (1,1,0,1,0,1,1,1,0,0,1,1,0,1,0)$.
+Then the CLT says 
+\begin{align}
+    \hat{\theta}(Y) - \theta \sim \mathcal{N}\left(0, \frac{\overline{y}_{n} (1-\overline{y}_{n})}{n} \right) \\ 
+    \hat{\theta}(Y) - \theta \sim \mathcal{N}\left(0, \frac{ \frac{9}{15}  \cdot \frac{6}{15}} {15} \right) \\ 
+\end{align}
+
+and we can compute for example the probability that our estimate is 0.1 away from the truth. 
+\begin{align}
+    P( -0.1 <   \hat{\theta}(Y) - \theta < 0.1) = F(0.1) - F(-0.1) \approx 0.57
+\end{align}
+In other words, there is a $0.57$ probability that our estimate is within 0.1 of the true parameter value $\theta$.
+
+
+\end{VT1}
 
 
 \section{Exercises}
@@ -356,6 +452,22 @@ and so for our problem above $\hat{\beta} = 1.37$ and so $\alpha = -0.45$.
         \item Provide a statistical setup for this data. Define a sample, assumptions about the sample, and a distribution for each random variable that is a part of the sample
         \item Estimate the parameters in your statistical setup using the Method of Moments
         \item Describe your results
+    \end{enumerate}
+    
+    \item Suppose $(Y_{1},Y_{2},\cdots,Y_{n})$ is a random sample where $Y_{i} \sim \text{Pois}(\lambda)$.
+    \begin{enumerate}
+        \item Define an estimator for $\lambda$ using the MoM
+        \item Characterize the distribution of $\hat{\lambda}$ using the CLT.
+    \end{enumerate}
+    
+    \item The Aedes and Aegypti mosquito are vectors for X,X,X,X, and so the daily incidence of Aedes, Aegypti mosquitoes in a given location is one signal associated with incidence of X,X,X, infections. Mosquitoes are routinely captured and counted and the daily frequency of mosquitoes is reported to departments of public health.
+    
+    Suppose we capture and count the number of mosquitoes in a specific county for two weeks, and compile this data in the following dataset $\mathcal{D} = (124,98,188,212,100,34,90,99,46,176,67,94,344,67)$.
+    
+    \begin{enumerate}
+        \item Define a set of random variables that we will use to model the daily frequency of mosquitoes. Include notation for the random sample and define a common distribution for all random variables.
+        \item Use the method of moments to estimate parameter values from the given dataset $\mathcal{D}$
+        \item 
     \end{enumerate}
     
 \end{enumerate}
