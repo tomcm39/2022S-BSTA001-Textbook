@@ -397,8 +397,34 @@ and we can compute for example the probability that our estimate is 0.1 away fro
 \end{align}
 In other words, there is a $0.57$ probability that our estimate is within 0.1 of the true parameter value $\theta$.
 
-
 \end{VT1}
+
+\section{Confidence intervals: the CLT in action}
+
+Given a random sample $(X_{1},X_{2},\cdots, X_{n},)$, a \textbf{confidence interval} for a parameter $\theta$ is a pair of statistics $(L(X),U(X))$ such that $P( \theta \in [L(X),U(X)] ) = 1 - \alpha$.
+The number $\alpha$ is called the \textbf{confidence coefficient} and we often say that the interval $[L(X),U(X)]$ is a $1-\alpha$ confidence interval for the parameter $\theta$. 
+
+A confidence interval provides a range of values that the true parameter is likely to be between.
+
+\ex Suppose we decide to study the prevalence of tuberculosis among people who have diabetes mellitus. Our model supposes we can represent each person in our sample with a random variable $X \sim \text{Bern}(\theta)$ where $\theta$ is the probability of an active tuberculosis infection. Given a random sample  $(X_{1},X{2},\cdots,X_{n})$ where $X_{i} \sim \text{Bern}(\theta)$, we find 34 people had an active infection and 3,456 did not. If we generate a 95\% confidence interval for the parameter $\theta$ that is [0.05\%, 2\%] then there are tow claims. Claim one: The confidence interval applied to a random sample that follows all of our assumptions will have a 95\% probability that the parameter value is within our confidence interval. Claim two: the confidence interval that was produced from our data either does or does not contain the true parameter value, and we are 95\% confident that this interval contains the true parameter value.
+
+\subsection{Z values}
+
+
+
+\subsection{Using the CLT to build a confidence interval}
+
+Suppose $(X_{1},X_{2},\cdots,X_{n})$
+
+\begin{align}
+    P\left( -z_{1-\alpha/2} < \frac{\hat{\theta} - \theta}{ \frac{\sigma}{n}  } < z_{1-\alpha/2} \right) &= 1-\alpha \\ 
+    P\left( -z_{1-\alpha/2} \frac{\sigma}{n} < \hat{\theta} - \theta < z_{1-\alpha/2} \frac{\sigma}{n} \right)&= 1-\alpha\\ 
+    P\left( z_{1-\alpha/2} \frac{\sigma}{n} > \theta - \hat{\theta} > -z_{1-\alpha/2} \frac{\sigma}{n} \right) &= 1-\alpha\\ 
+    P\left( \hat{\theta} + z_{1-\alpha/2} \frac{\sigma}{n} > \theta   > \hat{\theta} -z_{1-\alpha/2} \frac{\sigma}{n} \right)&= 1-\alpha \\ 
+    P\left( \hat{\theta} - z_{1-\alpha/2} \frac{\sigma}{n} < \theta   < \hat{\theta} +z_{1-\alpha/2} \frac{\sigma}{n} \right) &= 1-\alpha\\
+    P\left( \hat{\theta} - z_{1-\alpha/2} \frac{\hat{\sigma}}{n} < \theta   < \hat{\theta} +z_{1-\alpha/2} \frac{\hat{\sigma}}{n} \right) &= 1-\alpha
+\end{align}
+where $\sigma$ is equal to the standard deviation of $X$ or $\sigma = sd(X) = \sqrt{V(X)}$. 
 
 
 \section{Exercises}
@@ -460,14 +486,43 @@ In other words, there is a $0.57$ probability that our estimate is within 0.1 of
         \item Characterize the distribution of $\hat{\lambda}$ using the CLT.
     \end{enumerate}
     
-    \item The Aedes and Aegypti mosquito are vectors for X,X,X,X, and so the daily incidence of Aedes, Aegypti mosquitoes in a given location is one signal associated with incidence of X,X,X, infections. Mosquitoes are routinely captured and counted and the daily frequency of mosquitoes is reported to departments of public health.
+    \item The Aedes mosquito is a vector for yellow and dengue fever, the Zika virus, and Chikungunya. Tracking the daily incidence of Aedes mosquitoes in a given location is one signal associated with the incidence of these four diseases. Mosquitoes are routinely captured and counted and the daily frequency of mosquitoes is reported to departments of public health.
     
-    Suppose we capture and count the number of mosquitoes in a specific county for two weeks, and compile this data in the following dataset $\mathcal{D} = (124,98,188,212,100,34,90,99,46,176,67,94,344,67)$.
+    Suppose we capture and count the number of mosquitoes in a specific county for two weeks, and compile this data in the following dataset $\mathcal{D} = (124,98,188,212,100,34,90,99,46,176,67,94,344,67)$ where one data point represents the number of mosquitoes collected in one day.
     
     \begin{enumerate}
-        \item Define a set of random variables that we will use to model the daily frequency of mosquitoes. Include notation for the random sample and define a common distribution for all random variables.
-        \item Use the method of moments to estimate parameter values from the given dataset $\mathcal{D}$
-        \item 
+        \item Define a set of random variables that we will use to model the daily frequency of mosquitoes. Include notation for the random sample and define a common Poisson distribution for all random variables.
+        \item Use the method of moments to estimate parameter value $(\lambda)$ from the given dataset $\mathcal{D}$
+        \item Estimate the probability that we observe 124 mosquitoes
+        \item Estimate the probability that we observe 120 to 125 mosquitoes
+        \item Estimate the expected value and the variance
+        \item Let's rework the above model and assume that each random variable follows a Normal distribution. Use the method of moments to estimate parameters value $(\mu, \sigma^{2})$ from the given dataset $\mathcal{D}$.
+        \item Estimate the expected value and the variance for the Normal model
     \end{enumerate}
+    
+    \item A Randomized Control trial~(RCT) is a common study design to compare the efficacy and safety of a novel device. Suppose the sponsor for a new cardiovascular device wishes to compare the safety of their device, which they define as the percent of patients who survive 7 days after the procedure, and the efficacy, which they define as the percent of patients who survive at one year after the procedure. \\ 
+    
+    The trial enrolls 50 patients to receive the device~(the device group) and 50 patients who receive optimal medical therapy~(the control group). The trial enrolls these 100 patients over the course of two years. At year 3 all 100 patients have been contacted at one year after their procedure~(called a patient's one year followup).\\
+    
+    We find that in the device group 8 patients did not survive at or after 7 days from the date of their procedure and 18 patients did not survive one year after the date of their procedure. In the control group 9 patients did not survive at or after 7 days and 33 patients did not survive one year after the procedure.
+    
+    \begin{enumerate}
+        \item Define a set of random variables that we will use to model the number of patients in the device group who survive 7 days after the procedure out of a total of 50 patients and a second set of random variables to model the number of patients in the control group who survive 7 days after the procedure out of a total of 50 patients. Include mathematical notation for the random sample and a common distribution for both sets of random variables. 
+        
+        \item Use the Method of Moments to estimate the parameters for the distribution you chose for survival at or after 7 day for patients in the device group. Report the parameter estimate. 
+        
+        \item Use the Method of Moments to estimate the parameters for the distribution you chose for survival at or after 7 days for patients in the control group. Report the parameter estimate. 
+        
+        \item What can you conclude about the safety of the novel device compared to the safety of optimal medical therapy?  
+        
+        \item Use the Method of Moments to estimate the parameters for the distribution you chose for survival at one year for patients in the device group. Report the parameter estimate. 
+        
+        \item Use the Method of Moments to estimate the parameters for the distribution you chose for survival at one year for patients in the control group. Report the parameter estimate. 
+        
+        \item What can you conclude about the efficacy of the novel device compared to the efficacy of optimal medical therapy?   
+        
+    \end{enumerate}
+    \item 
+    
     
 \end{enumerate}
