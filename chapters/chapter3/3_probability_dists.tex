@@ -278,7 +278,7 @@ The expected value and variance of $X$ are
              V(X) &= \sigma^{2} 
 \end{align}
 
-For most continuous distributions the expected value and variance are a combination of all the paramters values. The normal distribution is unique in that the expected value only contains a single parameter $\mu$ and the variance only contains a unique parameter $\sigma$.
+For most continuous distributions the expected value and variance are a combination of all the paramter values. The normal distribution is unique in that the expected value only contains a single parameter $\mu$ and the variance only contains a unique parameter $\sigma$.
 
 \subsubsection{Shifting and scaling by a constant is easy}
 
@@ -288,6 +288,34 @@ If a random variable $Y = cX$ where $X \sim \mathcal{N}(\mu,\sigma^{2})$ then th
 
 These shifting and scaling properties are unique to the normal distribution.
 
+\section{Quantiles and the quantile function}
+
+A $(100 \times p)$ \textbf{quantile} is a value $x$ such that 
+\begin{align}
+    P( X < x )    \leq p \\ 
+    P( X \leq x ) \geq p 
+\end{align}
+where $p \in [0,1]$.
+
+If $X$ is a discrete random variable the $P(X < x)$ may not equal $P(X \leq)$. However when $X$ is a continuous random variable the $P(X < x)$ will equal $P(X \leq x)$ and so for a continuous random variable the $(100 \times p)$ quantile is a value $x$ such that 
+
+\begin{align}
+    P( X < x ) =  p 
+\end{align}
+
+\ex Define $X \sim \mathcal{N}(0,1)$.Then The 97.5th quantile for $X$ is the value 1.96 because $P(X < 1.96) = 0.975$. The 2.5th quantile for $X$ is the value -1.96 because  $P(X < -1.96) = 0.025$. The 90th quantile for $X$ is the value 1.28 because $P(X < 1.28) = 0.90$ and so the value -1.28 is the 10th quantile because $P(X < -1.28) = 0.10$.
+
+\ex Define $Y \sim \text{Binom}(10,0.3)$. Then the 90th quantile is the value $5$. This is because $P(Y \leq 5) = 0.95 \geq 0.90 $ and $P(Y < 5 ) = 0.85 \leq 0.90$.
+
+
+We can also define a \textbf{Quantile function} for a random variable $X$ that takes as input values of $p \in [0,1]$ and returns the value $x$ such that 
+
+\begin{align}
+    P( X < x )    \leq p \\ 
+    P( X \leq x ) \geq p 
+\end{align}
+
+Often we can think of the quantile function as the inverse of the cumulative mass (density) function. For a random variable $Y$, the cmf or cdf takes as input values in the support of $Y$ and returns the probability that $P(Y \leq y)$. Instead, the Quantile function takes as input a probability and returns the value such that $P( Y \leq y) \geq p$ and $P(Y < y) \leq p$.
 
 
 \section{Exercises}
