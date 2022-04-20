@@ -471,9 +471,6 @@ Z-scores also eliminate measurement units $(u)$ from an observation by mapping $
 Mapping the units of two or more variables to the number of standard deviations from their mean is a convenient way to compare two variables (i) where one variable has large values and the second has small values (ii) where one variable has a large variance and the second has a small variance. 
 Large, small values and large, small variances associated with a variable are often because of the chosen units. 
 
-
-
-
 \subsection{Using the CLT to build a confidence interval}
 
 The method of moments~(MoM) has given us an algorithm for estimating parameter values, however the MoM only provides a single estimate. 
@@ -484,7 +481,7 @@ Confidence intervals take into account the size of our sample dataset, the varia
 
 \ex
 
-More formally, given a random sample $(X_{1},X_{2},\cdots,X_{n})$,  a confidence interval for the parameter $\theta$ is a pair of statistics $[L(X), U(X)]$ such that $P(\theta \in {L(X),U(X)}) = 1-\alpha$. 
+More formally, given a random sample $(X_{1},X_{2},\cdots,X_{n})$,  a confidence interval for the parameter $\theta$ is a pair of statistics $[L(X), U(X)]$ such that $P(\theta \in [L(X),U(X)]) = 1-\alpha$. 
 The value $\alpha$ is called the confidence coefficient and the interval $[L(X), U(X)]$ is called a $1-\alpha$ confidence interval.
 
 One way to build a confidence interval is to use the Central Limit Theorem.
@@ -494,17 +491,138 @@ The CLT states that
 \end{align}
 where $\mu$ is $\mathbb{E}(X)$ and $\sigma^{2}$ is $V(X)$. 
 
-Suppose $(X_{1},X_{2},\cdots,X_{n})$
-
+Suppose $(X_{1},X_{2},\cdots,X_{n})$.
+The CLT states that 
 \begin{align}
-    P\left( -z_{1-\alpha/2} < \frac{\hat{\theta} - \theta}{ \frac{\sigma}{\sqrt{n}}  } < z_{1-\alpha/2} \right) &= 1-\alpha \\ 
-    P\left( -z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}} < \hat{\theta} - \theta < z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}} \right)&= 1-\alpha\\ 
-    P\left( z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}} > \theta - \hat{\theta} > -z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}} \right) &= 1-\alpha\\ 
-    P\left( \hat{\theta} + z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}} > \theta   > \hat{\theta} -z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}} \right)&= 1-\alpha \\ 
-    P\left( \hat{\theta} - z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}} < \theta   < \hat{\theta} +z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}} \right) &= 1-\alpha\\
-    P\left( \hat{\theta} - z_{1-\alpha/2} \frac{\hat{\sigma}}{\sqrt{n}} < \theta   < \hat{\theta} +z_{1-\alpha/2} \frac{\hat{\sigma}}{\sqrt{n}} \right) &= 1-\alpha
+    \overline{X} \sim \mathcal{N}(\mu,\sigma^{2}/n)
 \end{align}
-where $\sigma$ is equal to the standard deviation of $X$ or $\sigma = sd(X) = \sqrt{V(X)}$. 
+We can subtract from our random variable $\overline{X}$ the expected value $\mu$ 
+\begin{align}
+    \overline{X} - \mu \sim \mathcal{N}(0,\sigma^{2}/n)
+\end{align}
+and divide by $\dfrac{\sigma}{\sqrt{n}}$ to find that 
+\begin{align}
+    &\frac{\overline{X} - \mu}{\frac{\sigma}{\sqrt{n}}} \sim \mathcal{N}(0,1) \\ 
+    Z=&\frac{\sqrt{n}(\overline{X} - \mu)}{\sigma} \sim \mathcal{N}(0,1)
+\end{align}
+where $\mu = \mathbb{E}(X)$ and $\sigma^{2} = V(X)$.
+
+The translated and scaled quantity above, a new random variable $Z$, has a standard normal distribution. A random variable $Z$ has a \textbf{standard normal} distribution if $Z \sim \mathcal{N}(0,1)$. That is, a normal distribution with expected value zero and variance one. 
+
+One way to form a $1-\alpha$ confidence for a parameter $\mu$ is to find two values $a$ and $b$ such that $P(a<Z<b) = 1-\alpha$ and then solve for $\mu$.   
+
+Lets suppose we found these two values $a$ and $b$
+\begin{align}
+    P(a<Z<b) &= 1-\alpha\\
+    P\left(a< \frac{\overline{X} - \mu}{\frac{\sigma}{\sqrt{n}}} <b \right) &= 1-\alpha\\
+    P\left(a \cdot \frac{\sigma}{\sqrt{n}} < \overline{X} - \mu <b \cdot \frac{\sigma}{\sqrt{n}} \right) &= 1-\alpha\\
+    P\left(-a \cdot \frac{\sigma}{\sqrt{n}} > \mu - \overline{X} > -b \cdot \frac{\sigma}{\sqrt{n}} \right) &= 1-\alpha\\
+    P\left(\overline{X} -a \cdot \frac{\sigma}{\sqrt{n}} > \mu   > \overline{X} -b \cdot \frac{\sigma}{\sqrt{n}} \right) &= 1-\alpha
+\end{align}
+
+
+The normal distribution is symmetric about $0$ and so if $P( Z > a ) = \alpha$ then $P(Z < -a) = \alpha$.
+To bound $Z$ such that $P(a<Z<b) = 1-\alpha$ we will split $1-\alpha$ evenly.
+
+Suppose we find values $a$ and $b$ such that
+\begin{align}
+    P(Z<a) &= \alpha/2 \\ 
+    P(Z>b) &= \alpha/2 \\
+\end{align}
+then 
+\begin{align}
+    P([Z<a] \cup [a<Z<b] \cup [Z>b] ) &= 1\\
+    P(Z<a) + P(a<Z<b) + P(Z>b) &= 1\\
+    P(a<Z<b) &= 1 - P(Z<a) - P(Z>b) \\ 
+    P(a<Z<b) &= 1 - \alpha/2 - \alpha/2 \\
+    P(a<Z<b) &= 1 - \alpha
+\end{align}
+
+We define the symbol $z_{\alpha}$ as the value such that the probability that a random variable $Z$ with a standard normal distribution, $\mathcal{N}(0,1)$, is less than $z_{\alpha}$ equals $\alpha$.  
+\begin{equation}
+    P(Z < z_{\alpha}) = \alpha.
+\end{equation}
+
+So then 
+\begin{align}
+    P\left(\overline{X} -a \cdot \frac{\sigma}{\sqrt{n}} > \mu   > \overline{X} -b \cdot \frac{\sigma}{\sqrt{n}} \right) &= 1-\alpha\\
+    P\left(\overline{X} - z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} > \mu   > \overline{X} - z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} \right) &= 1-\alpha\\
+    P\left(\overline{X} + z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} > \mu   > \overline{X} - z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} \right) &= 1-\alpha\\
+    P\left(\overline{X} - z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} < \mu   < \overline{X} + z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} \right) &= 1-\alpha
+\end{align}
+
+Often a $1-\alpha$ confidence for $\mu$ is written 
+\begin{align}
+    \overline{X} \pm z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}}
+\end{align}
+
+
+\ex Suppose $(Y_{1},Y_{2},\cdots,Y_{n})$ and $Y_{i} \sim \text{Pois}(\lambda)$. The variance for $Y_{i}$, $\sigma^{2} = V(Y)$ is $\lambda$. Then a $1-\alpha$ confidence interval for $\lambda$ is $ \overline{Y} \pm z_{1-\alpha/2} \sqrt{ \frac{\lambda}{n} }$. Given a dataset $\mathcal{D} = (2,5,3,8,10)$ we can estimate $\hat{\lambda} = \overline{y}$ and so a sample confidence interval is  $ \overline{y} \pm z_{1-\alpha/2} \sqrt{ \frac{\overline{y}}{n} } = 5.6 \pm z_{1-\alpha/2} \sqrt{ \frac{5.6}{5} }$
+
+Below is a table of common $z$ values
+
+\begin{table}[ht!]
+    \centering
+    \begin{tabular}{c|c}
+        \alpha  & z_{\alpha}  \\
+        \hline
+        0.025 & -1.96\\
+        0.050  & -1.64\\
+        0.100  & -1.28\\
+        0.500  & 0 \\
+        0.900  & 1.28\\
+        0.950  & 1.64 \\
+        0.975 & 1.96\\
+    \end{tabular}
+\end{table}
+
+A 95\% confidence interval will use the $z$ values -1.96 and 1.96, a 90\% confidence interval will use the $z$ values -1.64 and 1.64, and a 80\% confidence interval will use the values -1.28 and 1.28.
+
+
+\subsection{Hypothesis Testing}
+
+% idea behind hypothesis testing
+The goal of statistical hypothesis testing is to support or deny a claim about a parameter.
+We first generate a set of statements about a parameter---called a \textbf{hypotheses}---that can we test.
+Second, we collect data that will help us make a decision about whether one statement or the other is true. 
+Third, we decide which statement can be refuted. 
+
+A \textbf{hypothesis} is typically a pair of statements about a parameter. 
+The \textbf{null hypothesis~($H_{0}$)} is a statement about a parameter value that allows us to characterize data generated by that parameter.
+
+\ex Suppose the following random sample $(X_{1},X_{2},\cdots,X_{n})$ $X_{i}~\text{Bern}(\theta)$. Then a null hypothesis might be $\theta = 0.50$. This statement about a parameter would allow us to characterize samples of data $(x_{1},x_{2},\cdots,x_{n})$ we may see from our random sample $(X_{1},X_{2},\cdots,X_{n})$. 
+
+The \textbf{alternative hypothesis~($H_{1}$)} is a statement about ta parameter value that is contrary to the null hypothesis. 
+
+\ex Suppose the sample sample and distribution as in the above example. Then an alternative hypothesis may be $\theta > 0.50$. This statement about a parameter would also allow us to characterize samples of data $(x_{1},x_{2},\cdots,x_{n})$ we may see from our random sample $(X_{1},X_{2},\cdots,X_{n})$. 
+
+We will say that a \textbf{hypothesis} must contain a null and alternative statement. 
+
+\ex A hypothesis may be $H_{0}: \theta = 0.50$ vs $H_{1}: \theta > 0.50$
+
+Though we plan to collect data and create a test that will support or deny the above hypothesis, we may make a mistake. We will never know the true parameter value from any finite given random sample and so our test will be imperfect. 
+Mistakes in hypothesis testing are categorized into two types: types I and II. 
+A \textbf{type I error} (informally called a false positive) is when we decide to accept the alternative hypothesis $(H_{1})$ however the null hypothesis is the truth. 
+A \textbf{type II error} (informally called a false negative) is when we decide to accept the null hypothesis however the alternative hypothesis is true.
+Related to type I and II errors is the \textbf{power} of a hypothesis.
+The \textbf{power} of a hypothesis test is the probability that we decide on the alternative hypothesis given that the alternative hypothesis is true.
+
+
+Define a random sample $(X_{1},X_{2},X_{3},\cdots,X_{n})$ and $X_{i}~f$.
+We define the \textbf{space}, $\mathcal{S}$, of our random sample as $supp(X_{1}) \times supp(X_{2}) \times \cdots \times supp(X_{n})$. 
+The space of a random sample is the set of all possible tuples that our random sample could generate, or all possible data sets. 
+
+A \textbf{hypothesis test} is a decision criteria such that we reject the null hypothesis if a realization $(x_{1},x_{2},\cdots,x_{n})$ from our random sample $(X_{1},X_{2},\cdots,X_{n})$ satisfies some criteria. 
+The set $C$ of all possible realizations that lead us to reject the null hypothesis is called the \textbf{critical region}.
+
+\ex Suppose $(X_{1},X_{2},\cdots,X_{n})$ and $X_{i} \sim \mathcal{N}(\mu,1)$. We can form the hypothesis $H_{0}: \mu=0$ vs $H_{1}: \mu > 0$. Intuitively we may decide to collect realizations $\mathcal{D} = (x_{1},x_{2},\cdots,x_{n})$, compute $\overline{x} = \sum_{i=1}^{n} x_{i} / n$, and decide to reject the null hypothesis if $\overline{x} > c$. The set of all samples where $\overline{x}>c$ would be our \textbf{critical region}.
+
+
+% z test for normal model
+% z test for proportion 
+% p value
+% t-test for one sample 
+% t-test for two samples 
 
 
 \section{Exercises}
@@ -641,5 +759,32 @@ where $\sigma$ is equal to the standard deviation of $X$ or $\sigma = sd(X) = \s
             \item Please compute a 95\% confidence interval for $\lambda$.
             \item Please compute a 80\% confidence interval for $\lambda$.
         \end{enumerate}
+        %----
+    
+    \item Consider two random samples $(Y_{1},Y_{2},\cdots,Y_{n_{1}})$ and $(X_{1},X_{2},\cdots,X_{n_{2}})$ where $Y_{i} \sim \text{Bern}(\theta_{y})$ and $X_{i} \sim \text{Bern}(\theta_{x})$. Please compute a $1-\alpha$ confidence interval for $\overline{Y} - \overline{X}$. 
+    
+    \item Suppose we collect the following dataset $\mathcal{D}_{y} = (0,1,1,0,1,0,1,1,1 )$ corresponding to a random sample $(Y_{1},Y_{2},\cdots,Y_{9})$ where $Y_{i} \sim \text{Bern}(\theta_{y})$ and a dataset $\mathcal{D}_{x} = (0,1,0,0,0,0)$ corresponding to a random sample $(X_{1},X_{2},\cdots,X_{6})$ where $X_{i} \sim \text{Bern}(\theta_{x})$.
+    
+    \begin{enumerate}
+        \item Please compute a 95\% confidence interval for $\theta_{y} - \theta_{x}$.
+        \item Please compute a 95\% confidence interval for $\theta_{x} - \theta_{y}$.
+        \item Please compute a 80\% confidence interval for $\theta_{y} - \theta_{x}$.
+    \end{enumerate}
+    
+    \item Suppose we collect the following dataset $\mathcal{D}_{y} = (3,3,2,1,3,2,1,4,0,3)$ corresponding to a random sample $(Y_{1},Y_{2},\cdots,Y_{10})$ where $Y_{i} \sim \text{Pois}(\lambda_{y})$ and a dataset $\mathcal{D}_{x} = (1, 0, 3, 0, 1, 2, 3, 1)$ corresponding to a random sample $(X_{1},X_{2},\cdots,X_{8})$ where $X_{i} \sim \text{Pois}(\lambda_{x})$.
+    
+    \begin{enumerate}
+        \item Please compute a 95\% confidence interval for $\lambda_{y} - \lambda_{x}$.
+        \item Please compute a 80\% confidence interval for $\lambda_{y} - \lambda_{x}$.
+    \end{enumerate}
+    
+     \item Suppose we collect the following dataset $\mathcal{D}_{y} = (-2.02,  0.78, -0.20, -0.47,  0.11, -2.57,  1.27,  3.17, 0.60)$ corresponding to a random sample $(Y_{1},Y_{2},\cdots,Y_{9})$ where $Y_{i} \sim \mathcal{N}(\mu_{y},2)$ and a dataset $\mathcal{D}_{x} = (2.46, -6.00, -3.67, -1.48, -3.60,  1.72, -1.28, -2.93, -1.70)$ corresponding to a random sample $(X_{1},X_{2},\cdots,X_{9})$ where $X_{i} \sim \mathcal{N}(\mu_{x},2)$.
+    
+    \begin{enumerate}
+        \item Please compute a 95\% confidence interval for $\mu{y} - \mu_{x}$.
+        \item Please compute a 80\% confidence interval for $\mu_{y} - \mu_{x}$.
+    \end{enumerate}
+        
+    
 
 \end{enumerate}
