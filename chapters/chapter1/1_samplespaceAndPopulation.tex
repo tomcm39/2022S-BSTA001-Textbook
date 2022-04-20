@@ -731,6 +731,17 @@ Above, the first data point is $(Yes,145,52)$, the second data point is $(No, 21
        \item Is $\emptyset \subset \mathcal{G}$?
     \end{enumerate}
     
+    \item \textit{Delfina Szigethy---Class of 2025:} 10 students in an Economics class and 10 students in a Biology class are asked to respond to the statement: Pick a number between 0 and 10. The data set collected for the economics class is $E = (1, 2, 4, 4, 6, 7, 7, 8, 9, 10)$ and the data set collected for the biology class is $B = (0, 2, 2, 5, 6, 6, 7, 9, 9, 10)$
+    \begin{enumerate}
+        \item Find the sample space $\samplespace$
+        \item Form the \textbf{set} $E$ from the responses from the 10 students in economics
+        \item Form the \textbf{set} $B$ from the responses from the 10 students in Biology
+        \item Please compute $E \cup B$
+        \item Please compute $E \cap B$
+        \item Are the sets $E$ and $B$ disjoint? 
+        \item Suppose $P(E) = 0.3$. Please compute $P(E^{c})$
+    \end{enumerate}
+    
     \item Let the sample space $\samplespace = \{0,1,2,a,b,c\}$ and let $A=\{0,1\}$, $B=\{x | x\text{ is a letter of the English alphabet}\}$
     \begin{enumerate}
         \item Please compute $A \cap B$
@@ -761,7 +772,14 @@ Above, the first data point is $(Yes,145,52)$, the second data point is $(No, 21
     \end{enumerate}
     \item Use what you know about the intersection, about subsets, and about probability to show that $P(A \cap B) \leq P(A)$. Hint: How are $A \cap B$ and $A$ related?
     
-    \item \textit{Audrey Vitello---Class of 2025:} Every year at the town fair there is a pie baking contest among the four best bakers. The best tasting pie wins and the outcome associated with this outcome is the baker’s number in the contest. For example, if baker one wins the outcome is the value 1, if baker two wins the outcome is the value 2 and so on.
+    \item \textit{Chinwe Okezie---Class of 2025:} Let $A = \{1,2,3,4\}, B=\{4,5,6\}$ and $C = \{2,4,6\}$ and assume that the above outcomes follow the Principle of Equally Likely Outcomes.
+    \begin{enumerate}
+        \item Can $P(A) > P(B)$?
+        \item Can $P(B) > P(A)$?
+        \item Can $P(C) < P(B)$?
+    \end{enumerate}
+    
+    \item \textit{Audrey Vitello---Class of 2025:} Every year at the town fair there is a pie baking contest among the four best bakers. The best tasting pie wins and the outcome associated with this outcome is the baker’s number in the contest. For example, if baker one wins the outcome is the value 1, if baker two wins the outcome is the value 2 and so on.
     
     In the past ten years Mr. Brown, consistently contestant number 4, has won 3 times.
     \begin{enumerate}
@@ -923,6 +941,19 @@ Above, the first data point is $(Yes,145,52)$, the second data point is $(No, 21
        \item Please compute $P(D^{c})$
    \end{enumerate}
    
+   
+   \item \textit{Walker Frisbie---Class of 2025:} Suppose we want to study the relationship between the probability you feel ill after riding the roller coaster called the "Intimidator 305" (An actual roller coaster located in VA and my \#1 favorite. I have ridden 150 different coasters) and the following three events: (i) we ate two hotdogs just before the ride, (ii) you rode this same coaster 10 times in the past 30 mins, and (iii) you have not had any water and are deydrated.\\
+   
+   Build a probability tree diagram with a root. Next add two branches that represent the events that you ride the Intimidator and that you do not ride the Intimidator. Given you ride the Intimidator with probability 0.9, create three branches for the events that you ate two hotdogs with probability 0.3, rode the coaster 10 times with probability 0.2, and are dehydrated with probability 0.5. Given you did \textbf{not} ride the Intimidator, create three branches for the events that you ate two hotdogs with probability 0.6, rode the coaster 10 times with probability 0.2, and are dehydrated with probability 0.2. For each of the six branches you created, add two branches: one for the event you feel ill and one for the event that you do not feel ill.
+   
+   \begin{enumerate}
+       \item Assign your own probabilities to each of these ill/not ill events.
+       \item Compute $P(\text{feel ill})$
+   \end{enumerate}
+   
+   
+   
+   
    \item Influenza is a contagious virus that enters the respiratory system from a human's nose, throat, or lungs. Common symptoms are cough, chills, and a fever.
    Suppose we collect data from a local hospital about those who were infected and not infected by the influenza virus and the above three symptoms. Let $\samplespace = \{ (x,y)  | x \text{ is } \text{"Flu"} \text{ or } \text{"not Flu"} \text{ and } y \in \{ \text{cough },\text{chills },\text{ fever} \}   \}$. 
    Suppose further that we define events $F$ = \{ (x,y)  | x \text{ is } \text{"Flu"} \}, $C$ = \{ (x,y)  | y \text{ is } \text{"Cough"} \}, $H$ = \{ (x,y)  | y \text{ is } \text{"Chills"} \} , $E$ = \{ (x,y)  | y \text{ is } \text{"Fever"} \}, and that $P( C|F ) = 0.5$ and $P( C|F^{c} ) = 0.15$, $P( H|F ) = 0.25$ and $P( H|F^{c} ) = 0.01$, $P( E|F ) = 0.98$ and $P( E|F^{c} ) = 0.35$, $P(F) = 0.02$  
@@ -955,11 +986,17 @@ Two events, $A$ and $B$, are statistically independent when one probability does
 This may remind you of mutually exclusive events. However, mutually exclusive events cannot be statically independent because when one event occurs the other event \textbf{CANNOT} occur. 
 That's why I like statistical independence, because the probability of one event doesn't change the probability of another event which makes computing the probability of the two events simpler.
 
+\textit{Ava Barrentine---Class of 2025---Baye's thm:} Baye’s Theorem is the most interesting to me as it shows the probability of an event, given another has already happened. I never thought one probability could be calculated based on a second event taking place. This theory is useful for so many reasons. For example, this equation can be used to calculate the probability of there being a forest fire when a gender reveal party has happened (probably very low). Say the probability of a forest fire~(event $A$) is $P(A) = 0.3$. The probability of a baby shower happening in/by the woods~($B$) is $P(B)= 0.05$. The probability of a forest fire happening due to a baby shower $P(A|B) = 0.007$. For Baye's Theorem, we can compute : (0.3 x 0.007)/0.05 = 0.042 = 4.2\% chance that given that a forest fire started, a baby shower took place near the woods.
+
 \textit{Josephine Osroagbo---Class of 2025---PELO:}I feel that the Principle of Equally Likely Outcomes does not occur frequently when defining an experiment and assigning probabilities to events. For example, suppose we wish to study the prevalence of COVID-19 hospitalizations among those who are 60 years of age or older with a vaccine to guard against infection and without a vaccine. 
 
 We can define a sample space for a single patient as $\mathcal{G} =\{(H,V), (H,V^{c}), (H^{c},V), (H^{c},V^{c})\}$ where $H$ represents the event that a person is hospitalized and $V$ represents that a person was vaccinated against infection by SARS-CoV-2. 
 
 If we applied PELO to this experiment we would have to assume the above four events occur with equal probability. Intuitively, this is likely not the case.
+
+\textit{Neha Paras---Class of 2025---A connection between PELO and Uniform:} While looking back at my chapter 1 notes, I grazed through the section about PELO. PELO states that the probability of each event in a sample space with a single outcome is equal. This reminded me of the class lesson where we were introduced to the uniform discrete distribution. I thought PELO and the uniform distribution were similar because they both assign to an event with a single outcome a probability of one divided by the number of outcomes in the sample space. I thought the connection between these two concepts was interesting, and it made me think more about how distributions fall outside of uniform. I am excited for future learning about the uniform distribution, for random events, as well as for the normal distribution.
+
+
 
 \section{Glossary}
 \begin{Glossary}
