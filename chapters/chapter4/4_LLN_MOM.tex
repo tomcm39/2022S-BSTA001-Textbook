@@ -615,12 +615,89 @@ The space of a random sample is the set of all possible tuples that our random s
 A \textbf{hypothesis test} is a decision criteria such that we reject the null hypothesis if a realization $(x_{1},x_{2},\cdots,x_{n})$ from our random sample $(X_{1},X_{2},\cdots,X_{n})$ satisfies some criteria. 
 The set $C$ of all possible realizations that lead us to reject the null hypothesis is called the \textbf{critical region}.
 
-\ex Suppose $(X_{1},X_{2},\cdots,X_{n})$ and $X_{i} \sim \mathcal{N}(\mu,1)$. We can form the hypothesis $H_{0}: \mu=0$ vs $H_{1}: \mu > 0$. Intuitively we may decide to collect realizations $\mathcal{D} = (x_{1},x_{2},\cdots,x_{n})$, compute $\overline{x} = \sum_{i=1}^{n} x_{i} / n$, and decide to reject the null hypothesis if $\overline{x} > c$. The set of all samples where $\overline{x}>c$ would be our \textbf{critical region}.
+\ex Suppose $(X_{1},X_{2},\cdots,X_{n})$ and $X_{i} \sim \mathcal{N}(\mu,1)$. We can form the hypothesis $H_{0}: \mu=0$ vs $H_{1}: \mu > 0$. Intuitively we may decide to collect realizations $\mathcal{D} = (x_{1},x_{2},\cdots,x_{n})$, compute $\overline{x} = \sum_{i=1}^{n} x_{i} / n$, and decide to reject the null hypothesis if $\overline{x} > c$. The set of all samples $(x_{1},x_{2},\cdots,x_{n})$ where $\overline{x}>c$ would be our \textbf{critical region}.
+
+\subsubsection{Z-test for Normally distributed data}
+
+A two-sided one-sample $Z$ test supposes that given a random samples $(X_{1},X_{2},X_{3},\cdots,X_{n})$ the following
+null and alternative hypotheses
+
+\begin{align}
+    H_{0}: \mu  = \mu_{0} \\ 
+    H_{1}: \mu \neq \mu_{0}
+\end{align}
+where $\mu_{0}$ is a constant, we can form the following statistic---called a test statistic
+
+\begin{align}
+    Z = \frac{\overline{X} - \mu_{0}}{ \sigma / \sqrt{n} }
+\end{align}
+A \textbf{test statistic} is a statistic that is used to help determine whether a sample is or is not in a pre-specified critical region.
+
+If the $H_{0}$ was true, we would expect $\overline{X}$ to be close to the value $\mu_{0}$, then our test statistic $Z$ should be close to the value zero. When $Z$ is far from zero then we would reject $H_{0}$ and suspect that $H_{1}$ is the more plausible conclusion.
+
+Then we can define a critical region~($C$) as 
+\begin{equation}
+    C = \left \{ (x_{1},x_{2},\cdots,x_{n}) |\; |Z| > c \right\}
+\end{equation}
+
+The value $c$ can be chosen by limiting our potential type I error, the error that we accept $H_{1}$ given that $H_{0}$ is true. 
+If $H_{0}$ is true then the probability that we accept $H_{1}$ is all the possible samples such that 
+
+\begin{align}
+      P( |Z| &> c) \\
+      P(-c > Z &> c) 
+\end{align}
+or samples where $Z$ is smaller than negative $c$ and larger than positive $c$. 
+
+Lets limit our type I error to $\alpha$ so that we need to find a value $c$ such that 
+\begin{align}
+      P(-c > Z &> c) \leq \alpha 
+\end{align}
+We will split the probability $\alpha$ in half so that
+\begin{align}
+      P( Z > c)  &\leq \frac{\alpha}{2}\\
+      P( Z < -c) &\leq \frac{\alpha}{2}
+\end{align}
 
 
-% z test for normal model
-% z test for proportion 
-% p value
+
+We know from the CLT that the random variable $Z$ has a standard normal distribution if $\mathbb{E}(X) = \mu_{0}$, in other words, if $H_{0}$ is true. 
+This means that we can compute the probability that 
+\begin{align}
+      P( Z > c)  &= \frac{\alpha}{2}.
+\end{align}
+This is by definition the value $z_{1-\alpha/2}$.
+
+\ex Suppose we collect a dataset $\mathcal{D} = ( -0.43,  1.58, -2.37, -0.11, -0.15,  2.23, -0.87, -1.24,  1.55,  0.38)$. We assume that the data was generated from a random sample $(G_{1},G_{2},\cdots,G_{10})$ where $G_{i} \sim \mathcal{N}(\mu,\sigma^{2})$. We wish to test the following hypotheses: 
+\begin{align}
+    H_{0}&: \mu  = 0 \\ 
+    H_{1}&: \mu  > 0 
+\end{align}
+with the critical region $C = \{ (g_{1}, g_{2}, \cdots, g_{10}) \, | Z > 2 \,  \}$
+
+We first compute our Z sample statistic $ Z = \frac{\overline{x} - \mu_{0}}{\overline{\sigma^{2}} / \sqrt{n}} =  \frac{0.057 - 0}{ 0.18 / \sqrt{10} } = 1.01$. 
+We used the MoM estimate for $\sigma^{2}$.
+Because our sample Z statistic is $1.01 < 2$ we cannot reject the null hypothesis. 
+
+\subsubsection{Z-test for a Bernoulli sample}
+
+The Z-test can be applied to any random sample. 
+For example, suppose we take a random sample $(Y_{1}, Y_{2}, \cdots, Y_{n})$ where $Y_{i} \sim \text{Bern}(\theta)$. 
+
+We can build a Z test statistic for hypotheses of the form
+\begin{align}
+    H_{0}&: \theta  = \theta_{0} \\ 
+    H_{1}&: \theta  \neq \theta_{0}
+\end{align}
+as 
+\begin{align}
+    Z &= \frac{\overline{X} - \theta_{0}}{ \sigma / \sqrt{n} } \\ 
+      &= \frac{\overline{X} - \theta_{0}}{ \sqrt{\hat{\theta}(1-\hat{\theta}) / n} } \\ 
+\end{align}
+where $\hat{\theta}$ is the MoM estimator for $\theta$.
+
+
+\subsubsection{The p-value}
 % t-test for one sample 
 % t-test for two samples 
 
@@ -785,6 +862,37 @@ The set $C$ of all possible realizations that lead us to reject the null hypothe
         \item Please compute a 80\% confidence interval for $\mu_{y} - \mu_{x}$.
     \end{enumerate}
         
+        
+    \item Suppose we collect a dataset $\mathcal{D} = \left(2,5,1,10,5,8,3 \right)$. Assume that this data was generated from a random sample $(Y_{1},Y_{2},Y_{3},Y_{4},Y_{5},Y_{6},Y_{7})$ where $Y_{i} \sim \text{Pois}(\lambda)$. 
+    
+    Our null and alternative hypotheses for the parameter $\lambda$ are 
+    \begin{align}
+        H_{0} : \lambda = 4 \\ 
+        H_{1} : \lambda > 4
+    \end{align}
+    
+    \begin{enumerate}
+        \item Please compute a $Z$ test statistic for the above sample.
+        \item Given a critical region $C = \{ (y_{1},y_{2}, \cdots, y_{7}}) \, | \, Z > 2.0 \}$, would we reject the null hypothesis?
+        \item Please provide an intuitive explanation for the critical region $C$. 
+        \item If we developed a new critical region $C_{1}$ and $C_{1} \subset C$ would our type I error for $C_{1}$ be smaller or larger than the type I error for $C$?
+    \end{enumerate}
+    
+    \item Suppose we are asked to analyze the primary safety endpoint for a clinical trial at a point when half of the patients were enrolled and followed for one year. The trial plans to enroll a total of 70 patients. At one year we find that $12\%$ of patient experienced the safety endpoint, defined as a combination of all cause mortality, myocardial infarction, or stroke. The trial is assumed safe if the true proportion of events is smaller than 10\%. 
+    
+    \begin{enumerate}
+        \item Please develop a statistical setup for the above dataset. Include a  sequence of random variables and define a common distribution for this sample.
+        \item Derive a method of moments \underline{estimator} for the above parameter(s) of your common distribution.
+        \item Compute an estimate of your parameters using your MoM estimator.
+        \item Compute a 95\% confidence interval for your parameter(s).
+        \item State a reasonable null and alternative hypothesis to test if your parameter is below 0.10.
+        \item Please compute a $Z$ test statistic for the above sample and your hypotheses.
+        \item Given a critical region $C = \{ (y_{1},y_{2}, \cdots ) \, | \, Z < 1.96 \}$, would we reject the null hypothesis?
+        \item Would the pvalue that corresponds to this test statistic be greater than or smaller than 0.05? Why?
+    \end{enumerate}
+    
+    
+    
     
 
 \end{enumerate}
