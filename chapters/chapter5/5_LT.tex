@@ -205,7 +205,7 @@ To explore this topic we will need to briefly learn about the derivative of a co
 
 \section{ Just in time derivatives }
 
-The derivative describes the tangential slope of a function at a point, and is an excellent linear approximation to a complicated function.
+The derivative describes the tangential slope of a function at a point and can serve as a linear approximation to a more complicated function.
 We will see how we can use the derivative to setup and solve an equation that will return a parameter value that maximizes the log likelihood. 
 This estimate of our parameter will be called a \textbf{maximum likelihood estimate}.
 
@@ -282,53 +282,268 @@ This is the key to finding a parameter value that maximizes our log likelihood.
 If we can compute the derivative of our log likelihood $\ell \ell'(\theta)$ and find the value $\theta$ such that $\ell \ell' = 0$ then we know we have found either a parameter value that minimizes or maximizes our log likelhood, which then minimizes or maximizes our likelihood, which suggests that this parameter value is the most plausible value given our observed data. Phew. 
 
 Lets prove that when the derivative equal zero then we are at a maximum. 
-\textit{Hypothesis}: If $f(x^{*}) > f(x)$ for any possible input $x$ then  $f'(x^{*})=0$.
-\textit{Evidence:} By definition
+\textit{Hypothesis}: If $f(x^{*}) > f(x)$ for any possible input $x$ then  $f'(x^{*})=0$.\\
+
+Let us build a two sequences, one sequence $\{x_{1}, x_{2}, \cdots \}$ that approaches $x^{*}$ such that all the values are smaller than $x^{*}$ and a second sequence $\{y_{1}, y_{2}, \cdots \}$ such that all values are larger than $x^{*}$.
+
+If we choose any $x_{n}$ in the sequence, the following must be true:
 \begin{align}
-    f'(x^{*}) &= \lim_{x \to x^{*}} \frac{ f(x) - f(x^{*}) }{x-x^{*}} = 0 \\ 
+    \frac{f(x_{n}) - f(x^{*})}{x_{n}-x^{*}} \geq 0 & \;\; &\text{bc $f(x^{*})$ is a max and } x_{n}< x^{*} \\ 
 \end{align}
 
-Let us build a sequence of values $\{x_{1}, x_{2}, \cdots \}$ that approaches $x^{*}$ such that all the values are smaller than $x^{*}$. Then if we choose any $x_{n}$ in the sequence, the following must be true:
+If we choose any $y_{n}$ in the sequence, the following must also be true:
 \begin{align}
-    \frac{f(x_{n}) - f(x^{*})}{x_{n}-x^{*}} > 0 & \;\; \text{bc $f(x^{*})$ is a max} \\ 
-    \frac{f(x_{n}) - f(x^{*})}{x_{n}-x^{*}} =c  & \;\;  \text{c is some positive value}\\
-    f(x_{n}) - f(x^{*}) =c (x_{n}-x^{*})        & \;\;  \text{algebra}\\
-    f(x_{n}) - c (x_{n}-x^{*}) = f(x^{*})       & \;\;  \text{algebra}  \\
+    \frac{f(y_{n}) - f(y^{*})}{y_{n}-x^{*}} \leq 0 & \;\; &\text{bc $f(x^{*})$ is a max and } y_{n}>y^{*} \\ 
 \end{align}
 
-Because our sequence $\{x_{n}\}_{n=1}^{\infty}$ is always smaller than $x^{*}$, the term  $(x_{n}-x^{*})$ is negative, and so then
-\begin{align}
-    f(x_{n}) + v &= f(x^{*}) \\ 
-    f(x_{n}) &< f(x^{*})
-\end{align}
-
-Instead of a sequence that is always smaller than $x^{*}$ we could have chosen a sequence that is always larger than $x^{*}$.
-\begin{align}
-    \frac{f(x_{n}) - f(x^{*})}{x_{n}-x^{*}} < 0 \\ 
-    \frac{f(x_{n}) - f(x^{*})}{x_{n}-x^{*}} = -c \\
-    f(x_{n}) - f(x^{*}) = -c (x_{n}-x^{*}) \\
-    f(x_{n}) + c (x_{n}-x^{*}) = f(x^{*})  \\
-\end{align}
-
-Because the sequence $\{x_{n}\}_{n=1}^{\infty}$ is always larger than $x^{*}$ the quantity $(x_{n}-x^{*})$ is positive. Then 
-\begin{align}
-    f(x_{n}) + v &= f(x^{*}) \\ 
-    f(x_{n}) &< f(x^{*})
-\end{align}
-
-
-[NEED PICTURE HERE]
+If we assume that there exists a derivative value $f'(x^{*})$ then that value must be greater than or equal to zero and also less than or equal to zero. 
+The only options then is $f'(x^{*}) = 0$.
 
 
 \subsection{derivative "rules"}
 
+There are several rules that can make computing derivatives of complicated functions easier. 
+
+\begin{itemize}
+    \item Constant Rule: if $f(x) = c$ where $c$ is a constant  then $f'(x) = 0$
+        \begin{itemize}
+           \item Example: if $f(x) = 72.67  $ then 
+           \begin{align}
+               f'(x) &= 0
+           \end{align}
+       \end{itemize}
+       
+    \item Power Rule: if $f(x) = x^{n}$ then $f'(x) = nx^{(n-1)}$ 
+       \begin{itemize}
+           \item Example: if $f(x) = x^{3/2}$ then $f'(x) = \frac{3}{2}x^{3/2-1} = \frac{3}{2}x^{1/2} $
+       \end{itemize}
+    \item Exp Rule: if $f(x) = e^{x}$ then $f'(x) = e^{x}$
+    \item log Rule: if $f(x) = \log(x)$ then $f'(x) = \frac{1}{x}$
+    \item Addition Rule: if $f(x) = g(x) + h(x)$ then $f'(x) = g'(x) + h'(x)$
+       \begin{itemize}
+           \item Example: if $f(x) = x^{2} + \frac{1}{3} x^{-1} $ then 
+           \begin{align}
+               f'(x) &= \left(x^{2}\right)' + \left( \frac{1}{3} x^{-1} \right)'\\
+               f'(x) &= 2x^{1} +  \frac{-1}{3} x^{-2}
+           \end{align}
+       \end{itemize}
+    \item "Chain" rule: if $f(x) = g( h(x) )$ then $ f'(x) = g'(h(x)) \cdot h'(x)$
+        \begin{itemize}
+            \item Example:~ Suppose $f(x) = (x+2)^{2}$ then g(h(x)) = $h(x)^{2}$ and $h(x) = x+2$.
+            \begin{align}
+                h'(x) &= 1\\
+                g'(h(x)) &= 2 h(x)
+            \end{align}
+            Therefore 
+            \begin{align}
+                f'(x) &= g'(h(x)) \cdot h'(x)\\
+                      &= 2 h(x) \cdot 1\\
+                      &= 2(x+2)
+            \end{align}
+                    \item Example:~ Suppose $f(x) = \sqrt{ \log(x)}$ then g(h(x)) = $h(x)^{1/2}$ and $h(x) = \log(x)$.
+            \begin{align}
+                h'(x) &= \frac{1}{x}\\
+                g'(h(x)) &= \frac{1}{2}h(x)^{-1/2}
+            \end{align}
+            Therefore 
+            \begin{align}
+                f'(x) &= g'(h(x)) \cdot h'(x)\\
+                      &=  \frac{1}{2}h(x)^{-1/2} \cdot \frac{1}{x}\\
+                      &= \frac{\log(x)^{-1/2}}{2x} \\ 
+                      &= \frac{1}{2x \sqrt{\log(x)}}
+            \end{align}
+            
+        \end{itemize}
+    
+      
+\end{itemize}
 
 
-\section{ Estimating variance, curvature of the likelihood, and Fishers Information }
+\section{Computing the maximum likelihood estimator}
+
+Given a i.i.d sample $(X_{1},X_{2},\cdots,X_{n})$ such that $X \sim f(x | \theta)$ we can compute a maximum likelihood estimator of the parameter $\theta$  by following these steps: (i) form the likelihood function (ii) convert the likelihood to a log likelihood (iii) compute the derivative of the log likelihood $\ell \ell ' (\theta)$ (iv) find the parameter value $\theta$ such that $\ell \ell ' (\theta) = 0$.
+
+\ex Given $(X_{1},X_{2},X_{3}, \cdots, X_{n})$, the distribution for each $X_{i} \sim \text{Bern}(\theta)$, and the dataset $\mathcal{D} = (0,1,1,0,1)$ we can compute the maximum likelihood estimate for $\theta$. 
+\begin{enumerate}
+    \item The likelihood of $\mathcal{D}$ is
+    \begin{align*}
+        \ell(\theta) &= f(0) \cdot f(1) \cdot f(1) \cdot f(0) \cdot f(1)\\
+                     &= \left(\theta^{x_{1}} (1-\theta)^{1-x_{1}}\right)
+                        \left(\theta^{x_{2}} (1-\theta)^{1-x_{2}}\right)
+                        \left(\theta^{x_{3}} (1-\theta)^{1-x_{3}}\right)
+                        \left(\theta^{x_{4}} (1-\theta)^{1-x_{4}}\right)
+                        \left(\theta^{x_{5}} (1-\theta)^{1-x_{5}}\right)\\
+                    &=  \left(\theta^{0} (1-\theta)^{1-0}\right)
+                        \left(\theta^{1} (1-\theta)^{1-1}\right)
+                        \left(\theta^{1} (1-\theta)^{1-1}\right)
+                        \left(\theta^{0} (1-\theta)^{1-0}\right)
+                        \left(\theta^{1} (1-\theta)^{1-1}\right)\\
+                    &=  \left( 1-\theta \right)
+                        \left(\theta \right)
+                        \left(\theta \right)
+                        \left( 1-\theta\right)
+                        \left(\theta \right)\\
+                    &=  \theta^{3} (1-\theta)^{2}
+    \end{align*} 
+    \item Compute the log likelihood
+    \begin{align*}
+        \ell \ell (\theta) &= \log \left[ \ell(\theta)  \right] \\ 
+                           &= \log \left[ \theta^{3} (1-\theta)^{2} \right] \\ 
+                           &= \log \left[ \theta^{3}] + \log \left[ (1-\theta)^{2} \right] \\ 
+                           &= 3 \log \left[\theta] + 2 \log \left[ (1-\theta)\right] \\ 
+    \end{align*}
+    \item Compute the derivative of the log likelihood 
+    \begin{align*}
+        \ell \ell (\theta)'  &= \left( 3 \log [\theta] + 2 \log [ (1-\theta)] \right)' \\ 
+                             &= \left( 3 \log [\theta] \right)' + \left(2 \log [ (1-\theta)] \right)' & \text{Addition rule}\\
+                             &= 3 \left( \log [\theta] \right)' + 2 \left( \log [ (1-\theta)] \right)' & \text{Constants rule}\\
+                             &= 3 \frac{1}{\theta} + 2 \left( \log [ (1-\theta)] \right)' & \text{Derivative of log}\\
+                             &= 3 \frac{1}{\theta} + 2 \left( \log [ z ] \right)' & \text{let } z=(1-\theta)\\
+                             &= 3 \frac{1}{\theta} + 2 \frac{1}{z} (z)' & \text{Chain rule } \\
+                             &= 3 \frac{1}{\theta} + 2 \frac{1}{1-\theta} (1-\theta)' & \text{Replace z} \\
+                             &= 3 \frac{1}{\theta} + 2 \frac{1}{1-\theta} (1)' - (\theta)' & \text{Addition rule} \\
+                             &= 3 \frac{1}{\theta} + 2 \frac{1}{1-\theta} 0 - (\theta)' & \text{Derivative of a constant} \\
+                             &= 3 \frac{1}{\theta} + 2 \frac{1}{1-\theta} (-1) & \text{Derivative of } \theta \\
+                             &= 3 \frac{1}{\theta} - 2 \frac{1}{1-\theta}\\
+                             &= \frac{3}{\theta} -  \frac{2}{1-\theta}
+    \end{align*}
+    \item Set $\ell \ell(\theta)' = 0$ and solve for $\theta$
+    \begin{align*}
+        \ell \ell ' (\theta) &= \frac{3}{\theta} -  \frac{2}{1-\theta} = 0\\
+        \frac{3}{\theta} &=  \frac{2}{1-\theta}\\
+        3 - 3\theta &=  2 \theta \\
+        3  &=  5 \theta \\
+        \theta &= 3/5\\ 
+        \hat {\theta} &= 3/5 
+    \end{align*}
+
+For our observed data $\mathcal{D}$ and our assumed model that the random variables generating each data point are i.i.d and distributed $\text{Bern}(\theta)$ our maximum likelihood estimate for $\theta$ is $\hat{\theta}_{\text{mle}} = 3/5$.
+
+\end{enumerate}
+
+\ex  Given $(Y_{1},Y_{2},Y_{3}, \cdots, Y_{n})$, the distribution for each $Y_{i} \sim \text{Geom}(p)$, and the dataset $\mathcal{D} = (7, 19, 1, 11)$ we can compute the maximum likelihood estimate for the parameter $p$. 
+\begin{enumerate}
+    \item The likelihood of $\mathcal{D}$ is
+    \begin{align}
+        \ell(p) &= f(9) \cdot f(19) \cdot f(1) \cdot f(11)\\
+                &= p(1-p)^{8} \cdot p(1-p)^{18} \cdot p(1-p)^{0} \cdot p(1-p)^{10}\\
+                &= p^{4} (1-p)^{8+18+0+10}\\
+                &= p^{4} (1-p)^{36}\\
+    \end{align}
+    \item Form the log likelihood
+    \begin{align}
+        \ell \ell(p) &= \log\left[ \ell(p) \right] \\ 
+                     &= \log \left[ p^{4} (1-p)^{36} \right] \\ 
+                     &= \log \left[ p^{4} \right] + \log \left[(1-p)^{36} \right] \\
+                     &= 4\log \left[ p \right] + 36\log \left[(1-p) \right] 
+    \end{align}
+    \item Compute the derivative of the log likelihood
+    \begin{align}
+        \ell \ell'(p) &= 4\frac{1}{p} + 36 \log( h(x) ) \text{ where } h(x) = 1-p\\
+                      &= \frac{4}{p} + 36\frac{1}{h(x)} \cdot -1\\
+                      &= \frac{4}{p} - 36\frac{1}{1-p} \\
+                      &= \frac{4}{p} - \frac{36}{1-p}
+    \end{align}
+    \item Set the derivative equal to zero and solve for the parameter
+    \begin{align}
+        \ell \ell'(p)  &= \frac{4}{p} - \frac{36}{1-p} = 0 \\
+                       &= \frac{ 4p(1-p) }{p} - \frac{36 p(1-p)}{1-p} = 0 \\ 
+                       &=  4(1-p) - 36 p = 0 \\ 
+                       &=  4 - 4p - 36 p = 0 \\ 
+                       &=  4  = 40p \\ 
+                     p &= 4/40 = 1/10  
+    \end{align}
+    
+    For our observed data $\mathcal{D}$ and our assumed model that the random variables generating each data point are i.i.d and distributed $\text{Geom}(p)$, our maximum likelihood estimate for $p$ is $\hat{p}_{\text{mle}} = \frac{1}{10}$.
+
+\end{enumerate}
 
 
-\section{ Evaluating estimators }
+\section{Homework}
 
+\begin{enumerate}
+    \item Suppose that we collected a dataset with a single observation $\mathcal{D} = \{ 12 \}$. Please compute the probability of $\mathcal{D}$ if we assume our data was generated by a random variable $X$
+    \begin{enumerate}
+        \item Such that $X \sim \text{Geom}(p)$. Assume we know the parameter value $p$. 
+        \item Such that $X \sim \text{Pois}(\lambda)$. Assume we know the parameter value $\lambda$. 
+        \item Such that $X \sim \mathcal{N}(\mu,\sigma^{2})$.
+        Assume we know the parameter values $(\mu, \sigma^{2})$.
+    \end{enumerate}
+    
+    \item Suppose that we collected a dataset with a two observations $\mathcal{D} = \{ 12, 2 \}$. Please compute the probability of $\mathcal{D}$ if we assume our data was generated by a random variable $X$
+        \begin{enumerate}
+        \item Such that $X \sim \text{Geom}(p)$. Assume we know the parameter value $p$. 
+        \item Such that $X \sim \text{Pois}(\lambda)$ Assume we know the parameter value $\lambda$. 
+        \item Such that $X \sim \text{Binom}(20, \theta)$.
+        Assume we know the parameter value $\theta$.
+    \end{enumerate}
+    
+    \item Suppose that we collected a dataset with a $n$ observations $\mathcal{D} = \{ x_{1}, x_{2}, \cdots, x_{n} \}$. Please compute the log likelihood if we assume our data was generated by a random variable $X$
+        \begin{enumerate}
+        \item Such that $X \sim \text{Geom}(p)$. Assume we know the parameter value $p$. 
+        \item Such that $X \sim \text{Pois}(\lambda)$ Assume we know the parameter value $\lambda$. 
+        \item Such that $X \sim \text{Binom}(N, \theta)$.
+        Assume we know the parameter value $\theta$.
+        \item Such that $X \sim \mathcal{N}(\mu,\sigma^{2})$.
+        Assume we know the parameter values
+    \end{enumerate}
+    
+    \item Consider the sequence $a_{n} = 2^{-n}$ for $n=1$ to $\infty$. 
+    \begin{enumerate}
+        \item Write down the first 3 items in this sequence 
+        \item Please compute \[ \lim_{n \to \infty} a_{n} \]
+    \end{enumerate}
+    
+    \item Does the infinite sequence $\{-1,1,-1,1,-1,1, \cdots \}$ have a limit? Why or why not? 
+    
+    \item Consider the finite sequence $a_{n} = 2^{-n}$ for $n=1$ to $100$. 
+    \begin{enumerate}
+        \item Does this sequence have a limit? Why or why not?
+    \end{enumerate}
+    
+    \item Compute the derivative of 
+    \begin{enumerate}
+        \item $f(x) = e^{2x}$
+        \item $f(x) = \log(\frac{1}{2x})$
+        \item $f(x) = x^{2} + e^{-x}$
+        \item $f(x) = 10$
+        \item $f(x) = \frac{sin(\pi)}{x}$
+    \end{enumerate}
+    
+    \item  Assume a set of random variables $Y_{1}, Y_{2}, \cdots, Y_{n}$ such that $Y_{i} \sim \text{Geom}(p)$ generated an observed dataset. Please compute the maximum likelihood estimate for $p$. Include the log likelihood, derivative, and solution when setting the derivative to zero: 
+    \begin{enumerate}
+        \item Given a dataset $\mathcal{D} = \{ 12, 1, 0, 3, 8  \}$
+        \item Given a dataset $\mathcal{D} = \{y_{1}, y_{2}, \dots, y_{n}\}$
+    \end{enumerate}
+    
+    \item Assume a set of random variables $A_{1}, A_{2}, \cdots, A_{n}$ such that $A_{i} \sim \text{Bern}(\theta)$ generated an observed dataset. Please compute the maximum likelihood estimate for $p$. Include the log likelihood, derivative, and solution when setting the derivative to zero: 
+    \begin{enumerate}
+        \item Given a dataset $\mathcal{D} = \{ 0,0,0,0 \}$
+        \item Do you think the estimate you computed above is reasonable? Why or why not?
+        \item Given a dataset $\mathcal{D} = \{a_{1}, a_{2}, \dots, a_{n}\}$
+    \end{enumerate}
+    
+    \item Assume a set of random variables $A_{1}, A_{2}, \cdots, A_{n}$ such that $A_{i} \sim \text{Pois}(\lambda)$ generated an observed dataset. Please compute the maximum likelihood estimate for $p$. Include the log likelihood, derivative, and solution when setting the derivative to zero: 
+    \begin{enumerate}
+        \item Given a dataset $\mathcal{D} = \{ 11,12,2,10 \}$
+        \item Given a dataset $\mathcal{D} = \{a_{1}, a_{2}, \dots, a_{n}\}$
+    \end{enumerate}
+    
+    \item The number of influenza A and influenza B cases each week is recorded by the Pennsylvania Department of health. 
+    For the year 2022 the number of cases in northampton county, PA is 
+    \begin{table}[]
+        \centering
+        \begin{tabular}{A|B}
+             &  \\
+             & 
+        \end{tabular}
+        \caption{Caption}
+        \label{tab:my_label}
+    \end{table}
+    Please pose a model for the number of influenza A cases, and compute the maximum likelihood estimate for any parameters in this model. Explain why you chose your particular model and explain parameter estimates.
+    
+    
+\end{enumerate}
 
 
 

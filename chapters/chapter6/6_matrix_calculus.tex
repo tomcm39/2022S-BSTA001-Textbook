@@ -1,0 +1,428 @@
+\chapterauthor{thomas mcandrew}{Lehigh University}
+%\chapterauthor{Second Author}{Second Author Affiliation}
+\chapter{Matrix calculus}
+\hspace{1mm}
+
+\section{Introduction}\label{intro}
+
+Statistics is meant to impart structure to observations in nature and many times the observations that we. are interested in contain many different pieces of information. 
+For example, when studying the relationship between patients randomized in a clinical trial we may be interested in, for each patient, their age, sex, race, body mass index, and whether or not they attain the outcome of interest. 
+Then every observation~(a patient) contains five pieces of information. 
+We can think of this observation as living in a single, 5-dimensional space. 
+
+Mathematical objects that keep track of values in 1, 2, 3, and higher dimensional spaces are called vectors, and linear maps that take as input one vector and produce a second vector are called matrices. 
+The rules for operating with vectors and matrices is called \textbf{matrix calculus}. 
+
+Because we wish to structure observations with many pieces of information it is natural that statistics rely on matrix calculus.
+
+
+\section{ Vectors }
+\hspace{1mm}
+\subsection{Definition}
+Define the set of all real numbers (positive, negative, and decimal numbers) with the symbol $\mathbb{R}$, and further define the Cartesian product of the set of real numbers with itself as $\mathbb{R}^{2} = \mathbb{R} \times \mathbb{R}$. 
+In general the Cartesian produce of $\mathbb{R}$ with itself $N$ times can be denoted as $\mathbb{R}^{N}$.
+
+We will informally define a vector of length $N$ as a point in the space $\mathbb{R}^{N}$.
+A vector is typically represented as a lowercase letter and the values of the vector are enclosed in square brackets. 
+
+\ex For the space $\mathbb{R}^{2}$ we can define the vector 
+\begin{equation}
+    a = \begin{bmatrix}
+        3\\
+        2
+    \end{bmatrix}
+\end{equation} or the vector 
+\begin{equation}
+    c = \begin{bmatrix}
+        0.1\\
+        -23.01
+    \end{bmatrix}
+\end{equation}
+For a space $\mathbb{R}^{6}$ we could define a vector 
+\begin{equation}
+    v = \begin{bmatrix}
+        0\\
+        1\\
+        -8\\
+        3.2\\
+        -0.7\\
+        1
+    \end{bmatrix}
+\end{equation}
+
+Vectors can be characterized by their \textbf{length}.
+The \textbf{length} of a vector is the number of values that are needed to define it. The vector $a$ and $c$ have a length of 2 and the vector $v$ has a length of 6.
+
+Though it is possible to discuss vectors of length one, more often we give these objects their own name and special properties. 
+A vector of length one is called a \textbf{scalar}. 
+Scalars do not need to be enclosed by square brackets.
+
+\ex In any of the spaces $R^{N}$ for $N>1$ examples of scalars are 6, -0.4, 0,1, 22, etc.
+
+\subsection{Addition and subtraction}
+
+There are specific rules for how two vectors can interact with one another.
+You can add and subtract vectors, and you can multiply vectors by a scalar. 
+Addition, subtraction; multiplication and division by a scalar all have a geometric interpretation.
+
+To add two vectors you add the corresponding values in the first, second, third and so on position.
+You cannot add vectors of different lengths. 
+
+\ex Let
+\begin{align}
+    x = \begin{bmatrix}
+        1\\
+        0\\
+        -2
+    \end{bmatrix}
+\end{align}
+and 
+\begin{align}
+    y = \begin{bmatrix}
+        0.5\\
+        2.0\\
+        -2.0
+    \end{bmatrix}
+\end{align}
+Then 
+\begin{align}
+    x + y = \begin{bmatrix}
+        1 + 0.5\\
+        0 + 2.0\\
+        -2 + (-2.0)
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        1.5\\
+        2.0\\
+       -4.0
+    \end{bmatrix}
+\end{align}
+
+To subtract two vectors you subtract the corresponding values in the first, second, third and so on position.
+You cannot subtract vectors of different lengths. 
+\begin{align}
+    x - y = \begin{bmatrix}
+        1 - 0.5\\
+        0 - 2.0\\
+        -2 - (-2.0)
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        0.5\\
+        -2.0\\
+        0.0
+    \end{bmatrix}
+\end{align}
+
+Consider $\mathbb{R}^{2}$, the vector $v =  \begin{bmatrix} x \\ y \end{bmatrix}$ can be drawn on the Cartesian coordinate plane by starting at the origin $(0,0)$ and then drawing a straight line from the origin to the point $(x,y)$. 
+
+You can draw the addition of two vectors with a method nicknamed the "tip to tail" draw. 
+Consider two vector labeled $x$ and $y$. Draw the first vector $x$ starting at the origin. Draw the second vector starting, not at the origin, but at the tip of the first vector. The vector $x+y$ is the vector starting at the origin and ending at the tip of the second vector. 
+
+\subsection{Multiplication and division by a scalar}
+
+A new vector $v$ can be built by multiplying or dividing a vector $x$ by a scalar $\alpha$, $v = \alpha x$. 
+The vector $v$ is built by multiplying each entry in $x$ by $\alpha$. 
+\begin{align}
+    v &= \alpha \cdot x\\
+      &= \alpha \begin{bmatrix}
+                  x_{1}\\
+                  x_{2}\\
+                  \vdots\\
+                  x_{n}
+      \end{bmatrix}\\
+      &= \begin{bmatrix}
+                  \alpha \cdot x_{1}\\
+                  \alpha \cdot x_{2}\\
+                  \vdots\\
+                  \alpha \cdot x_{n}
+      \end{bmatrix}
+\end{align}
+
+Geometrically, when you multiply a vector by a scalar that is greater than one the vector is stretched. 
+When diving by that scalar (or multiplying by a scalar between 0 and one) then the vector is compressed. 
+When you multiply a vector by negative one that vector is rotated by 180 degrees.
+To multiply a vector by a scalar smaller than negative one first rotate the vector 180 degrees and then stretch the vector. A vector multiplied by a scalar between negative one and zero is rotated and then compressed.   
+
+\section{ Matrices }
+\hspace{1mm}
+\subsection{Definition}
+A matrix is a list of vectors and can be thought of as a function that transforms one vector to another. 
+A matrix is often denoted as a capital letter and the values of a matrix are enclosed in square brackets. 
+
+\ex We can build a matrix 
+\begin{align}
+    A = \begin{bmatrix}
+        2 & -1 & 0 \\
+        0.5 & 0.1 & 10 \\
+    \end{bmatrix}
+\end{align}
+Entries in a matrix $A$ can be referred to by row  number and column number. 
+For example the $(2,1)$ entry in the matrix $A$ is value 0.5. 
+We can also refer to the (2,1) entry in the matrix $A$ as $A_{(2,1)}$
+
+The \textbf{shape} of a matrix is a tuple that describes the number of rows of the matrix and the number of columns. The shape of the matrix $A$ above is $(2,3)$.
+
+An important operation---called the \textbf{transpose}---interchanges rows and columns of a matrix. 
+Define a matrix
+\begin{align}
+    B = \begin{bmatrix}
+           1 & 2 \\
+           2 & 3 \\
+           4 & 5 \\
+           5 & 1 \\
+        \end{bmatrix}
+\end{align}
+with shape $(4,2)$.
+Then the transpose of $B$, labeled $B'$ or sometimes $B^{t}$, is the matrix with shape $(2,4)$ and where the first row of $B$ is the first column of $B'$, the second row of $B$ is the second column of $B'$, and so on. 
+\begin{align}
+    B' = \begin{bmatrix}
+           1 & 2 & 4 & 5\\
+           2 & 3 & 5 & 1
+    \end{bmatrix}
+\end{align}
+If the matrix $B$ has shape $(2,4)$ then the matrix $B'$ has shape $(4,2)$.
+
+We can think of vectors as matrix where the number of rows equals the length of the vector and the number of columns equals one.
+This allows us to consider both a vector \begin{align}
+    r = \begin{bmatrix}
+        3\\
+        2\\
+        1\\
+        0
+    \end{bmatrix}
+\end{align}
+and a vector transpose $r = [3, 2, 1, 0]'$.
+A vector with several rows and one column is often called a \textbf{column vector} and a vector with several columns and one row is often called a \textbf{row vector}.
+The vector $r$ is an example of a column vector.
+
+
+Like vectors, matrices can interact with other matrices and with vectors. 
+
+\subsection{Matrix times vector}
+
+If the number of columns of a matrix $M$ is equal to the length of a vector $v$ then $M$ and $v$ can be multiplied together to produce another vector.
+\begin{align}
+    M \cdot v=q
+\end{align}
+If the shape of the matrix $M$ is $(n,p)$ and the vector $v$ is of length $p$ then the new vector $q$ will be of length $n$.
+
+The values of each entry in $q$ are combinations of individual rows in the matrix $M$ and the vector $v$. 
+
+Let 
+\begin{align}
+    M = \begin{bmatrix}
+         1 & 2 & 3 \\
+         4 & 5 & 6 \\
+        \end{bmatrix}
+\end{align}
+and 
+\begin{align}
+    v = \begin{bmatrix}
+           0\\
+           -3\\
+           -2
+        \end{bmatrix}
+\end{align}
+
+To compute the first entry in $q$ we work with the first row of $M$ and the vector $v$.
+\begin{align}
+    q_{1} &= M_{1,1} \cdot v_{1} + M_{1,2} \cdot v_{2} + M_{1,3} \cdot v_{3} \\  
+          &= 1 \cdot 0 + 2 \cdot (-3) + 3 \cdot (-2)\\
+          &= 0 -6 -6 = -12
+\end{align}
+where $q_{1}$ denotes the first entry in $q$, $v_{i}$ denotes the $i^{\text{th}}$ entry in $v$ and $M_{i,j}$ denotes the $(i,j)$ entry in the matrix $M$.
+
+To compute the second entry in $q$ we work with the second row of $M$ and the vector $v$, and so on.
+\begin{align}
+    q_{2} &= M_{2,1} \cdot v_{1} + M_{2,2} \cdot v_{2} + M_{2,3} \cdot v_{3} \\  
+          &= 4 \cdot 0 + 5 \cdot (-3) + 6 \cdot (-2)\\
+          &= 0 -13 -12 = -25
+\end{align}
+The new vector $q$ generated by multiplying $M$ and $v$ is the vector 
+\begin{align}
+    q = \begin{bmatrix}
+        -12\\
+        -25
+    \end{bmatrix}
+\end{align}
+We could rewrite, if desired, the above vector $q$ as a scalar times a vector 
+\begin{align}
+    q = -1\begin{bmatrix}
+        12\\
+        25
+    \end{bmatrix}
+\end{align}
+
+In general, given a matrix $A$ with shape $(N,P)$ and a vector $b$ with length $P$, multiplying $A b$ produces a new vector $c$ where 
+\begin{align}
+    c_{i} = \sum_{k} A_{i,k}\; b_{k} 
+\end{align}
+
+Because a matrix times a vector produces a new vector we can think of a matrix as a function. 
+The input to our function is a vector (such as the vector $v$) and the output is another vector (such as the vector $q$ above)
+
+Matrices and vectors have special properties when interacting. A matrix can be "distributed" across two vectors
+Given a matrix $M$ and the vectors $q$ and $r$, the matrix product
+\begin{align}
+    M (q + r)  = M q + M r
+\end{align}
+Scalars can be "factored" out of a matrix, vector multiplications. 
+Let $\alpha$ be a scalar, then 
+\begin{align}
+    M (\alpha q ) = \alpha \left(M q\right) 
+\end{align}
+
+\subsection{Matrix-matrix operations}
+\hspace{1mm} \vspace{-0.75cm}
+\subsubsection{Addition and subtraction}
+Matrices of the same shape can be added and subtracted by adding (subtracting) corresponding entries. 
+
+Given the matrix
+\begin{align}
+    A = \begin{bmatrix}
+        -1 & 2 & -3 \\ 
+         0 & -1 & 2 \\ 
+    \end{bmatrix}
+\end{align}
+and the matrix
+\begin{align}
+    B = \begin{bmatrix}
+        9 & 8 & 7 \\ 
+         10 & 2 & 0.5 \\ 
+    \end{bmatrix}
+\end{align}
+then the $(i,j)$ entry of a new matrix $C = A + B$ is the sum of the $(i,j)$ entry in $A$ and $(i,j)$ entry in $B$ or
+\begin{equation}
+    C_{ij} = A_{ij} + B_{ij}
+\end{equation}
+The $(i,j)$ entry of a matrix $D = A - B$ is the difference of 
+the $(i,j)$ entry in $A$ and $(i,j)$ entry in $B$ or
+\begin{equation}
+    D_{ij} = A_{ij} - B_{ij}
+\end{equation}
+
+\subsubsection{Multiplication}
+
+A matrix $A$ can be multiplied by a matrix $B$ to produce a new matrix $C$ with the following formula
+\begin{align}
+    C_{ij} = \sum_{k} A_{i,k} B_{k,j}
+\end{align}
+
+\ex Given a matrix \begin{align}
+    A = \begin{bmatrix}
+           0 & 1 \\ 
+           -1 & 2 \\ 
+        \end{bmatrix}
+\end{align} and a matrix 
+ \begin{align}
+    B = \begin{bmatrix}
+           1 & 4 \\ 
+           3 & 2 \\ 
+        \end{bmatrix}
+\end{align}
+The entry in the new matrix $C$, in the (1,1) position is 
+\begin{align}
+    C_{1,1} &= A_{1,1} B_{1,1} + A_{1,2} B_{2,1}\\
+            &= 0 (1) + 1 (3) = 3
+\end{align}
+\begin{align}
+    C_{1,2} &= A_{1,1} B_{1,2} + A_{1,2} B_{2,2}\\
+            &= 0 (4) + 1 (2) = 2
+\end{align}
+\begin{align}
+    C_{2,1} &= A_{2,1} B_{1,1} + A_{2,2} B_{2,1}\\
+            &= -1 (1) + 2 (3) = 5
+\end{align}
+\begin{align}
+    C_{2,2} &= A_{2,1} B_{1,2} + A_{2,2} B_{2,2}\\
+            &= -1 (4) + 2 (2) = 0
+\end{align}
+\begin{align}
+    C = \begin{bmatrix}
+        3 & 2 \\ 
+        5 & 0
+        \end{bmatrix}
+\end{align}
+
+The above operation for computing an entry in $C$ occurs frequently in matrix calculus. 
+This operation is called an \textbf{inner product}. 
+The inner product of the vector $v$ of length $n$ and the vector $q$ of length $n$ is equal to 
+\begin{align}
+    v'q = \sum_{k=1}^{n} v_{k}q_{k}
+\end{align}
+
+We can think of the matrix $A$ as consisting of $2$ row vectors, the vectors $A_{1,:} = [0,1]$ and $A_{2,:} = [-1, 2]$, and the matrix $B$ as consisting of two column vectors 
+\begin{align}
+    B_{:,1} = \begin{bmatrix}
+          1 \\
+          3
+    \end{bmatrix}
+\end{align} 
+and 
+\begin{align}
+    B_{:,2} = \begin{bmatrix}
+          4 \\
+          2
+    \end{bmatrix}
+\end{align}
+
+Then the matrix $C_{i,j} = A_{i,:} B_{:,j}$ or 
+\begin{align}
+    C = \begin{bmatrix}
+           A_{1,:}' B_{:,1} & A_{1,:}' B_{:,2} \\ 
+           A_{2,:}' B_{:,1} & A_{2,:}' B_{:,2} \\ 
+        \end{bmatrix}
+\end{align}
+
+\textbf{Important:} The matrix product $AB$ is not necessarily equal to the matrix product $BA$. For matrix multiplication, the order of multiplication matters.
+
+\subsection{The matrix inverse}
+
+There exists a special matrix called \textbf{identity matrix}. 
+The identity matrix $I$ of size $n$ is a matrix with $n$ rows and $n$ columns with ones along the diagonal entries~(the entries $I_{k,k}$ for $k$ from 1 to $n$) and then zeroes for all other entries.   
+\begin{align}
+    I_{2} = \begin{bmatrix}
+        1 & 0 \\ 
+        0 & 1 
+    \end{bmatrix}\\
+    I_{3} = \begin{bmatrix}
+        1 & 0 & 0 \\ 
+        0 & 1 & 0 \\ 
+        0 & 0 & 1  
+    \end{bmatrix}
+\end{align}
+
+A matrix $A$ has an inverse $B$ if (i) $A$ has the same number of rows as columns and (ii)
+\begin{align}
+    AB = I \\ 
+    BA = I
+\end{align}
+A matrix $B$ that satisfies the above properties is called the inverse of $A$ and is denoted $A^{-1}$.
+
+A matrix inverse is similar to an inverse in one dimensional algebra. In 1d algebra an inverse $b$ for the variable $a$ satisfies
+\begin{align}
+    ab = 1 \\ 
+    ba = 1 
+\end{align}
+and the variable $b$ is denotes $a^{-1}$ or $\frac{1}{a}$. 
+Matrix with a different number of rows and columns will never have an inverse.
+
+\section{Homework}
+\begin{enumerate}
+    \item 
+    \item 
+    \item 
+    \item 
+    \item
+    \item 
+    \item 
+    \item 
+    \item 
+    \item 
+\end{enumerate}
+
+
+
+
+
+
