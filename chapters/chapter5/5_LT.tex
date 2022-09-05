@@ -517,9 +517,9 @@ For our observed data $\mathcal{D}$ and our assumed model that the random variab
     
     \item Does the infinite sequence $\{-1,1,-1,1,-1,1, \cdots \}$ have a limit? Why or why not? 
     
-    \item Consider the finite sequence $a_{n} = 2^{-n}$ for $n=1$ to $100$. 
+    \item Consider the finite sequence $a_{n} = 2^{-n}$ for $n=1$ to $100$, a sequence that ends at $2^{-100}$. 
     \begin{enumerate}
-        \item Does this sequence have a limit? Why or why not?
+        \item Does this sequence have a limit point? Why or why not?
     \end{enumerate}
     
     \item Compute the derivative of 
@@ -528,7 +528,23 @@ For our observed data $\mathcal{D}$ and our assumed model that the random variab
         \item $f(x) = \log(\frac{1}{2x})$
         \item $f(x) = x^{2} + e^{-x}$
         \item $f(x) = 10$
-        \item $f(x) = \frac{sin(\pi)}{x}$
+        \item $f(x) = -3x$
+        \item $f(x) = \frac{1}{2}x^{2}$
+        \item $f(x) = \log(x)$
+        \item $f(x) = \log(x^{2})$
+        \item $f(x) = \log(10)$
+    \end{enumerate}
+    
+    \item  Assume a set of random variables $Z_{1}, Z_{2}, \cdots, Z_{n}$ such that $Z_{i} \sim \text{exp}(\beta)$ generated an observed dataset. An exponential distribution assign a density over continuous numbers from 0 to infinity. The probability density function is 
+    \begin{align*}
+        f(z) = \beta e^{-\beta z}     
+    \end{align*}
+    Suppose we collect a dataset $\mathcal{D} = (2,4,0.5,3)$.
+    \begin{enumerate}
+        \item Please compute the log likelihood of an arbitrary dataset $\mathcal{D} = (z_{1},z_{2},z_{3}\cdots,z_{n})$
+        \item Compute the derivative of the log likelihood above
+        \item Set the derivative of the log likelihood equal to zero and solve for $\beta$ (ie find the parameter value that maximizes the log likelhiood). 
+        \item Apply the maximum likelihood estimate you found to the dataset  $\mathcal{D} = (2,4,0.5,3)$.
     \end{enumerate}
     
     \item  Assume a set of random variables $Y_{1}, Y_{2}, \cdots, Y_{n}$ such that $Y_{i} \sim \text{Geom}(p)$ generated an observed dataset. Please compute the maximum likelihood estimate for $p$. Include the log likelihood, derivative, and solution when setting the derivative to zero: 
