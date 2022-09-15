@@ -458,6 +458,82 @@ For our observed data $\mathcal{D}$ and our assumed model that the random variab
 
 \end{enumerate}
 
+\section{Fisher information}
+
+A maximum likelihood estimate for a parameter describes what single parameter value most probably generated our observed dataset.
+However, intuitively, if we had a collected a different dataset of the same size then we would likely have arrived at a different maximum likelihood estimate. 
+Repeating the steps: (i) generate dataset of same size, (ii) compute maximum likelihood estimate, (iii) store estimate would lead to many estimates of the same model.  
+To better characterize our model, we will need in addition to a single maximum likelihood estimate a measure of how that estimate may vary.
+
+The Fisher Information $\mathcal{I}(\theta)$ about a parameter $\theta$ is defined as 
+\begin{equation}
+    \mathcal{I}(\theta) = \mathbb{E}\left( \left[ \ell'(x | \theta) \right]^{2} \right) = \mathbb{V}\left(\ell(\theta)\right)
+\end{equation}
+the intuition behind the Fisher information is that log likelihood function that are very peaked around their maximum likelihood estimate will have large Fisher information values. 
+On the contrary, if a log-likelihood is very flat near it's maximum likelihood estimate then the Fisher information will be small.
+ 
+In some sense, the Fisher information describes the curvature of the log likelihood around the maximum likelihood estimate and that curvature is also related to the variability of our estimate.
+
+We will not explore this topic in class, but it is often easier to compute an equivalent definition of the Fisher information
+\begin{equation}
+    -\mathbb{E}( \ell \ell ''(\theta | X) ) = \mathbb{V}( \ell \ell ' (\theta | X)  ).
+\end{equation}
+This definition says that in order to compute the Fisher information we will need to compute the second derivative of the log likelihood, compute the expedctation, and then multiply that second derivative by negative one.
+
+Lets look at an example of using this alternative definition to compute the Fisher information for a Bernoulli model.
+
+\ex Suppose a sample $(X_{1},X_{2},X_{3},\cdots,X_{n})$ that we assume $X_{i} \sim \text{Bernoulli}(\theta)$. Then the log likelihood for a single data point is 
+\begin{align}
+    \ell(\theta) &= \log \left[ f(d_{1} | \theta) \right] \\ 
+                &= \log \left[ \theta^{d_{1}}(1-\theta)^{1-d_{1}} \right] \\ 
+                &=  d_{1}\log(\theta) + (1-d_{1})\log(1-\theta)  \\ 
+\end{align}
+and the derivative of the log likelihood is
+\begin{align}
+    \ell'(\theta) = \frac{d_{1}}{\theta} - \frac{1-d_{1}}{1-\theta} 
+\end{align}
+To compute the second derivative, we take the derivative of $\ell'(\theta)$. 
+\begin{align}
+    \ell'(\theta)   &= d_{1} \theta^{-1} - (1-d_{1})(1-\theta)^{-1} \\ 
+    \ell''(\theta)  &= -d_{1} \theta^{-2} - (1-d_{1})(1-\theta)^{-2}
+\end{align}
+The above if the second derivative of the log likelihood for a single datapoint. 
+However that data point was generated from a random variable $X_{1}$ and so we can then treat $ \ell''(\theta)$ as a transformation of the random variable $X_{1}$. 
+\begin{align}
+    \ell''(X | \theta)  &= -X \theta^{-2} - (1-X)(1-\theta)^{-2} \\ 
+    \ell''(X | \theta)  &= - \frac{X}{\theta^{2}} - \frac{1-X}{ (1-\theta)^{2}} \\
+\end{align}
+The above transformation is a complicated function, but the fisher information only requires that we understand as single quantity from this transformation---the expected value. 
+\begin{align}
+    \mathbb{E}\left[\ell''(X | \theta)\right] &= - \frac{ \mathbb{E}(X)}{\theta^{2}} - \frac{1-\mathbb{E}(X)}{ (1-\theta)^{2}} \\ 
+                                              &= -\frac{\theta}{\theta^{2}} - \frac{1-\theta}{ (1-\theta)^{2}} \\ 
+                                              &= -\frac{1}{\theta} - \frac{1}{(1-\theta)}
+\end{align}
+The final steps asks that we take the negative of the quantity above 
+\begin{align}
+    \mathcal{I}(\theta | X) &=  \frac{1}{\theta} + \frac{1}{(1-\theta)} \\ 
+                            &= \frac{ 1- \theta + \theta }{\theta(1-\theta)} \\ 
+                            &= \frac{1}{\theta(1-\theta)}
+\end{align}
+
+\subsection{Fisher for a sample of size n}
+
+The Fisher information for a sample of size n $(X_{1},X_{2},\cdots, X_{n})$ is equal to 
+\begin{equation}
+    \mathcal{I}(x_{1},x_{2},\cdots,x_{n}) = n \mathcal{I}(\theta)
+\end{equation}
+Intuitively, a sample of size $8$ is twice as informative as a sample of size $4$.
+
+\section{CLT-like thm that involves the Fisher information}
+
+An important theorem that will allow us to construct confidence intervals and hypothesis tests about our parameters states the following: 
+\begin{equation}
+    \sqrt{n}(\hat{\theta} - \theta) \sim \mathcal{N}\left(0,\frac{1}{\mathcal{I}(\theta)}\right)   
+\end{equation}
+where $\hat{\theta}$ is our maximum likelihood estimate, $\theta$ is our true, and unknown, parameter, and $\mathcal{I}$ is the information about $\theta$.
+
+This theorem 
+
 
 \section{Homework}
 
@@ -547,7 +623,7 @@ For our observed data $\mathcal{D}$ and our assumed model that the random variab
         \item Apply the maximum likelihood estimate you found to the dataset  $\mathcal{D} = (2,4,0.5,3)$.
     \end{enumerate}
     
-    \item  Assume a set of random variables $Y_{1}, Y_{2}, \cdots, Y_{n}$ such that $Y_{i} \sim \text{Geom}(p)$ generated an observed dataset. Please compute the maximum likelihood estimate for $p$. Include the log likelihood, derivative, and solution when setting the derivative to zero: 
+    \item  Assume a set of random variables $Y_{1}, Y_{2}, \cdots, Y_{n}$ such that $Y_{i} \sim \text{Geom}(p)$ generated an observed dataset $\mathcal{D}$. Please compute the maximum likelihood estimate for $p$. Include the log likelihood, derivative, and solution when setting the derivative to zero: 
     \begin{enumerate}
         \item Given a dataset $\mathcal{D} = \{ 12, 1, 0, 3, 8  \}$
         \item Given a dataset $\mathcal{D} = \{y_{1}, y_{2}, \dots, y_{n}\}$
@@ -565,20 +641,26 @@ For our observed data $\mathcal{D}$ and our assumed model that the random variab
         \item Given a dataset $\mathcal{D} = \{ 11,12,2,10 \}$
         \item Given a dataset $\mathcal{D} = \{a_{1}, a_{2}, \dots, a_{n}\}$
     \end{enumerate}
-    
+
+    \item Assume that we model a sample $(X_{1},X_{2},\cdots,X_{n})$ with a Poisson distribution ($X \sim \text{Pois}(\lambda)$). Please derive the Fisher information $\mathcal{I}(\lambda)$ 
+        
     \item The number of influenza A and influenza B cases each week is recorded by the Pennsylvania Department of health. 
-    For the year 2022 the number of cases in northampton county, PA is 
-    \begin{table}[]
+    For the year 2022 the number of cases in Northampton county, PA is 
+    \begin{table}[ht!]
         \centering
-        \begin{tabular}{A|B}
-             &  \\
-             & 
+        \begin{tabular}{cc}
+           Flu A & Flu B  \\
+           \hline
+            100 & 0 \\ 
+            89 & 0 \\ 
+            10 & 10 \\ 
+            45 & 12 \\ 
+            12 & 98 \\ 
         \end{tabular}
-        \caption{Caption}
-        \label{tab:my_label}
     \end{table}
-    Please pose a model for the number of influenza A cases, and compute the maximum likelihood estimate for any parameters in this model. Explain why you chose your particular model and explain parameter estimates.
-    
+    Please pose a model for the number of influenza A cases, and compute the maximum likelihood estimate for any parameters in this model. 
+    Explain why you chose your particular model and explain parameter estimates.
+    In addition, use the Fisher information about your parameter to build a 95CI around this estimated parameter value.
     
 \end{enumerate}
 
