@@ -221,6 +221,175 @@
         }
         \end{enumerate}
         
+    \item Consider the sequence $a_{n} = 2^{-n}$ for $n=1$ to $\infty$. 
+    \begin{enumerate}
+        \item Write down the first 3 items in this sequence 
+        
+        \begin{enumerate}
+            \item  {\color{red} 1/2, 1/4, 1/8  }
+        \end{enumerate}
+        
+        \item Please compute \[ \lim_{n \to \infty} a_{n} \]
+        
+        \begin{enumerate}
+            \item  {\color{red} the limit is the value 0  }
+        \end{enumerate}
+        
         
     \end{enumerate}
+    
+    \item Does the infinite sequence $\{-1,1,-1,1,-1,1, \cdots \}$ have a limit? Why or why not? 
+    
+    \begin{enumerate}
+            \item   {\color{red} No. This sequence does not have a limit because this sequence does not approach a single value. Instead, is oscillates. }
+        \end{enumerate}
+        
+    
+    \item Consider the finite sequence $a_{n} = 2^{-n}$ for $n=1$ to $100$, a sequence that ends at $2^{-100}$. 
+    \begin{enumerate}
+        \item Does this sequence have a limit point? Why or why not?
+        \begin{enumerate}
+            \item  {\color{red} No. This sequence does not have a limit because it is finite. The value 0 is a good candidate for a limit but the sequence cannot get any closer to 0 than 2^{-100} }
+        \end{enumerate}
+        
+        
+    \end{enumerate}
+    
+    \item Compute the derivative of 
+    \begin{enumerate}
+        \item $f(x) = e^{2x}$
+        \begin{enumerate}
+            \item  {\color{red} 
+            \begin{align}
+                f(x) = e^{h(x)} \\ 
+                h(x) = 2x\\
+                f' = e^{h(x)} (2x)' \\
+                f' = e^{h(x)} 2 \\
+                f' = 2e^{2x} 
+            \end{align}
+            }
+        \end{enumerate}
+        
+        \item $f(x) = \log(\frac{1}{2x})$
+        \begin{enumerate}
+            \item  {\color{red}
+            \begin{align}
+                f(x) = \log(1/2x) \\ 
+                f(x) = \log(h(x)) \\ 
+                h(x) = 2x^{-1} \\
+                f' = \frac{1}{h(x)} (2x^{-1})' \\
+                f' = \frac{1}{h(x)} -1 (2x^{-2}) (2) \\
+                f' = -\frac{1}{2x^{-1}} 2x^{-2} (2) \\
+                f' = -\frac{2}{x} 
+            \end{align}
+            }
+        \end{enumerate}
+        
+        \item $f(x) = x^{2} + e^{-x}$
+        \begin{enumerate}
+            \item  {\color{red} 
+            \begin{align}
+                f'(x) = 2x - e^{-x}
+            \end{align}
+            
+            }
+        \end{enumerate}
+        
+        \item $f(x) = 10$
+        \begin{enumerate}
+            \item  {\color{red} f'(x) = 0   }
+        \end{enumerate}
+        
+        \item $f(x) = -3x$
+        \begin{enumerate}
+            \item  {\color{red}    f'(x) = - 3}
+        \end{enumerate}
+        
+        \item $f(x) = \frac{1}{2}x^{2}$
+        \begin{enumerate}
+            \item  {\color{red}
+                f'(x) = x
+            }
+        \end{enumerate}
+        
+        \item $f(x) = \log(x)$
+        \begin{enumerate}
+            \item  {\color{red}  $ f'(x) = \frac{1}{x}$ }
+        \end{enumerate}
+        \item $f(x) = \log(x^{2})$
+        \begin{enumerate}
+            \item  {\color{red} 
+            f'(x) = \log(x^{2}) 2x
+            
+            
+            }
+        \end{enumerate}
+        
+        \item $f(x) = \log(10)$
+        \begin{enumerate}
+            \item  {\color{red}  f'(x) = 0    }
+        \end{enumerate}
+        
+    \end{enumerate}
+    
+    \item  Assume a set of random variables $Z_{1}, Z_{2}, \cdots, Z_{n}$ such that $Z_{i} \sim \text{exp}(\beta)$ generated an observed dataset. An exponential distribution assign a density over continuous numbers from 0 to infinity. The probability density function is 
+    \begin{align*}
+        f(z) = \beta e^{-\beta z}     
+    \end{align*}
+    Suppose we collect a dataset $\mathcal{D} = (2,4,0.5,3)$.
+    \begin{enumerate}
+        \item Please compute the log likelihood of an arbitrary dataset $\mathcal{D} = (z_{1},z_{2},z_{3}\cdots,z_{n})$
+        \begin{enumerate}
+            \item {\color{red}
+            \begin{align*}
+                \ell \ell(\beta) = \log \left \[ p(z_{1},z_{2},\cdots,z_{n}) \r] \\ 
+                \ell \ell(\beta) = \log(p(z_{1})+ + \log(p(z_{2})) + \cdots + \log( p(z_{n})) \\ 
+                 \ell \ell(\beta) = \log(\beta e^{-\beta z_{1}}) + log(\beta e^{-\beta z_{2}}) + \cdots +  \log(\beta e^{-\beta z_{n}}) \\ 
+                 \ell \ell(\beta) = \log(\beta) -\beta z_{1} +  \log(\beta) -\beta z_{2} + \cdots + \log(\beta) -\beta z_{n} \\
+                 \ell \ell(\beta) = n\log(\beta) - \beta \sum_{i=1}^{n} z_{i}\\
+            \end{align*}
+            }
+        \end{enumerate}
+        
+        \item Compute the derivative of the log likelihood above
+        \begin{enumerate}
+            \item  {\color{red}
+            \ell \ell(\beta) = n\log(\beta) - \beta \sum_{i=1}^{n} z_{i}\\
+            \ell \ell(\beta)' = \frac{n}{\beta} - \sum_{i=1}^{n} z_{i}
+            }
+        \end{enumerate}
+        
+        \item Set the derivative of the log likelihood equal to zero and solve for 
+        $\beta$ (ie find the parameter value that maximizes the log likelhiood). 
+        \begin{enumerate}
+            \item  {\color{red} 
+            \begin{align}
+            \frac{n}{\beta} - \sum_{i=1}^{n} z_{i} = 0\\
+            \frac{n}{\beta}  = \sum_{i=1}^{n} z_{i}\\
+            \frac{\beta}{n}  = \frac{1}{\sum_{i=1}^{n} z_{i}}\\
+            \beta = \frac{n}{\sum_{i=1}^{n} z_{i}}
+            \end{align}
+            }
+        \end{enumerate}
+        
+        \item Apply the maximum likelihood estimate you found to the dataset  $\mathcal{D} = (2,4,0.5,3)$.
+        \begin{enumerate}
+            \item  {\color{red}$\hat{\beta} = 4/9.5 = 0.42$}
+        \end{enumerate}
+        
+    \end{enumerate}
+ 
+    
+        
+    \end{enumerate}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 \end{document}

@@ -538,6 +538,51 @@ and the mle for $\sigma^{2}$ is
         \mathcal{D}_{1} = \{ (3,1),(0.1,10),(-1,1),(1,0) \}\\
         \mathcal{D}_{2} = \{(0.1,10), (1,0),(3,1),(-1,1) \}
     \end{align}
+    
+    \item  Suppose that you are asked to explore in a group of patients who have a family history of heard disease the relationship between the number of packs of cigarettes smoked by the patient and Creatine Kinase-MB (CK-MB), an enzyme found in heart muscle that when elevated indicates damage to the heart.
+    CK-MB is a measurement that is at minimum 0.\\
+    
+    You're first thought is to fit a linear regression model of the form
+    \begin{align}
+        Y_{i}| x_{i} \sim \mathcal{N}\left( \beta_{0} + \beta_{1} x_{i}, \sigma^{2} \right)
+    \end{align}
+    where $Y_{i}$ is a random variable that we assume generates CK-MB levels for patient $i$ and $x_{i}$ is the reported number of packs smoked per day. 
+    
+    \begin{enumerate}
+        \item What is the support of a Normal distribution? Is this assumption reasonable to model CK-MB? 
+        \item Suppose we collect data and estimate $\beta_{0}$ as $\hat{\beta_{0}} = 200$ and $\hat{\beta_{1}} = 10$. 
+        How would you interpret $\hat{\beta_{0}}$?
+    \end{enumerate}
+
+
+    \item Assume that we decide to model a dataset $\mathcal{D} = ( (x_{1},y_{1}),(x_{2},y_{2}),\cdots,(x_{n},y_{n})  )$ as 
+    \begin{align}
+        Y_{i} | x_{i} \sim \mathcal{N}\left( \beta_{0} + \beta_{1} x_{i}, \sigma^{2} \right)
+    \end{align}
+    
+    \begin{enumerate}
+        \item Let $E = Y_{i} | x_{i} - (\beta_{0} + \beta_{1} x_{i})$. 
+        What is the distribution of $E$? 
+        \item Let $Z = \frac{Y_{i} - (\beta_{0} + \beta_{1} x_{i})}{\sigma}$. What is the distribution of $Z$?
+    \end{enumerate}
+    
+    \item We assume that in linear regression 
+    \begin{align}
+        Y_{i} | x_{i} \sim \mathcal{N}\left( \beta_{0} + \beta_{1} x_{i}, \sigma^{2} \right)
+    \end{align}
+    the variable $x_{i}$ is generated randomly. Why or why not?
+    
+    \item Suppose that we decide to model $\mathcal{D} = ( y_{1}, y_{2}, y_{3}, \cdots, y_{n})$ as $Y_{i} \sim \mathcal{N}\left(\mu,\sigma^{2} \right)$. 
+    The loglikelihood function for the normal distribution is
+    \begin{align}
+         \ell \ell(\mu, \sigma^{2}) = - \frac{N}{2} \log \left(2 \pi \sigma^{2}\right) - \frac{1}{2 \sigma^{2}} \sum_{i=1}^{n} \left[   \left (y_{i} - \mu \right)^{2} \right]
+    \end{align}
+    \begin{enumerate}
+        \item Please compute the mle for $\mu$ by computing the derivative, treating $\mu$ as a variable and $\sigma^{2}$ as a constant 
+        \item Please compute the mle for $\sigma^{2}$ by computing the derivative, treating $\sigma^{2}$ as a variable and $\mu$ as a constant 
+    \end{enumerate}
+    
+    
     \item Please compute for all values of $q$ the quantities $\mathbb{E}(R|q)$ and $\mathbb{V}(R|q)$
     \begin{table}[ht!]
         \centering
@@ -581,19 +626,12 @@ and the mle for $\sigma^{2}$ is
     
     \item Will different parameter estimates lead to different diagnostic plots? Why or why not?
     
-    \item The loglikelihood function for the normal distribution is
-    \begin{align}
-         \ell \ell(\mu, \sigma^{2}) = - \frac{N}{2} \log \left(2 \pi \sigma^{2}\right) - \frac{1}{2 \sigma^{2}} \sum_{i=1}^{n} \left[   \left (y_{i} - \mu \right)^{2} \right]
-    \end{align}
-    \begin{enumerate}
-        \item Please compute the mle forfor $\mu$ by computing the derivative, treating $\mu$ as a variable and $\sigma^{2}$ as a constant 
-        \item Please compute the mle for $\sigma^{2}$ by computing the derivative, treating $\sigma^{2}$ as a variable and $\mu$ as a constant 
-    \end{enumerate}
+    
     
     \item Consider the function $g(x) = -x^{2} + 3$. 
     \begin{enumerate}
         \item Compute the derivative of $g$
-        \item Does the $x$ value that maximizes $g$ depend on the value of $c$? Why or why not?
+        \item Does the $x$ value that maximizes $g$ not depend on the value of $c$? Why or why not?
     \end{enumerate}
 
     \item Consider the function $g(x) = f(x) + c$ where $c$ is a constant. 
