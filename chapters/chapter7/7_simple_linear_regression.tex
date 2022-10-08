@@ -412,7 +412,7 @@ At this point we have two equations and two unknowns:
 We can solve the above equations and find that the least squares estimates for $\beta_{0}$ and for $\beta_{1}$ are
 
 \begin{align}
-    \hat{\beta_{1}} &= \frac{ \sum_{i=1}^{N} (x_{i} - \bar{x})(y_{i} - \bar{y})  }{ \sum_{i=1}^{N} (x_{i} - \bar{x}) }\\
+    \hat{\beta_{1}} &= \frac{ \sum_{i=1}^{N} (x_{i} - \bar{x})(y_{i} - \bar{y})  }{ \sum_{i=1}^{N} (x_{i} - \bar{x})^{2} }\\
     \hat{\beta_{0}} &= \bar{y} - \hat{\beta_{1}} \bar{x} \\
 \end{align}
 
@@ -624,29 +624,21 @@ and the mle for $\sigma^{2}$ is
         \item Does the equal variances assumption appear to hold? Why or why not?
     \end{enumerate}
     
+    
+    
+    \item Suppose we build a scatter plot of the relationship between observations of a variable $x$ and variable $y$. 
+    We decide to fit a linear regression and add to the plot $\mathbb{E}(Y|x)$. 
+    Please sketch what you would expect the residual vs fitted value plot to look like.
+    
+    \item Suppose that you fit a linear regression model and compute the residuals.
+    As the residuals move closer to the line $\mathbb{E}(Y|x)$ will your estimate of $\sigma^{2}$ be smaller or larger? Why?  
+    
+    \item A linear regression is fit to a dataset where we collected the number of lbs of sugar an undergraduate student consumes during a week in the Fall semester and their H1Ac level.
+    We estimate our parameters and find that $\hat{\beta_{0}} = 2$ and $\hat{\beta_{1}} = 10$. It may (or may not) be more reasonable to express the change in H1Ac not in increments of 1lb but instead in increments of 1 ounce.
+    Please reexpress the estimated change in H1Ac in ounces of sugar consumed.  
+    
     \item Will different parameter estimates lead to different diagnostic plots? Why or why not?
     
-    
-    
-    \item Consider the function $g(x) = -x^{2} + 3$. 
-    \begin{enumerate}
-        \item Compute the derivative of $g$
-        \item Does the $x$ value that maximizes $g$ not depend on the value of $c$? Why or why not?
-    \end{enumerate}
-
-    \item Consider the function $g(x) = f(x) + c$ where $c$ is a constant. 
-    \begin{enumerate}
-        \item Compute the derivative of $g$
-        \item Does the $x$ value that maximizes $g$ depend on the value of $c$? Why or why not?
-    \end{enumerate}
-
-    \item Consider the function $g(x) = cf(x)$ where $c$ is a constant. 
-    \begin{enumerate}
-        \item Compute the derivative of $g$
-        \item Does the $x$ value that maximizes $g$ depend on the value of $c$? Why or why not?
-    \end{enumerate}
-
-
     \item The loglikelihood for single covariate regression is 
     \begin{align}
         \ell \ell (\beta_{0}, \beta_{1}, \sigma^{2}) = - \frac{N}{2} \log \left(2 \pi \sigma^{2}\right) - \frac{1}{2 \sigma^{2}} \sum_{i=1}^{n} \left\{   \left \left[y_{i} - (\beta_{0} + \beta_{1}x_{i}) \right]^{2} \right\}
