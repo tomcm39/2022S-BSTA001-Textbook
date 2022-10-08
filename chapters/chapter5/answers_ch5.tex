@@ -371,6 +371,7 @@
             \end{align}
             }
         \end{enumerate}
+        \end{enumerate}
         
         \item Apply the maximum likelihood estimate you found to the dataset  $\mathcal{D} = (2,4,0.5,3)$.
         \begin{enumerate}
@@ -379,8 +380,153 @@
         
     \end{enumerate}
  
-    
+    \item  Assume a set of random variables $Y_{1}, Y_{2}, \cdots, Y_{n}$ such that $Y_{i} \sim \text{Geom}(p)$ generated an observed dataset $\mathcal{D}$. Please compute the maximum likelihood estimate for $p$. Include the log likelihood, derivative, and solution when setting the derivative to zero: 
+    \begin{enumerate}
+         \item Given a dataset $\mathcal{D} = \{ 12, 1, 0, 3, 8  \}$
         
+        \begin{enumerate}
+            \item { \color{red}
+            \begin{align}
+             \hat{p}_{\text{mle}}&=\frac{n}{\sum_{i=1}^{n} y_{i}}  \\ 
+             &=5/24 = 0.208
+            \end{align}
+            }
+        \end{enumerate}
+        \item Given a dataset $\mathcal{D} = \{y_{1}, y_{2}, \dots, y_{n}\}$
+        
+        \begin{enumerate}
+            \item { \color{red} 
+            
+            \begin{align}
+                f(y) &= p(1-p)^{y-1}\\
+                \ell \ell(p) &= \sum_{i=1}^{n} \log \left(p(1-p)^{y_{i}-1} \right) \\ 
+                &= \sum_{i=1}^{n} \log (p) + (y_{i}-1) \log(1-p) \\
+                \ell \ell '(p) &= \sum_{i=1}^{n} \frac{1}{p} - (y_{i}-1) \frac{1}{1-p}  \\
+                \ell \ell '(p) &=  \frac{n}{p} - \sum_{i=1}^{n} y_{i} \frac{1}{1-p} + \frac{n}{1-p}  \\
+                \ell \ell '(p) &= 0 \\
+                \frac{n}{p} - \sum_{i=1}^{n} y_{i} \frac{1}{1-p} + \frac{n}{1-p} & = 0\\
+               \frac{n}{p}  + \frac{n}{1-p} & = \sum_{i=1}^{n} y_{i} \frac{1}{1-p}\\
+               (1-p)n + np = p \sum_{i=1}^{n} y_{i}\\
+               n = p \sum_{i=1}^{n} y_{i}\\
+               \hat{p}_{\text{mle}}=\frac{n}{\sum_{i=1}^{n} y_{i}}
+            \end{align}
+            
+            
+            }
+        \end{enumerate}
+    \end{enumerate}
+    
+    \item Assume a set of random variables $A_{1}, A_{2}, \cdots, A_{n}$ such that $A_{i} \sim \text{Bern}(\theta)$ generated an observed dataset. Please compute the maximum likelihood estimate for $p$. Include the log likelihood, derivative, and solution when setting the derivative to zero: 
+    \begin{enumerate}
+        \item Given a dataset $\mathcal{D} = \{ 0,0,0,0 \}$
+        
+        \begin{enumerate}
+            \item { \color{red} Throwing this question out.
+            \begin{align}
+                \hat{\theta}_{\text{mle}} = \frac{\sum_{i=1}^{n} a_{i}}{n}\\
+                \hat{\theta}_{\text{mle}} =0\
+            \end{align}
+            }
+        \end{enumerate}
+        \item Do you think the estimate you computed above is reasonable? Why or why not?
+        
+        \begin{enumerate}
+            \item { \color{red} Students can argue for or against whether this is reasonable. i would be exceedingly generous with credit. }
+        \end{enumerate}
+        
+        \item Given a dataset $\mathcal{D} = \{a_{1}, a_{2}, \dots, a_{n}\}$
+        
+        \begin{enumerate}
+            \item { \color{red}
+            
+            \begin{align}
+                f(a) &= \theta^{a}(1-\theta)^{1-a}\\
+                \ell \ell (\theta) &= \sum_{i=1}^{n} \log \left[ \theta^{a_{i}}(1-\theta)^{1-a_{i}} \right] \\
+                &= \sum_{i=1}^{n} a_{i} \log(\theta) + (1-a_{i} ) \log(1-\theta) \\
+                &= \sum_{i=1}^{n} a_{i} \frac{1}{\theta} - (1-a_{i})  \frac{1}{1-\theta}\\
+                \ell \ell '(\theta) &= 0 \\
+                \sum_{i=1}^{n} a_{i} \frac{1}{\theta} - (1-a_{i})  \frac{1}{1-\theta} &=0\\
+                \sum_{i=1}^{n} a_{i} \frac{1}{\theta} = \sum_{i=1}^{n}(1-a_{i})  \frac{1}{1-\theta} \\
+                \sum_{i=1}^{n} a_{i} (1-\theta) = \sum_{i=1}^{n}(1-a_{i})  \theta \\
+                \sum_{i=1}^{n} a_{i} -\theta \sum_{i=1}^{n} a_{i}  = n\theta  -\theta \sum_{i=1}^{n}a_{i}  \\
+                \sum_{i=1}^{n} a_{i}  = n\theta \\
+                \hat{\theta}_{\text{mle}} = \frac{\sum_{i=1}^{n} a_{i}}{n}
+            \end{align}
+            
+            }
+        \end{enumerate}
+    \end{enumerate}
+    
+    \item Assume a set of random variables $A_{1}, A_{2}, \cdots, A_{n}$ such that $A_{i} \sim \text{Pois}(\lambda)$ generated an observed dataset. Please compute the maximum likelihood estimate for $p$. Include the log likelihood, derivative, and solution when setting the derivative to zero: 
+    \begin{enumerate}
+        \item Given a dataset $\mathcal{D} = \{ 11,12,2,10 \}$
+        
+        \begin{enumerate}
+            \item { \color{red}  $\hat{\lambda}_{\text{mle}} = 8.75$ }
+        \end{enumerate}
+        \item Given a dataset $\mathcal{D} = \{a_{1}, a_{2}, \dots, a_{n}\}$
+        
+        \begin{enumerate}
+            \item { \color{red} 
+            \begin{align}
+                f(a) &= \frac{e^{-\lambda} \lambda ^{a} }{a!}\\
+                \ell ell (\lambda) &= \sum_{i=1}^{n} \log \left[\frac{e^{-\lambda} \lambda ^{a_{i}} }{a_{i}!} \right] \\
+                &= \sum_{i=1}^{n} -\lambda + a_{i} \log(\lambda) - \log(a_{i}!)\\
+                \ell \ell ' (\lambda) &= \sum_{i=1}^{n} -1 + a_{i} \frac{1}{\lambda} \\
+                \ell \ell ' (\lambda) &=  -n + \frac{1}{\lambda}\sum_{i=1}^{n}a_{i} \\
+                \ell \ell ' (\lambda) &= 0 \\ 
+                -n + \frac{1}{\lambda}\sum_{i=1}^{n}a_{i} &= 0 \\
+                \frac{1}{\lambda}\sum_{i=1}^{n}a_{i} &= n \\
+                \hat{\lambda}_{\text{mle}} = \frac{\sum_{i=1}^{n}a_{i}}{n}
+            \end{align}
+            }
+        \end{enumerate}
+    \end{enumerate}
+
+    \item Assume that we model a sample $(X_{1},X_{2},\cdots,X_{n})$ with a Poisson distribution ($X \sim \text{Pois}(\lambda)$). Please derive the Fisher information $\mathcal{I}(\lambda)$ 
+        
+        \begin{enumerate}
+            \item { \color{red} XXX 
+            \begin{align}
+                f(x) &= \frac{e^{-\lambda} \lambda ^{x} }{x!} \\ 
+                \log \left( f(x) \right) &= -\lambda + x log(\lambda) - \log(x!) \\ 
+                \log \left( f(x) \right)' &= -1 + \frac{x}{\lambda} \\ 
+                \log \left( f(x) \right)'' &= -\frac{x}{\lambda^{2}} \\ 
+                \mathbb{E}\left[ \log \left( f(x) \right)''\right] &= -\frac{\mathbb{E}(X)}{\lambda^{2}} \\ &= -\frac{\lambda}{\lambda^{2}} \\ 
+                &= -\frac{1}{\lambda} \\ 
+                \mathcal{I} = \frac{1}{\lambda}
+            \end{align}
+            }
+        \end{enumerate}
+        
+        
+    \item The number of influenza A and influenza B cases each week is recorded by the Pennsylvania Department of health. 
+    For the year 2022 the number of cases in Northampton county, PA is 
+    \begin{table}[ht!]
+        \centering
+        \begin{tabular}{cc}
+           Flu A & Flu B  \\
+           \hline
+            100 & 0 \\ 
+            89 & 0 \\ 
+            10 & 10 \\ 
+            45 & 12 \\ 
+            12 & 98 \\ 
+        \end{tabular}
+    \end{table}
+    Please pose a model for the number of influenza A cases, and compute the maximum likelihood estimate for any parameters in this model. 
+    Explain why you chose your particular model and explain parameter estimates.
+    In addition, use the Fisher information about your parameter to build a 95CI around this estimated parameter value.
+
+        \begin{enumerate}
+            \item { \color{red} 
+            The model i will pose is model the number of flu cases is $X_{t} \sim \text{Pois}(\lambda)$
+            The MLE is $\hat{\lambda}_{\text{mle}} = 51.2$
+            $\mathcal{I}_{5} = \frac{5}{51.2}$
+            $\hat{\lambda} \sim \mathcal{N}(51.2, 10.2)$
+            95CI: $[30.8, 71.6]$
+            }
+        \end{enumerate}
     \end{enumerate}
     
     
