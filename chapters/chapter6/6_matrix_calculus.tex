@@ -407,18 +407,86 @@ A matrix inverse is similar to an inverse in one dimensional algebra. In 1d alge
 and the variable $b$ is denotes $a^{-1}$ or $\frac{1}{a}$. 
 Matrix with a different number of rows and columns will never have an inverse.
 
+\section{Multivariate Linear regression}
+
+\subsection{Data and model setup}
+\subsection{A single categorical variable}
+\subsection{Two or more continuous covariates}
+\subsection{Estimating $\beta$ and $\sigma$}
+\subsection{Adjusting for confounders}
+
+
+
 \section{Homework}
 \begin{enumerate}
-    \item 
-    \item 
-    \item 
-    \item 
-    \item
-    \item 
-    \item 
-    \item 
-    \item 
-    \item 
+    \item Please compute the following 
+        \begin{enumerate}
+            \item $v + x$
+            \item $v-x$
+            \item $2v+x/2$
+            where 
+            \begin{align*}
+            v = \begin{bmatrix}
+                1 \\ 
+                0 \\
+                -1
+            \end{bmatrix} \; \;  
+            x = \begin{bmatrix}
+                -2 \\ 
+                1 \\
+                0
+            \end{bmatrix}
+        \end{align}
+        \end{enumerate}
+    
+    \item Let 
+    \begin{align*}
+        A = \begin{bmatrix}
+                1/2 & -2 & 0 \\
+                -10 & -5 & -1 
+            \end{bmatrix} \; 
+        B = \begin{bmatrix}
+             1 & 0  \\ 
+             0 & -1 \\ 
+             1 & 1
+            \end{bmatrix} \; 
+        x = \begin{bmatrix}
+                -2 \\ 
+                1 \\
+                0
+            \end{bmatrix}
+    \end{align*}
+    If possible, please compute the below. If it is not possible to compute one of the below quantities then please write "Cannot compute" and explain why.
+    \begin{enumerate}
+        \item $AB$
+        \item $BA$
+        \item $Ax$
+        \item $Bx$
+        \item $BAx$
+    \end{enumerate}
+    
+    \item Suppose that we collect data on the total number of confirmed influenza hospitalizations over the 2022/2023 influenza season and hypothesize that the total number of cases may be related to population density of the state and the percent of the state population that is vaccinated before October 1, 2022.
+    
+    Please describe a multivariate linear regression that may be used to model this data. Please include: (i) the model, a description of each variable in the dataset, a summary of what the vector $y$ and matrix $X$ might look like.
+    
+    \item Let $\beta' x$, where 
+    \begin{align*}
+        \beta = \begin{bmatrix}
+                    \beta_{0}\\
+                    \beta_{1}\\
+                    \beta_{2}\\
+                    \beta_{3}\\
+                 \end{bmatrix}\; ; 
+                 x   = \begin{bmatrix}
+                    x_{3}\\
+                    x_{2}\\
+                    x_{1}\\
+                    x_{0}\\
+                 \end{bmatrix}
+    \end{align*}
+    Please expand $\beta'x$ as a series of sums and products.
+    
+    
 \end{enumerate}
 
 
