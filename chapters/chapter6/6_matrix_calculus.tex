@@ -409,12 +409,144 @@ Matrix with a different number of rows and columns will never have an inverse.
 
 \section{Multivariate Linear regression}
 
-\subsection{Data and model setup}
-\subsection{A single categorical variable}
-\subsection{Two or more continuous covariates}
-\subsection{Estimating $\beta$ and $\sigma$}
-\subsection{Adjusting for confounders}
+Multivariate regression models are ubiquitous in science because of their ability to relate two or more measurable quantities to a target variable.
 
+Multivariate linear regression supposes that many different covariates $(x_{1}, x_{2}, \cdots, x_{p})$ may be able to describe the distribution of a random variable $Y$. 
+
+Multivariate linear regression extends single covariate regression, and we will see below that adding more covariates makes estimating, as well as communicating, parameters more difficult.
+
+
+\subsection{Data and model setup}
+
+Multivariate linear regression supposes that an experiment generates a single data point that contains one measurement of our target of interest and two or more measurements of covariates $(x_{1}, x_{2}, \cdots)$ that may help explain our target.
+
+A single observation takes the form 
+\begin{align}
+    d = \left( y_{1}, x_{1}, x_{2}, x_{3}, \cdots, x_{p}  \right) 
+\end{align}
+where $y_{1}$ is our target and $x_{1}, x_{2}, \cdots, x_{p}$ are $p$ covariates that are measured at the same time as our target.
+
+A dataset containing $n$ observation then can be written as 
+\begin{align}
+    &\mathcal{D} = \left( (y_{1}, x_{1,1}, x_{1,2}, x_{1,3}, \cdots, x_{1,p}), \\
+    &(y_{2}, x_{2,1}, x_{2,2}, x_{2,3}, \cdots, x_{2,p}), \cdots, (y_{n}, x_{n,1}, x_{n,2}, x_{n,3}, \cdots, x_{n,p})  \right)     
+\end{align}
+
+The model for multivariate linear regression assumes 
+\begin{align}
+    Y_{i} | x_{i,1:p} \sim \mathcal{N}\left( \beta_{0} + \beta_{1}x_{i,1} + \beta_{2}x_{i,2} + \cdots, \beta_{p}x_{i,p}, \sigma^{2} \right)
+\end{align}
+where we assume that the observation $y_{i}$ was generated from a corresponding random variable $Y_{i}$ with the above Normal distribution conditioned on all $x$ covariate values. 
+
+The above model can also be expressed as 
+\begin{align}
+    Y_{i} | x_{i,1:p} &=  \beta_{0} + \beta_{1}x_{i,1} + \beta_{2}x_{i,2} + \cdots, \beta_{p}x_{i,p} + \epsilon_{i} \\ 
+    \epsilon_{i} &\sim \mathcal{N}(0,\sigma^{2})
+\end{align}
+Compared to single covariate linear regression, multivariate linear regression begins with $\beta_{0} + \beta_{1}x_{i,1}$ as in single covariate linear regression and then further adjusts the mean by multiplying each additional covariate $x_{i,k}$ with a corresponding $\beta_{k}$ and summing all of these quantities $\beta_{k}x_{i,k}$.
+
+\subsection{A single categorical variable}
+
+A natural experiment where one will need to use multivariate regression is when associating a continuous target variable $y$ to a categorical explanatory variable $x$ that can take one of $C$ possible categories.
+
+Suppose that we wish to relate $y$, a continuous variable, to x, a variable that can take one of the three values `A', `B', `C' then linear regression does not---at first---make much sense. 
+
+Given the dataset 
+\begin{align}
+\mathcal{D} = \begin{bmatrix}
+        y & x \\
+        0.2  & "A"\\
+        0.4  & "A"\\
+        -0.5 & "B"\\
+        0.6  & "C"\\
+        -0.5 & "B"
+              \end{bmatrix}
+\end{align}
+
+The naive model would assume that 
+\begin{align}
+    Y_{i} &= \beta_{0} + \beta_{1} x_{i} + \epsilon_{i} \\
+    \epsilon_{i} &\sim \mathcal{N}(0,\sigma^{2})     
+\end{align}
+However, we cannot multiply the value $\beta_{1}$ by the letters A, B, C.
+
+One solution is to convert this single categorical variable into many numerical variables.
+We will need to (i) choose a \textbf{reference} value for $x$ that we will compare all other y values corresponding to other categories to and (ii) create two additional columns---one per category excluding the reference---that contain the value one when that category value is present in $x$ and the value zero otherwise.  
+
+For example, suppose for the above dataset we choose a reference of "B". 
+Then we will create one column that identifies values of "A" and a second column that identifies values of "C". 
+
+Our new dataset will look like 
+\begin{align}
+\mathcal{D} = \begin{bmatrix}
+        y & x & x_{A} & x_{c}\\
+        0.2  & "A" & 1 & 0\\
+        0.4  & "A" & 1 & 0\\
+        -0.5 & "B" & 0 & 0\\
+        0.6  & "C" & 0 & 1\\
+        -0.5 & "B" & 0 & 0\\
+              \end{bmatrix}
+\end{align}
+
+We can update our naive single covariate linear regression with the following multivariate linear regression. 
+\begin{align}
+    Y_{i} &= \beta_{0} + \beta_{1}x_{i,A} + \beta_{2}x_{i,C} + \epsilon_{i}\\
+    \epsilon_{i} & \sim \mathcal{N}(0,\sigma^{2}) 
+\end{align}
+
+To interpret the above model, lets compute the expected value of $Y$ when we observe a "A", "B", and a "C". 
+
+When we observe an "A" then the covariate $x_{A}$ is the value one and the covariate $x_{c}$ is the value zero. So then 
+\begin{align}
+    \mathbb{E}(Y |x=A) &= \beta_{0} + \beta_{1} (1) + \beta_{2} (0)\\
+                       &= \beta_{0} + \beta_{1}
+\end{align}
+
+When we observe a "B" then the covariate $x_{A}$ is the value zero and the covariate $x_{c}$ is the value zero. So then 
+\begin{align}
+    \mathbb{E}(Y |x=B) &= \beta_{0} + \beta_{1} (0) + \beta_{2} (0)\\
+                       &= \beta_{0}
+\end{align}
+
+When we observe a "C" then the covariate $x_{A}$ is the value zero and the covariate $x_{c}$ is the value one. So then 
+\begin{align}
+    \mathbb{E}(Y |x=C) &= \beta_{0} + \beta_{1} (0) + \beta_{2} (1)\\
+                       &= \beta_{0} + \beta_{2}
+\end{align}
+
+The intercept term~$(\beta_{0})$ is the expected value of $Y$ when we observe a $x$ value that is equal to the reference. 
+All other categories include this reference $\beta_{0}$.
+The parameter $\beta_{1}$ is the change in the expected value of $Y$  when an observation includes $x=A$  \textbf{compared to the expected value when x=B}.
+The parameter $\beta_{2}$ is the change in the expected value of $Y$  when an observation includes $x=C$  \textbf{compared to the expected value when x=B}.
+
+\subsection{Two or more continuous covariates and adjustment for confounding}
+
+We can include several continuous valued $x$ covariates without the need to first transform them as we must do when we include a $x$ covariate that is categorical.
+For example, suppose that we wish to associate the annual cost of household health insurance to annual family income, number of dependents that are claimed on previous taxes by the individual who pays the insurance, and age of the oldest resident of the household. 
+
+Then we can generate a model 
+\begin{align}
+    Y_{i} &= \beta_{0} + \beta_{1} x_{i,1} + \beta_{2}x_{i,2} + \beta_{3} x_{i,3} + \epsilon_{i}\\
+    \epsilon_{i} &\sim \mathcal{N}(0,\sigma^{2})    
+\end{align}
+and estimate the parameters $\theta = (\beta_{0}, \beta_{1}, \beta_{2}, \beta_{3}, \sigma^{2})$.
+Standard software can produce point estimates, confidence intervals, and hypothesis tests at a desired false positive rate, but software can not interpret the hypothesized impact of these parameters on $Y$. 
+
+One method to understand whether a covariate $x$ is associated with $Y$ while adjusting for all other covariates that are considered is to build an \textbf{added variable plot} between $Y$ and $x$.
+
+Suppose our experiment generates three covariates $(x_{1}, x_{2}, x_{3})$ and a target $y$.
+An added variable plot for the covariate $x_{3}$ follows these steps:
+\begin{itemize}
+    \item Fit a linear regression to $Y    = \beta_{0} + \beta_{1}x_{1}+ \beta_{2}x_{1} + \epsilon_{Y|x3}$
+    \item Fit a linear regression to $X_{3} = \beta^{*}_{0} + \beta^{*}_{1}x_{1}+ \beta^{*}_{2}x_{1} + \epsilon_{X_{3}}$
+    \item Plot the pairs ( $\epsilon_{Y|x3}$, $\epsilon_{X_{3}}$ )
+    \item Fit the regression $\epsilon_{Y|x3} = \beta_{3} \epsilon_{X_{3}}$ and plot the expected value. 
+\end{itemize}
+
+The residuals $\epsilon_{Y|x3}$ include any relationships that are not captured by associating $Y, x_{1}$, and $x_{2}$ linearly. 
+The residuals $\epsilon_{X_{3}}$ are values that linearly relating $x_{1}$ and $x_{2}$ could not capture, and so when we relate $\epsilon_{Y|x3}$ to $\epsilon_{X_{3}}$ we are asking about the association between patterns in $Y$ that could not be captured by $x_{1}$ and $x_{2}$, and patterns in $x_{3}$ that could not be explained by $x_{1}$ and $x_{2}$.
+
+\subsection{Estimating $\beta$ and $\sigma$}
 
 
 \section{Homework}
@@ -485,7 +617,7 @@ Matrix with a different number of rows and columns will never have an inverse.
                  \end{bmatrix}
     \end{align*}
     Please expand $\beta'x$ as a series of sums and products.
-    
+   
     
 \end{enumerate}
 

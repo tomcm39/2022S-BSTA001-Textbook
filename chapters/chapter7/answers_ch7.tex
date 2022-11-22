@@ -224,14 +224,26 @@
     
     Please sketch what you would expect the residual vs fitted value plot to look like.
     
+    
     \item Suppose that you fit a linear regression model and compute the residuals.
     As the residuals move closer to the line $\mathbb{E}(Y|x)$ will your estimate of $\sigma^{2}$ be smaller or larger? Why?  
+    
+    \begin{enumerate}
+        \item {\color{red} Our estimate of $\sigma^2$ will shrink. This is because we estimate $\sigma^{2}$ as $\sum_{i=1}^{n} \epsilon_{i}^{2} / n$  }
+    \end{enumerate}
     
     \item A linear regression is fit to a dataset where we collected the number of lbs of sugar an undergraduate student consumes during a week in the Fall semester and their H1Ac level.
     We estimate our parameters and find that $\hat{\beta_{0}} = 2$ and $\hat{\beta_{1}} = 10$. It may (or may not) be more reasonable to express the change in H1Ac not in increments of 1lb but instead in increments of 1 ounce.
     Please reexpress the estimated change in H1Ac in ounces of sugar consumed.  
     
+     \begin{enumerate}
+        \item {\color{red} 10 H1AC/lb * (1lb/16oz) = 10/16  }
+    \end{enumerate} 
+    
     \item Will different parameter estimates lead to different diagnostic plots? Why or why not?
+    \begin{enumerate}
+        \item {\color{red} Different parameter estimates will leaed to different diagnostic plots because different parameters will  will produce different fitted values and residuals.}
+    \end{enumerate}
     
 \end{enumerate} 
 
