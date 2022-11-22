@@ -5,22 +5,53 @@
 
 \section{Introduction}\label{intro}
 
+Logistic regression is used to model a target that reports the presence~(often mapped to the value one) or absence~(often mapped to the value zero) of a phenomena.
 
-\section{Model setup}
 
+\section{Data setup}
 
+Compared to multivariate linear regression, we assume an identical setup for the data except for one change. 
+Assume that we collect observations with $p$ pieces of information and a target of interest $y$. 
+Then we may describe our dataset with $n$ observations as 
+\begin{align}
+    \mathcal{D} = \left( (y_{1}, x_{1,1}, x_{1,2}, \cdots, x_{1,p}), (y_{2}, x_{2,1}, x_{2,2}, \cdots, x_{2,p}), \cdots, (y_{n}, x_{n,1}, x_{n,2}, \cdots, x_{n,p})  \right)
+\end{align}
+
+The key difference between the data for linear regression and the data for logistic regression is that for linear regression the target variable $y$ is assumed to take any negative or positive values.
+However, for logistic regression we assume the only two options for $y$ are 0 or 1. 
 
 \subsection{Modeling the target}
 
+Because the target takes the value 0 or 1 a natural choice to model this target is the Bernoulli distribution.
+That is, we start by assuming that the random variables $Y_{i}$ that generate observations $y_{i}$ follow a Bernoulli distribution.
+\begin{align}
+    Y_{i} \| x_{i,1},  x_{i,2}, \cdots, x_{ip} \sim \text{Bernoulli}(\theta)  
+\end{align}
+
+
 \subsection{A function to constrain the parameter space}
-
-
-\subsection{The full model}
 
 \begin{align}
     Y_{i} \sim \Bernoulli( \theta(x_{i}) ) \\ 
     \theta(x_{i}) = \frac{ e^{ \beta_{0} + \sum_{k=1}^{p} \beta_{k}x_{i,k} } }{1 + e^{ \beta_{0} + \sum_{k=1}^{p} \beta_{k}x_{i,k}}
 \end{align}
+The parameter $\theta$ determines the probability that we assign to a one (and so then also a zero).
+To allow $x$ covariates to change the probability that $Y_{i} = 1$ we can change $\theta$ from a constant, $\theta$, to a function that depends on $x_{1}, x_{2}, \cdots, x_{p}$, $\theta(x)$. 
+
+A first choice for the function above may be the same as linear regression 
+\begin{equation}
+    \theta(x_{i}) = \beta_{0} + \sum_{k=1}^{p} \beta_{k} x_{i,k}
+\end{equation}
+
+However, because $\theta(x)$ is the \textbf{probability} assigned to $Y=1$ the function $\theta(x)$ needs to be confined in the interval $[0,1]$. 
+The function above is not limited to the interval [0,1] and so we need to find a new function that guarantees that $\theta(x)$ is between 0 and 1. 
+
+
+\subsection{The full model}
+
+
+
+
 
 \section{One unit change}
 
