@@ -1,0 +1,106 @@
+\chapterauthor{thomas mcandrew}{Lehigh University}
+%\chapterauthor{Second Author}{Second Author Affiliation}
+\chapter{Logistic regression}
+\hspace{1mm}
+
+\section{Introduction}\label{intro}
+
+
+\section{Model setup}
+
+
+
+\subsection{Modeling the target}
+
+\subsection{A function to constrain the parameter space}
+
+
+\subsection{The full model}
+
+\begin{align}
+    Y_{i} \sim \Bernoulli( \theta(x_{i}) ) \\ 
+    \theta(x_{i}) = \frac{ e^{ \beta_{0} + \sum_{k=1}^{p} \beta_{k}x_{i,k} } }{1 + e^{ \beta_{0} + \sum_{k=1}^{p} \beta_{k}x_{i,k}}
+\end{align}
+
+\section{One unit change}
+
+
+\section{Log odds and odds ratio}
+
+
+\section{Decision boundaries}
+
+
+
+\section{Homework}
+
+\begin{enumerate}
+    \item Consider the following logistic regression model 
+    \begin{align}
+        Y_{i} & \sim  \text{Bern}[\theta(x_{i})] \\ 
+              \theta(x) &= e^{\beta_{0} + \beta_{1}x_{i}} \Big / (1+e^{\beta_{0} + \beta_{1}x_{i}})
+    \end{align}
+    Please derive the change in the log odds for a $k$ unit change in $x$,
+    
+    \item Suppose you find estimates $\beta_{0} = 0.5$ and $\beta_{1} = -1$ for the following logistic regression model 
+        \begin{align}
+        Y_{i} & \sim  \text{Bern}[\theta(x_{i})] \\ 
+              \theta(x) &= e^{\beta_{0} + \beta_{1}x_{i}} \Big / (1+e^{\beta_{0} + \beta_{1}x_{i}})
+        \end{align}
+        \begin{enumerate}
+            \item What does the model assume is the probability of obtaining $y=1$ when $x=0$~(i.e. $P(Y=1 | x=0)$)? 
+            
+            \item What does the model assume is the probability of obtaining $y=1$ when $x=2$~(i.e. $P(Y=1 | x=2)$)? 
+        
+            \item What does the model assume is the probability of obtaining $y=1$ when $x=3$~(i.e. $P(Y=1 | x=3)$)? 
+            
+            \item What does the model assume is the probability of obtaining $y=1$ when $x=4$~(i.e. $P(Y=1 | x=4)$)? 
+            
+            \item Why is the change in the probability of a one from $x=2$ to $x=3$~( i.e. $P(Y=1 | x=3) - P(Y=1 | x=2)$ ) different compared to the change in the probability of a one from $x=3$ to $x=4$~($P(Y=1 | x=4) - P(Y=1 | x=3)$ )?
+        \end{enumerate}
+    \item Suppose the following model
+    \begin{align}
+        Y_{i} & \sim  \text{Bern}[\theta(x_{i})] \\ 
+              \theta(x) &= e^{\beta_{0} + \beta_{1}x_{i,1} +\beta_{2}x_{i,2} } \Big / (1+e^{\beta_{0} + \beta_{1}x_{i}})
+        \end{align}
+    \begin{enumerate}
+        \item Please write down the conditional expected value for $Y$, $\mathbb{E}(Y | x_{1}, x_{2})$
+        \item Please write down the conditional variance for $Y$, $\mathbb{V}(Y | x_{1}, x_{2})$
+    \end{enumerate}
+    
+    \item You are asked to build a model to summarize the association between diabetes type II status~(the target) and three covariates: age, in years, sex (Male/Female), and fasting glucose level (mg/dL) for patients at a local hospital.\\
+    
+    The dataset contains observations on 1000 patients. 
+    You build a model 
+    \begin{align}
+        \log \left[\frac{\theta(x)}{\theta(1-x)}\right] = \beta_{0} + \beta_{1} x_{i,1} + \beta_{2}x_{i,2} + \beta_{3}x_{i,3}
+    \end{align}
+    where $x_{i,1}$ is age, $x_{i,2}$ is sex with a reference level male, and $x_{i,3}$ is fasting glucose level.
+    
+    When you estimate the parameters you find that
+    \begin{table}[ht!]
+        \centering
+        \begin{tabular}{cccc}
+            $\hat{\beta_{0}}$ & $\hat{\beta_{1}}$ & $\hat{\beta_{2}}$ & $\hat{\beta_{3}}$ \\
+             -0.5 & 1.2 & -0.9 & -0.75 \\
+        \end{tabular}
+    \end{table}
+    
+    \begin{enumerate}
+        \item Convert the above estimates to odds ratios
+        \item Please interpret a one unit change in age, sex, and fasting glucose level.
+        \item Write down the equation that describes a decision boundary if we assign a 1 when the probability of a 1 is greater than 0.50 and a 0 otherwise. 
+    \end{enumerate}
+    
+    
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
